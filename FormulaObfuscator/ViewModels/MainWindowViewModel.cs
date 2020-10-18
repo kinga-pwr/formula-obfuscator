@@ -1,4 +1,6 @@
-﻿using FormulaObfuscator.Commands;
+﻿using FormulaObfuscator.BLL;
+using FormulaObfuscator.BLL.Helpers;
+using FormulaObfuscator.Commands;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using System;
@@ -81,8 +83,13 @@ namespace FormulaObfuscator.ViewModels
         {
             await Task.Run(() =>
             {
-                // todo: use algorithm
-                Output = Input;
+                var obfuscatorManager = new ObfuscatorManager(Input);
+                var resultHolder = obfuscatorManager.obfuscate();
+
+                if (resultHolder.WasSuccessful)
+                    Output = resultHolder.Value.ToString();
+                else
+                    Output = resultHolder.ErrorMsg;
             });
         }
 
