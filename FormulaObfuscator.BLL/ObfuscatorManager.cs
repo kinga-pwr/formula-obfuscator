@@ -20,8 +20,8 @@ namespace FormulaObfuscator.BLL
         public Holder<XElement> obfuscate()
         {
             var reader = new HTMLReader(UploadedText);
-            var htmlTreeHolder = reader.convertToTree();
-            return htmlTreeHolder;
+            var mathmlTreeHolder = reader.convertToMathMLTree();
+            return mathmlTreeHolder;
         }
 
     }

@@ -7,7 +7,7 @@ namespace FormulaObfuscator.BLL.Helpers
 {
     public class HTMLReader
     {
-        private const string CONVERT_FAILED_MSG = "Nie udało się przekonwertować tekstu, proszę spróbować jeszcze raz...";
+        private const string MATHML_TAG = "math";
 
         public string Text { get; set; }
 
@@ -16,20 +16,27 @@ namespace FormulaObfuscator.BLL.Helpers
             this.Text = text;
         }
 
-        public Holder<XElement> convertToTree()
+        public Holder<XElement> convertToMathMLTree()
         {
             try
             {
                 var tree = XElement.Parse(Text);
+                var mathMLTreeHolder = Walker.findTreeWithValue(tree, MATHML_TAG);
 
-                return Holder<XElement>.Success(tree);
+                return mathMLTreeHolder;
 
             } catch (System.Xml.XmlException e)
             {
                 Console.WriteLine(e.Message);
             }
 
-            return Holder<XElement>.Fail(CONVERT_FAILED_MSG);
+            return Holder<XElement>.Fail(ErrorMsgs.CONVERT_FAILED_MSG);
+        }
+
+        private XElement getMathML(XElement tree)
+        {
+
+            throw new System.Xml.XmlException("MathML not found");
         }
     }
 }
