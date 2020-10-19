@@ -15,7 +15,7 @@ namespace FormulaObfuscator.BLL.Helpers
                 walkWithAlgorithm(child, algorithm);
             }
 
-            if (node.Parent != null && node.Parent.Name.ToString().Contains("mrow"))
+            if (node.Parent != null && node.Parent.Name.ToString().Contains("mrow")) // TODO to disscuss
             {
                 algorithm.makeObfuscate(node);
             }
