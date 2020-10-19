@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FormulaObfuscator.BLL.Algorithms;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
@@ -7,21 +8,25 @@ namespace FormulaObfuscator.BLL.Helpers
 {
     public static class Walker
     {
-        public static void walk(XElement node)
+        public static void walkWithAlgorithm(XElement node, IAlgorithm algorithm)
         {
             foreach (XElement child in node.Elements())
             {
-                if (child.HasElements)
-                {
-                    walk(child);
-                }
+                walkWithAlgorithm(child, algorithm);
+            }
+
+            if (node.Parent != null && node.Parent.Name.ToString().Contains("mrow"))
+            {
+                algorithm.makeObfuscate(node);
             }
         }
 
         public static Holder<XElement> findTreeWithValue(XElement node, string value)
         {
-            if (node.Name == value)
+            if (node.Name.ToString().Contains(value))
+            {
                 return Holder<XElement>.Success(node);
+            }
 
             foreach (XElement child in node.Elements())
             {

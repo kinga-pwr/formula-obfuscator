@@ -1,4 +1,5 @@
-﻿using FormulaObfuscator.BLL.Helpers;
+﻿using FormulaObfuscator.BLL.Algorithms;
+using FormulaObfuscator.BLL.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,8 +22,16 @@ namespace FormulaObfuscator.BLL
         {
             var reader = new HTMLReader(UploadedText);
             var mathmlTreeHolder = reader.convertToMathMLTree();
+
+            if (mathmlTreeHolder.WasSuccessful)
+                obfuscateWithSimple(mathmlTreeHolder.Value);
+
             return mathmlTreeHolder;
         }
 
+        private void obfuscateWithSimple(XElement node)
+        {
+            Walker.walkWithAlgorithm(node, new SimpleAlgorithm());
+        }
     }
 }
