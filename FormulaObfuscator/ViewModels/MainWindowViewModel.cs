@@ -81,15 +81,21 @@ namespace FormulaObfuscator.ViewModels
 
         private async Task ObfuscateData()
         {
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
-                var obfuscatorManager = new ObfuscatorManager(Input);
-                var resultHolder = obfuscatorManager.obfuscate();
+                var resultHolder = new ObfuscatorManager(Input).obfuscate();
 
                 if (resultHolder.WasSuccessful)
                     Output = resultHolder.Value.ToString();
                 else
-                    Output = resultHolder.ErrorMsg;
+                {
+                    Output = string.Empty;
+                    await _dialogCoordinator.ShowMessageAsync(this, "Error", resultHolder.ErrorMsg, 
+                        settings: new MetroDialogSettings()
+                        {
+                            ColorScheme = MetroDialogColorScheme.Accented
+                        });
+                }
             });
         }
 
