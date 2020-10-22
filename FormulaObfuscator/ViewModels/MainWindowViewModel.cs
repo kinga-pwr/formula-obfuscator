@@ -1,4 +1,6 @@
-﻿using FormulaObfuscator.Commands;
+﻿using FormulaObfuscator.BLL;
+using FormulaObfuscator.BLL.Helpers;
+using FormulaObfuscator.Commands;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using System;
@@ -85,10 +87,21 @@ namespace FormulaObfuscator.ViewModels
 
         private async Task ObfuscateData()
         {
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
-                // todo: use algorithm
-                Output = Input;
+                var resultHolder = new ObfuscatorManager(Input).obfuscate();
+
+                if (resultHolder.WasSuccessful)
+                    Output = resultHolder.Value.ToString();
+                else
+                {
+                    Output = string.Empty;
+                    await _dialogCoordinator.ShowMessageAsync(this, "Error", resultHolder.ErrorMsg, 
+                        settings: new MetroDialogSettings()
+                        {
+                            ColorScheme = MetroDialogColorScheme.Accented
+                        });
+                }
             });
         }
 
