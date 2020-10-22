@@ -11,14 +11,16 @@ namespace FormulaObfuscator.BLL.Algorithms
 
         private XElement Node { get; set; }
 
-        Func<string, string> Algorithm = name => $"<mrow><mo>+</mo><mi>{name}</mi><mo>-</mo><mi>{name}</mi></mrow>";
+        Func<char, string> Algorithm = name => $"<mrow><mo>+</mo><mi>{name}</mi><mo>-</mo><mi>{name}</mi></mrow>";
 
         public SimpleAlgorithm(){}
 
         public void makeObfuscate(XElement leaf)
         {
-            var obfuscateNode = XElement.Parse(Algorithm("a"));
-            leaf.Add(obfuscateNode);
+            int num = new Random().Next(0, 26);
+            char let = (num > 13) ? ((char)('a' + num)) : (char)('a' + num); // get random letter
+            var obfuscateNode = XElement.Parse(Algorithm(let));
+            leaf.AddBeforeSelf(obfuscateNode);
         }
     };
 }
