@@ -15,8 +15,6 @@ namespace FormulaObfuscator.ViewModels
         private const string DefaultInputFile = "Input.html";
         private readonly IDialogCoordinator _dialogCoordinator;
 
-        private string RootPath => AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("bin"));
-
         public DelegateCommand UploadCommand { get; set; }
         public DelegateCommand ObfuscateCommand { get; set; }
         public DelegateCommand DownloadCommand { get; set; }
@@ -126,7 +124,7 @@ namespace FormulaObfuscator.ViewModels
         {
             try
             {
-                Input = await File.ReadAllTextAsync($"{RootPath}sample{sampleId}.html");
+                Input = await File.ReadAllTextAsync($"Samples/sample{sampleId}.html");
             }
             catch (Exception e)
             {
