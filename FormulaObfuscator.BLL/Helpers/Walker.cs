@@ -1,6 +1,7 @@
 ﻿using FormulaObfuscator.BLL.Algorithms;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
@@ -14,10 +15,11 @@ namespace FormulaObfuscator.BLL.Helpers
             {
                 walkWithAlgorithm(child, algorithm);
             }
-
-            if (node.Parent != null && node.Parent.Name.ToString().Contains("mrow")) // TODO to disscuss
+            // condition when we want to add obfuscate node
+            // for now find ) in <mrow>
+            if (node.Name.ToString().Contains("mrow") && node.Value.ToString().Contains(")") && node.Parent != null)
             {
-                algorithm.makeObfuscate(node);
+                algorithm.makeObfuscate(node.Parent);
             }
         }
 
