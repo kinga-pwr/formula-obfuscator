@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace FormulaObfuscator.ViewModels
 {
@@ -12,9 +13,13 @@ namespace FormulaObfuscator.ViewModels
         private const string DefaultInputFile = "Input.html";
         private readonly IDialogCoordinator _dialogCoordinator;
 
+        private string RootPath => AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("bin"));
+
         public DelegateCommand UploadCommand { get; set; }
         public DelegateCommand ObfuscateCommand { get; set; }
         public DelegateCommand DownloadCommand { get; set; }
+        public ParameterCommand<int> LoadSampleCommand { get; set; }
+
 
         private string _input;
         public string Input
@@ -35,6 +40,7 @@ namespace FormulaObfuscator.ViewModels
             UploadCommand = new DelegateCommand(() => UploadFile());
             ObfuscateCommand = new DelegateCommand(() => Obfuscate());
             DownloadCommand = new DelegateCommand(() => DownloadResult());
+            LoadSampleCommand = new ParameterCommand<int>((sampleId) => LoadSample(sampleId));
 
             _dialogCoordinator = dialogCoordinator;
 
@@ -72,7 +78,7 @@ namespace FormulaObfuscator.ViewModels
 
             progressController.SetIndeterminate();
 
-            await ObfuscateData();   
+            await ObfuscateData();
 
             await progressController.CloseAsync();
         }
@@ -100,7 +106,19 @@ namespace FormulaObfuscator.ViewModels
             {
                 File.WriteAllText(saveDialog.FileName, Output);
                 await _dialogCoordinator.ShowMessageAsync(this, "File exported", "Obfuscated file successfully exported!");
-            } 
+            }
+        }
+
+        private async void LoadSample(int sampleId)
+        {
+            try
+            {
+                Input = await File.ReadAllTextAsync($"{RootPath}sample{sampleId}.html");
+            }
+            catch (Exception e)
+            {
+                Input = e.Message;
+            }
         }
     }
 }
