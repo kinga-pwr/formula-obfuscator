@@ -17,9 +17,9 @@ namespace FormulaObfuscator.BLL.Helpers
             }
             // condition when we want to add obfuscate node
             // for now find ) in <mrow>
-            if (node.Name.ToString().Contains("mrow") && node.Value.ToString().Contains(")") && node.Parent != null)
+            if (node.Name.ToString().Contains("mrow") && node.Value.ToString().Contains(")"))
             {
-                algorithm.makeObfuscate(node.Parent);
+                algorithm.makeObfuscate(node);
             }
         }
 
