@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FormulaObfuscator.BLL.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
@@ -15,11 +16,9 @@ namespace FormulaObfuscator.BLL.Algorithms
 
         public SimpleAlgorithm(){}
 
-        public void makeObfuscate(XElement leaf)
+        public void Obfuscate(XElement leaf)
         {
-            int num = new Random().Next(0, 26);
-            char let = (num > 13) ? ((char)('a' + num)) : (char)('a' + num); // get random letter
-            var obfuscateNode = XElement.Parse(Algorithm(let));
+            var obfuscateNode = XElement.Parse(Algorithm(Randoms.Char()));
             leaf.AddBeforeSelf(obfuscateNode);
         }
     };

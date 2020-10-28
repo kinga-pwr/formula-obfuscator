@@ -19,7 +19,7 @@ namespace FormulaObfuscator.BLL.Helpers
             // for now find ) in <mrow>
             if (new List<string>() { ")", "}", "]" }.Contains(node.Value.ToString()))
             {
-                algorithm.makeObfuscate(node);
+                algorithm.Obfuscate(node);
             }
         }
 

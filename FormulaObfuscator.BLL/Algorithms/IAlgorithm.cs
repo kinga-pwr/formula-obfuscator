@@ -7,6 +7,6 @@ namespace FormulaObfuscator.BLL.Algorithms
 {
     public interface IAlgorithm
     {
-        void makeObfuscate(XElement leaf);
+        void Obfuscate(XElement leaf);
     }
 }
