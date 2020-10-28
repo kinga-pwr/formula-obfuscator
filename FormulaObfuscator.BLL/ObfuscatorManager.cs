@@ -33,5 +33,15 @@ namespace FormulaObfuscator.BLL
         {
             Walker.walkWithAlgorithm(node, new SimpleAlgorithm());
         }
-    }
+
+        // taki jakby main
+    //    XElement root = new XElement("");
+    //    Random random = new Random();
+    //    List<IAlgorithm> ListaAlgorytmów = new List<IAlgorithm>();
+    //        for (int i = 0; i< 7; i++)
+    //        {
+    //            ListaAlgorytmów[random.Next(ListaAlgorytmów.Count)].Obfuscate(root);
+    //}
+
+}
 }
