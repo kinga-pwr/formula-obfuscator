@@ -1,8 +1,10 @@
-﻿using FormulaObfuscator.BLL.Models;
+﻿using FormulaObfuscator.BLL.Generators;
+using FormulaObfuscator.BLL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Helpers
 {
@@ -36,8 +38,31 @@ namespace FormulaObfuscator.BLL.Helpers
 
         public static MathOperator Operator()
         {
-            return new MathOperator(operators[Randoms.Int(operators.Length)]);
+            return new MathOperator(operators[Int(operators.Length)]);
         }
 
+        public static XElement OperatorXElement()
+        {
+            return new XElement(Operator().Value.ToString()) ;
+        }
+
+        public static XElement SimpleExpression()
+        {
+            var possibleExpressions = typeof(SimpleExpressionGenerator).GetMethods();
+            return (XElement)possibleExpressions[Int(possibleExpressions.GetLength(0))].Invoke(null, null);
+            //switch (possibleExpressions[Randoms.Int(possibleExpressions.GetLength(0))].Name)
+            //{
+            //    case "FractionNumberNumber":
+            //        return SimpleExpressionGenerator.FractionNumberNumber();
+            //    default:
+            //        break;
+            //}
+            //return null;
+        }
+        public static XElement ComplexExpression()
+        {
+            var possibleExpressions = typeof(ComplexExpressionGenerator).GetMethods();
+            return (XElement)possibleExpressions[Int(possibleExpressions.GetLength(0))].Invoke(null, null);
+        }
     }
 }
