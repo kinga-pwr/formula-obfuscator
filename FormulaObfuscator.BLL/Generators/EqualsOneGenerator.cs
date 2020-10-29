@@ -117,7 +117,7 @@ namespace FormulaObfuscator.BLL.Generators
         private XElement Fraction()
         {
             XElement fraction = new XElement(MathMLTags.Fraction);
-            XElement nominator = new XElement(MathMLTags.Row, Randoms.ComplexExpression());
+            XElement nominator = new XElement(MathMLTags.Row, Root());
             XElement denominator = new XElement(MathMLTags.Row, Polynomial());
 
             fraction.Add(nominator);
