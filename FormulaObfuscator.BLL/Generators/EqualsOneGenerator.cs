@@ -92,7 +92,7 @@ namespace FormulaObfuscator.BLL.Generators
         private XElement Root()
         {
             XElement root = new XElement(MathMLTags.Root);
-            XElement degree = new XElement(MathMLTags.Identifier, SimpleExpressionGenerator.FractionNumberNumber());
+            XElement degree = new XElement(MathMLTags.Identifier, Randoms.ComplexExpression());
             XElement element = new XElement(MathMLTags.Number, Polynomial());
 
             root.Add(degree);
