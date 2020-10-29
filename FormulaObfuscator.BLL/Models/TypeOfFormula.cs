@@ -6,6 +6,8 @@ namespace FormulaObfuscator.BLL.Models
 {
     public enum TypeOfFormula
     {
-        Polynomial
+        Polynomial,
+        Fraction,
+        Root
     }
 }
