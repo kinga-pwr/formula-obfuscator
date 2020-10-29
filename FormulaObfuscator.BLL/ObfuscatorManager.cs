@@ -27,8 +27,7 @@ namespace FormulaObfuscator.BLL
             if (mathmlTreeHolder.WasSuccessful)
                 obfuscateWithSimple(mathmlTreeHolder.Value);
 
-            //return mathmlTreeHolder;
-            return Holder.Success(new EqualsOneGenerator().Generate());
+            return mathmlTreeHolder;
         }
 
         private void obfuscateWithSimple(XElement node)

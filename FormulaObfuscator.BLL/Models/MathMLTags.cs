@@ -61,6 +61,7 @@ namespace FormulaObfuscator.BLL.Models
         /// <para>You can also have arbitrary text in it to mark up terms.</para>
         /// </value>
         public static string Identifier => "mi";
+        public static string Power => "msup";
 
 
     }
