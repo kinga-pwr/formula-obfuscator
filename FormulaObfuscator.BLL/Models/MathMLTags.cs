@@ -61,8 +61,17 @@ namespace FormulaObfuscator.BLL.Models
         /// <para>You can also have arbitrary text in it to mark up terms.</para>
         /// </value>
         public static string Identifier => "mi";
+
+
+        /// <value>
+        /// <para>The MathML msup element is used to attach a superscript to an expression.</para>
+        /// <para>It uses the following syntax: msup base superscript /msup.</para>
+        /// </value>
         public static string Power => "msup";
 
-
+        /// <summary>
+        /// Contrainer for more complex expressions.
+        /// </summary>
+        public static string Container => "container";
     }
 }
