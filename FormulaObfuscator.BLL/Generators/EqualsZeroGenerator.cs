@@ -13,14 +13,14 @@ namespace FormulaObfuscator.BLL.Generators
     {
         public XElement Generate(TypeOfFormula formula)
         {
-            switch (formula)
+            return formula switch
             {
-                case TypeOfFormula.Polynomial:
-                    return Polynomial();
-                case TypeOfFormula.Fraction:
-                    return Fraction();
-            }
-            throw new GeneratorFormulaTypeUnknownException();
+                TypeOfFormula.Polynomial => Polynomial(),
+                TypeOfFormula.Fraction => Fraction(),
+                TypeOfFormula.Trigonometry => Trigonometry(),
+                TypeOfFormula.Integral => Integral(),
+                _ => throw new GeneratorFormulaTypeUnknownException(),
+            };
         }
 
         private XElement Polynomial()
@@ -55,7 +55,7 @@ namespace FormulaObfuscator.BLL.Generators
                 formula += (currConst >= 0 ? "+" : "") + currConst + currVarName + "^" + currPower;
                 formulaRoot.Add(new XElement(MathMLTags.Operator, currConst >= 0 ? "+" : "-"));
                 formulaRoot.Add(new XElement(MathMLTags.Number, Math.Abs(currConst)));
-                formulaRoot.Add(MakePowerNode(currPower, currVarName));
+                formulaRoot.Add(MathMLStructures.Power(currPower, new XElement(MathMLTags.Identifier, currVarName)));
 
                 var varHistory = logs[currVarName];
 
@@ -76,20 +76,11 @@ namespace FormulaObfuscator.BLL.Generators
                     formula += (currConst >= 0 ? "+" : "") + currConst + variable + "^" + power;
                     formulaRoot.Add(new XElement(MathMLTags.Operator, currConst >= 0 ? "+" : "-"));
                     formulaRoot.Add(new XElement(MathMLTags.Number, Math.Abs(currConst)));
-                    formulaRoot.Add(MakePowerNode(power, variable));
+                    formulaRoot.Add(MathMLStructures.Power(power, new XElement(MathMLTags.Identifier, variable)));
                 }
             }
 
             return formulaRoot;
-        }
-
-        private XElement MakePowerNode(int power, char varName)
-        {
-            var powerNode = new XElement(MathMLTags.Power);
-            powerNode.Add(new XElement(MathMLTags.Identifier, varName));
-            powerNode.Add(new XElement(MathMLTags.Number, power));
-
-            return powerNode;
         }
 
         private XElement Fraction()
@@ -103,5 +94,31 @@ namespace FormulaObfuscator.BLL.Generators
 
             return fraction;
         }
+
+        /// <summary>
+        /// <code>
+        /// (container)
+        /// <para>(mi)sin(/mi)</para>
+        /// <para>(mn)0(/mn)</para>
+        /// (/container)
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
+        private XElement Trigonometry() 
+            => MathMLStructures.Trigonometric((Trigonometry)Randoms.Int(0,1), new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)));
+
+        /// <summary>
+        /// <code>
+        /// (container)
+        /// (munderover)
+        /// <para>(mo)#integral sign#(/mo)</para>
+        /// <para>(mn)0(/mn)</para>
+        /// (/munderover)
+        /// (/container)
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
+        private XElement Integral()
+            => MathMLStructures.Integral(new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 3)));
     }
 }

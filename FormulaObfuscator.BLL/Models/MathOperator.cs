@@ -16,15 +16,12 @@ namespace FormulaObfuscator.BLL.Models
 
         public static MathOperator operator !(MathOperator a)
         {
-            switch (a.Value)
+            return a.Value switch
             {
-                case '+':
-                    return new MathOperator('-');
-                case '-':
-                    return new MathOperator('+');
-
-            }
-            throw new UnhandledOperatorException();
+                '+' => new MathOperator('-'),
+                '-' => new MathOperator('+'),
+                _ => throw new UnhandledOperatorException(),
+            };
         }
     }
 }

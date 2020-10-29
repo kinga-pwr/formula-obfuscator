@@ -1,14 +1,14 @@
-<mxfile host="65bd71144e" modified="2020-10-29T19:49:18.456Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.50.1 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36" etag="yeBqgEzg4c0BTtBNA1O3" version="13.6.5">
+<mxfile host="65bd71144e" modified="2020-10-29T19:59:14.922Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.50.1 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36" etag="jcFHUqWq_iNC7Natf0GS" version="13.6.5">
     <diagram id="0SnGmBQ4gUtuMeLUTnXq" name="Page-1">
-        <mxGraphModel dx="1417" dy="1993" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1005" dy="1961" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="3c72NYzMMBWpRRResMp0-30" value="" style="fillColor=none;strokeColor=none;pointerEvents=0;html=1;whiteSpace=wrap;container=1;collapsible=0;childLayout=stackLayout;resizeParent=1;dropTarget=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fontColor=#F7F7F7;" parent="1" vertex="1" zOrder="1">
-                    <mxGeometry x="72" y="-684" width="2040" height="744" as="geometry"/>
+                    <mxGeometry x="72" y="-684" width="2810" height="744" as="geometry"/>
                 </mxCell>
                 <mxCell id="3c72NYzMMBWpRRResMp0-31" value="EqualsOneGenerator" style="swimlane;html=1;whiteSpace=wrap;container=1;connectable=0;collapsible=0;startSize=24;dropTarget=0;rounded=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeColor=#e466b8;strokeOpacity=100;fillOpacity=100;fillColor=#e466b8;fontSize=11;fontColor=#F7F7F7;" parent="3c72NYzMMBWpRRResMp0-30" vertex="1">
-                    <mxGeometry width="2040" height="744" as="geometry"/>
+                    <mxGeometry width="2810" height="744" as="geometry"/>
                 </mxCell>
                 <mxCell id="3c72NYzMMBWpRRResMp0-32" value="" style="fillColor=none;strokeColor=none;pointerEvents=0;html=1;whiteSpace=wrap;container=1;collapsible=0;childLayout=stackLayout;resizeParent=1;dropTarget=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fontColor=#F7F7F7;" parent="1" vertex="1" zOrder="2">
                     <mxGeometry x="96" y="-636" width="960" height="672" as="geometry"/>
@@ -303,10 +303,10 @@
                     </mxCell>
                 </UserObject>
                 <mxCell id="3c72NYzMMBWpRRResMp0-80" value="" style="fillColor=none;strokeColor=none;pointerEvents=0;html=1;whiteSpace=wrap;container=1;collapsible=0;childLayout=stackLayout;resizeParent=1;dropTarget=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fontColor=#F7F7F7;" parent="1" vertex="1" zOrder="76">
-                    <mxGeometry x="72" y="96" width="2480" height="744" as="geometry"/>
+                    <mxGeometry x="72" y="96" width="3280" height="744" as="geometry"/>
                 </mxCell>
                 <mxCell id="3c72NYzMMBWpRRResMp0-81" value="EqualsZeroGenerator" style="swimlane;html=1;whiteSpace=wrap;container=1;connectable=0;collapsible=0;startSize=24;dropTarget=0;rounded=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;fillOpacity=100;fontSize=11;fillColor=#439C6F;strokeColor=#439C6F;fontColor=#F7F7F7;" parent="3c72NYzMMBWpRRResMp0-80" vertex="1">
-                    <mxGeometry width="2380" height="744" as="geometry"/>
+                    <mxGeometry width="3130" height="744" as="geometry"/>
                 </mxCell>
                 <mxCell id="3c72NYzMMBWpRRResMp0-82" value="" style="fillColor=none;strokeColor=none;pointerEvents=0;html=1;whiteSpace=wrap;container=1;collapsible=0;childLayout=stackLayout;resizeParent=1;dropTarget=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fontColor=#F7F7F7;" parent="1" vertex="1" zOrder="77">
                     <mxGeometry x="96" y="144" width="950" height="560" as="geometry"/>
@@ -457,76 +457,76 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="25" value="Polynomial" style="swimlane;html=1;whiteSpace=wrap;container=1;connectable=0;collapsible=0;startSize=24;dropTarget=0;rounded=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;fontSize=11;fillColor=#FFFF99;fontColor=#000000;strokeColor=#FFFF99;" vertex="1" parent="1">
+                <mxCell id="25" value="Polynomial" style="swimlane;html=1;whiteSpace=wrap;container=1;connectable=0;collapsible=0;startSize=24;dropTarget=0;rounded=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;fontSize=11;fillColor=#FFFF99;fontColor=#000000;strokeColor=#FFFF99;" parent="1" vertex="1">
                     <mxGeometry x="1092" y="144" width="1328" height="560" as="geometry"/>
                 </mxCell>
-                <mxCell id="32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="27" target="28">
+                <mxCell id="32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="27" target="28" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="27" value="Create polynomial XElement" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fillColor=#FFFF99;fontColor=#000000;" vertex="1" parent="1">
+                <mxCell id="27" value="Create polynomial XElement" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fillColor=#FFFF99;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="1150" y="180" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="33" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="28" target="31">
+                <mxCell id="33" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="28" target="31" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="28" target="34">
+                <mxCell id="35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="28" target="34" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="28" value="Create variables history" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#FFB366;" vertex="1" parent="1">
+                <mxCell id="28" value="Create variables history" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#FFB366;" parent="1" vertex="1">
                     <mxGeometry x="1150" y="270" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="37" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="31" target="36">
+                <mxCell id="37" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="31" target="36" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="56" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" edge="1" parent="1" source="31" target="55">
+                <mxCell id="56" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" parent="1" source="31" target="55" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="31" value="Get random power" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" vertex="1" parent="1">
+                <mxCell id="31" value="Get random power" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" parent="1" vertex="1">
                     <mxGeometry x="1150" y="402" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="34" value="Set max_of_different_variables, max_const, max_power,&lt;br&gt;max_generate_variables" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#FFB366;" vertex="1" parent="1">
+                <mxCell id="34" value="Set max_of_different_variables, max_const, max_power,&lt;br&gt;max_generate_variables" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#FFB366;" parent="1" vertex="1">
                     <mxGeometry x="1330" y="260" width="150" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="39" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="36" target="38">
+                <mxCell id="39" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="36" target="38" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="36" value="Get random const" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" vertex="1" parent="1">
+                <mxCell id="36" value="Get random const" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" parent="1" vertex="1">
                     <mxGeometry x="1310" y="402" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="44" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="38" target="43">
+                <mxCell id="44" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="38" target="43" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="38" value="Get random variable name" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" vertex="1" parent="1">
+                <mxCell id="38" value="Get random variable name" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" parent="1" vertex="1">
                     <mxGeometry x="1470" y="402" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="50" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="40" target="49">
+                <mxCell id="50" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="40" target="49" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="40" value="Create XElement with power" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" vertex="1" parent="1">
+                <mxCell id="40" value="Create XElement with power" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" parent="1" vertex="1">
                     <mxGeometry x="1920" y="393" width="120" height="78" as="geometry"/>
                 </mxCell>
-                <mxCell id="47" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="43" target="46">
+                <mxCell id="47" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="43" target="46" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="43" value="Create XElement operator - if const &amp;gt;= 0 then + else -" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" vertex="1" parent="1">
+                <mxCell id="43" value="Create XElement operator - if const &amp;gt;= 0 then + else -" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" parent="1" vertex="1">
                     <mxGeometry x="1620" y="402" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="48" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="46" target="40">
+                <mxCell id="48" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="46" target="40" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="46" value="Create XElement with const" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" vertex="1" parent="1">
+                <mxCell id="46" value="Create XElement with const" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" parent="1" vertex="1">
                     <mxGeometry x="1770" y="402" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="52" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="49" target="51">
+                <mxCell id="52" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="49" target="51" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="49" value="Add elements to polynomial" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" vertex="1" parent="1">
+                <mxCell id="49" value="Add elements to polynomial" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" parent="1" vertex="1">
                     <mxGeometry x="2067.5" y="393" width="120" height="78" as="geometry"/>
                 </mxCell>
-                <mxCell id="51" value="Save aded element to variables history - add const for proper power" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" vertex="1" parent="1">
+                <mxCell id="51" value="Save aded element to variables history - add const for proper power" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fontColor=#000000;fillColor=#66FF66;" parent="1" vertex="1">
                     <mxGeometry x="2210" y="393" width="120" height="78" as="geometry"/>
                 </mxCell>
-                <mxCell id="53" value="" style="endArrow=classic;html=1;fontColor=#000000;" edge="1" parent="1" source="51">
+                <mxCell id="53" value="" style="endArrow=classic;html=1;fontColor=#000000;" parent="1" source="51" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="1690" y="320" as="sourcePoint"/>
                         <mxPoint x="1210" y="370" as="targetPoint"/>
@@ -535,54 +535,54 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="54" value="Repeat untill i &amp;lt; max_generate_variables" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#FFFFFF;" vertex="1" connectable="0" parent="53">
+                <mxCell id="54" value="Repeat untill i &amp;lt; max_generate_variables" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#FFFFFF;" parent="53" vertex="1" connectable="0">
                     <mxGeometry x="-0.0299" y="-2" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="58" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" edge="1" parent="1" source="55" target="57">
+                <mxCell id="58" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" parent="1" source="55" target="57" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="73" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" edge="1" parent="1" source="55" target="72">
+                <mxCell id="73" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" parent="1" source="55" target="72" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="55" value="Get from history variable name" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" vertex="1" parent="1">
+                <mxCell id="55" value="Get from history variable name" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="1150" y="542" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="60" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" edge="1" parent="1" source="57" target="59">
+                <mxCell id="60" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" parent="1" source="57" target="59" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="57" value="Get from history power" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" vertex="1" parent="1">
+                <mxCell id="57" value="Get from history power" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="1300" y="542" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="62" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" edge="1" parent="1" source="59" target="61">
+                <mxCell id="62" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" parent="1" source="59" target="61" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="59" value="Get from history const" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" vertex="1" parent="1">
+                <mxCell id="59" value="Get from history const" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="1460" y="542" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="64" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" edge="1" parent="1" source="61" target="63">
+                <mxCell id="64" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" parent="1" source="61" target="63" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="61" value="Create XElement with operator - if const &amp;gt;= 0 then - else +" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" vertex="1" parent="1">
+                <mxCell id="61" value="Create XElement with operator - if const &amp;gt;= 0 then - else +" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="1630" y="542" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="66" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" edge="1" parent="1" source="63" target="65">
+                <mxCell id="66" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" parent="1" source="63" target="65" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="63" value="Create XElement with power" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" vertex="1" parent="1">
+                <mxCell id="63" value="Create XElement with power" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="1780" y="542" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="68" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" edge="1" parent="1" source="65" target="67">
+                <mxCell id="68" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#FFFFFF;" parent="1" source="65" target="67" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="65" value="Create XElement with const" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" vertex="1" parent="1">
+                <mxCell id="65" value="Create XElement with const" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="1930" y="542" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="67" value="Add elements to polynomial" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" vertex="1" parent="1">
+                <mxCell id="67" value="Add elements to polynomial" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="2090" y="542" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="69" value="" style="endArrow=classic;html=1;fontColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="67">
+                <mxCell id="69" value="" style="endArrow=classic;html=1;fontColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="67" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="1710" y="470" as="sourcePoint"/>
                         <mxPoint x="1210" y="510" as="targetPoint"/>
@@ -592,49 +592,309 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="71" value="Repeat for each variable from log history" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#FFFFFF;" vertex="1" connectable="0" parent="69">
+                <mxCell id="71" value="Repeat for each variable from log history" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#FFFFFF;" parent="69" vertex="1" connectable="0">
                     <mxGeometry x="-0.0121" y="-4" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="72" value="&lt;font color=&quot;#000000&quot;&gt;Return polynomial equals to 0&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#001DBC;fontColor=#ffffff;fillColor=#FFFF99;" vertex="1" parent="1">
+                <mxCell id="72" value="&lt;font color=&quot;#000000&quot;&gt;Return polynomial equals to 0&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#001DBC;fontColor=#ffffff;fillColor=#FFFF99;" parent="1" vertex="1">
                     <mxGeometry x="1150" y="630" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="74" value="Polynomial" style="swimlane;html=1;whiteSpace=wrap;container=1;connectable=0;collapsible=0;startSize=24;dropTarget=0;rounded=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;fontSize=11;fillColor=#FFFF99;strokeColor=#FFFF99;fontColor=#000000;" vertex="1" parent="1">
+                <mxCell id="74" value="Polynomial" style="swimlane;html=1;whiteSpace=wrap;container=1;connectable=0;collapsible=0;startSize=24;dropTarget=0;rounded=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;fontSize=11;fillColor=#FFFF99;strokeColor=#FFFF99;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="1450" y="-636" width="580" height="672" as="geometry"/>
                 </mxCell>
-                <mxCell id="77" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="75" target="76">
+                <mxCell id="77" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="75" target="76" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="75" value="Create polynomial XElement" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fillColor=#FFFF99;fontColor=#000000;" vertex="1" parent="1">
+                <mxCell id="75" value="Create polynomial XElement" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fillColor=#FFFF99;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="1480" y="-576" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="79" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="76" target="78">
+                <mxCell id="79" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="76" target="78" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="76" value="Generete polynomial from EqualsZeroGenerator" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#2D7600;fillColor=#60a917;fontColor=#ffffff;" vertex="1" parent="1">
+                <mxCell id="76" value="Generete polynomial from EqualsZeroGenerator" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#2D7600;fillColor=#60a917;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="1480" y="-436" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="81" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="78" target="80">
+                <mxCell id="81" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="78" target="80" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="85" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="78" target="84">
+                <mxCell id="85" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="78" target="84" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="78" value="Create XElement with + operator" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#006EAF;fillColor=#1ba1e2;fontColor=#ffffff;" vertex="1" parent="1">
+                <mxCell id="78" value="Create XElement with + operator" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#006EAF;fillColor=#1ba1e2;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="1480" y="-296" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="83" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" edge="1" parent="1" source="80" target="82">
+                <mxCell id="83" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontColor=#000000;" parent="1" source="80" target="82" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="80" value="Create XElement with 1 value" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#006EAF;fillColor=#1ba1e2;fontColor=#ffffff;" vertex="1" parent="1">
+                <mxCell id="80" value="Create XElement with 1 value" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#006EAF;fillColor=#1ba1e2;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="1680" y="-296" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="82" value="Add element to polynomial" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#006EAF;fillColor=#1ba1e2;fontColor=#ffffff;" vertex="1" parent="1">
+                <mxCell id="82" value="Add element to polynomial" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#006EAF;fillColor=#1ba1e2;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="1880" y="-296" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="84" value="Return polynomial equals to 1" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fillColor=#FFFF99;fontColor=#000000;" vertex="1" parent="1">
+                <mxCell id="84" value="Return polynomial equals to 1" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFF99;fillColor=#FFFF99;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="1480" y="-156" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="87" target="90">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Create trigonometric container XElement" lucidchartObjectId="_njJJdkaCANs" id="87">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="40" parent="1">
+                        <mxGeometry x="2130" y="-588" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="88" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="100" target="92">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="89" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="90" target="100">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Create COS XElement" lucidchartObjectId="_njJz52jtMIH" id="90">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#83bbe5;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="41" parent="1">
+                        <mxGeometry x="2130" y="-480" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="91" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="92" target="100">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="2400" y="-336"/>
+                            <mxPoint x="2400" y="-390"/>
+                            <mxPoint x="2178" y="-390"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <UserObject label="Generate&amp;nbsp;&lt;span style=&quot;font-weight: 700&quot;&gt;EqualsZero complex equation&lt;/span&gt;" lucidchartObjectId="A_iJGswauMV7" id="92">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#83bbe5;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="6" parent="1">
+                        <mxGeometry x="2260" y="-372" width="120" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="94" target="97">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Add variable to trigonometric container" lucidchartObjectId="_njJBlh0h99x" id="94">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="70" parent="1">
+                        <mxGeometry x="2130" y="-156" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="95" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="96" target="94">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Add COS to trigonometric container" lucidchartObjectId="_njJBlh0h99x" id="96">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="70" parent="1">
+                        <mxGeometry x="2130" y="-264" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Return trigonometric container" lucidchartObjectId="_njJ0L~156CR" id="97">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="72" parent="1">
+                        <mxGeometry x="2130" y="-48" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="98" value="Trigonometric" style="swimlane;html=1;whiteSpace=wrap;container=1;connectable=0;collapsible=0;startSize=24;dropTarget=0;rounded=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;fontSize=11;fillColor=#6666FF;strokeColor=#3333FF;" vertex="1" parent="1">
+                    <mxGeometry x="2090" y="-636" width="340" height="686" as="geometry"/>
+                </mxCell>
+                <mxCell id="99" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="100" target="96">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Create variable XElement" lucidchartObjectId="_njJz52jtMIH" id="100">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#83bbe5;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="41" parent="1">
+                        <mxGeometry x="2130" y="-372" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="101" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="102" target="105">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Create trigonometric container XElement" lucidchartObjectId="_njJJdkaCANs" id="102">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="40" parent="1">
+                        <mxGeometry x="2570" y="-599" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="103" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="114" target="107">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="105" target="114">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Create set SIN^2+COS^2 or TG*CTG" lucidchartObjectId="_njJz52jtMIH" id="105">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#83bbe5;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="41" parent="1">
+                        <mxGeometry x="2570" y="-491" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="106" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="107" target="114">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="2840" y="-347"/>
+                            <mxPoint x="2840" y="-401"/>
+                            <mxPoint x="2618" y="-401"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <UserObject label="Generate&amp;nbsp;&lt;span style=&quot;font-weight: 700&quot;&gt;EqualsZero complex equation&lt;/span&gt;" lucidchartObjectId="A_iJGswauMV7" id="107">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#83bbe5;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="6" parent="1">
+                        <mxGeometry x="2700" y="-383" width="120" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="108" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="109" target="112">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Add variable to trigonometric container" lucidchartObjectId="_njJBlh0h99x" id="109">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="70" parent="1">
+                        <mxGeometry x="2570" y="-167" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="110" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="111" target="109">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Add set to trigonometric container" lucidchartObjectId="_njJBlh0h99x" id="111">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="70" parent="1">
+                        <mxGeometry x="2570" y="-275" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Return trigonometric container" lucidchartObjectId="_njJ0L~156CR" id="112">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="72" parent="1">
+                        <mxGeometry x="2570" y="-59" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="113" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="114" target="111">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Create variable XElement" lucidchartObjectId="_njJz52jtMIH" id="114">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#83bbe5;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="41" parent="1">
+                        <mxGeometry x="2570" y="-383" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="115" value="TrigonometricRedundancy" style="swimlane;html=1;whiteSpace=wrap;container=1;connectable=0;collapsible=0;startSize=24;dropTarget=0;rounded=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;fontSize=11;fillColor=#FF9933;strokeColor=#FF9933;" vertex="1" parent="1">
+                    <mxGeometry x="2490" y="-636" width="360" height="686" as="geometry"/>
+                </mxCell>
+                <mxCell id="116" value="Trigonometric" style="swimlane;html=1;whiteSpace=wrap;container=1;connectable=0;collapsible=0;startSize=24;dropTarget=0;rounded=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;fontSize=11;fillColor=#6666FF;strokeColor=#3333FF;" vertex="1" parent="1">
+                    <mxGeometry x="2460" y="144" width="332" height="672" as="geometry"/>
+                </mxCell>
+                <mxCell id="117" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="118" target="121">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Create trigonometric container XElement" lucidchartObjectId="_njJJdkaCANs" id="118">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="40" parent="1">
+                        <mxGeometry x="2498" y="180" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="119" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="130" target="123">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="120" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="121" target="130">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Create SIN/TG XElement" lucidchartObjectId="_njJz52jtMIH" id="121">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#83bbe5;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="41" parent="1">
+                        <mxGeometry x="2498" y="288" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="122" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="123" target="130">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="2768" y="432"/>
+                            <mxPoint x="2768" y="378"/>
+                            <mxPoint x="2546" y="378"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <UserObject label="Generate&amp;nbsp;&lt;span style=&quot;font-weight: 700&quot;&gt;EqualsZero complex equation&lt;/span&gt;" lucidchartObjectId="A_iJGswauMV7" id="123">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#83bbe5;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="6" parent="1">
+                        <mxGeometry x="2628" y="396" width="120" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="124" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="125" target="128">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Add variable to trigonometric container" lucidchartObjectId="_njJBlh0h99x" id="125">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="70" parent="1">
+                        <mxGeometry x="2498" y="612" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="126" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="127" target="125">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Add SIN/TG to trigonometric container" lucidchartObjectId="_njJBlh0h99x" id="127">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="70" parent="1">
+                        <mxGeometry x="2498" y="504" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Return trigonometric container" lucidchartObjectId="_njJ0L~156CR" id="128">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="72" parent="1">
+                        <mxGeometry x="2498" y="720" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="129" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="130" target="127">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Create variable XElement" lucidchartObjectId="_njJz52jtMIH" id="130">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#83bbe5;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="41" parent="1">
+                        <mxGeometry x="2498" y="396" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="131" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="132" target="135">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Create integral container XElement" lucidchartObjectId="_njJJdkaCANs" id="132">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="40" parent="1">
+                        <mxGeometry x="2892" y="190" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="133" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="144" target="137">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="134" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="135" target="144">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Create integral XElement" lucidchartObjectId="_njJz52jtMIH" id="135">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#83bbe5;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="41" parent="1">
+                        <mxGeometry x="2892" y="298" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="136" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="137" target="144">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="3162" y="442"/>
+                            <mxPoint x="3162" y="388"/>
+                            <mxPoint x="2940" y="388"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <UserObject label="Generate&amp;nbsp;&lt;span style=&quot;font-weight: 700&quot;&gt;EqualsZero complex equation&lt;/span&gt;" lucidchartObjectId="A_iJGswauMV7" id="137">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#83bbe5;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="6" parent="1">
+                        <mxGeometry x="3022" y="406" width="120" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="138" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="139" target="142">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Add variable to integral container" lucidchartObjectId="_njJBlh0h99x" id="139">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="70" parent="1">
+                        <mxGeometry x="2892" y="622" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="140" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="141" target="139">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Add integral to integral container" lucidchartObjectId="_njJBlh0h99x" id="141">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="70" parent="1">
+                        <mxGeometry x="2892" y="514" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Return integral container" lucidchartObjectId="_njJ0L~156CR" id="142">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#5abaa7;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="72" parent="1">
+                        <mxGeometry x="2892" y="730" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="143" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="144" target="141">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <UserObject label="Create variable XElement" lucidchartObjectId="_njJz52jtMIH" id="144">
+                    <mxCell style="html=1;whiteSpace=wrap;;whiteSpace=wrap;fontSize=11;spacing=7;strokeColor=none;strokeOpacity=100;fillOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9.6;fillColor=#83bbe5;strokeWidth=0;fontColor=#F7F7F7;" vertex="1" zOrder="41" parent="1">
+                        <mxGeometry x="2892" y="406" width="96" height="72" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="145" value="Integral" style="swimlane;html=1;whiteSpace=wrap;container=1;connectable=0;collapsible=0;startSize=24;dropTarget=0;rounded=0;whiteSpace=wrap;fontSize=11;spacing=0;strokeOpacity=100;fontSize=11;fillColor=#CCCC00;strokeColor=#FFFF00;" vertex="1" parent="1">
+                    <mxGeometry x="2842" y="144" width="332" height="672" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

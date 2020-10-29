@@ -4,8 +4,9 @@ using System.Text;
 
 namespace FormulaObfuscator.BLL.Models
 {
-    class MathMLSymbols
+    public static class MathMLSymbols
     {
-        public string Multiply => "&sdot;";
+        public static string Multiply => "&sdot;";
+        public static string Integral => "&#x222B";
     }
 }

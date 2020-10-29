@@ -13,20 +13,15 @@ namespace FormulaObfuscator.BLL.Generators
     {
         public XElement Generate(TypeOfFormula type)
         {
-            switch (type)
+            return type switch
             {
-                case TypeOfFormula.Polynomial:
-                    return Polynomial();
-
-                case TypeOfFormula.Fraction:
-                    return Fraction();
-
-                case TypeOfFormula.Root:
-                    return Root();
-
-                default:
-                    return LevelOne();
-            }
+                TypeOfFormula.Polynomial => Polynomial(),
+                TypeOfFormula.Fraction => Fraction(),
+                TypeOfFormula.Root => Root(),
+                TypeOfFormula.Trigonometry => Trigonometric(),
+                TypeOfFormula.TrigonometryRedundancy => TrigonometricRedundancy(),
+                _ => LevelOne(),
+            };
             throw new GeneratorFormulaTypeUnknownException();
         }
 
@@ -124,6 +119,48 @@ namespace FormulaObfuscator.BLL.Generators
             fraction.Add(denominator);
 
             return fraction;
+        }
+
+        /// <summary>
+        /// <code>
+        /// (container)
+        /// <para>(mi)cos(/mi)</para>
+        /// <para>(mn)3(/mn)</para>
+        /// (/container)
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
+        private XElement Trigonometric() 
+            => MathMLStructures.Trigonometric(Trigonometry.cos, new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)));
+
+        /// <summary>
+        /// <code>
+        /// (container)
+        ///    (msup)
+        ///      (mi)sin(/mi)
+        ///      (mn)2(/mn)
+        ///    (/msup)
+        ///    +
+        ///    (msup)
+        ///      (mi)cos(/mi)
+        ///      (mn)2(/mn)
+        ///    (/msup)
+        /// (/container)
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
+        private XElement TrigonometricRedundancy()
+        {
+            var options = new[] { (Trigonometry.sin, "+", Trigonometry.cos, 2), (Trigonometry.tg, MathMLSymbols.Multiply, Trigonometry.ctg, 1) };
+            var formula = new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2));
+            var option = options[Randoms.Int(0, 1)];
+            XElement element = new XElement("container");
+            var part1 = MathMLStructures.Trigonometric(option.Item1, formula, option.Item4);
+            var part2 = MathMLStructures.Trigonometric(option.Item3, formula, option.Item4);
+            element.Add(part1);
+            element.Add(new XElement(MathMLTags.Operator, option.Item2));
+            element.Add(part2);
+            return element;
         }
     }
 }
