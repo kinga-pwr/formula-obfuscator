@@ -17,8 +17,10 @@ namespace FormulaObfuscator.BLL.Generators
             {
                 case TypeOfFormula.Polynomial:
                     return Polynomial();
+                case TypeOfFormula.Fraction:
+                    return Fraction();
             }
-            throw new GeneratorComplexityLevelOutOfBoundsException();
+            throw new GeneratorFormulaTypeUnknownException();
         }
 
         private XElement Polynomial()
@@ -88,6 +90,18 @@ namespace FormulaObfuscator.BLL.Generators
             powerNode.Add(new XElement(MathMLTags.Number, power));
 
             return powerNode;
+        }
+
+        private XElement Fraction()
+        {
+            XElement fraction = new XElement(MathMLTags.Fraction);
+            XElement nominator = new XElement(MathMLTags.Row, Polynomial());
+            XElement denominator = new XElement(MathMLTags.Row, Randoms.ComplexExpression());
+
+            fraction.Add(nominator);
+            fraction.Add(denominator);
+
+            return fraction;
         }
     }
 }

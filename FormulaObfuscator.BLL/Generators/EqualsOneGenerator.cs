@@ -17,10 +17,17 @@ namespace FormulaObfuscator.BLL.Generators
             {
                 case TypeOfFormula.Polynomial:
                     return Polynomial();
+
+                case TypeOfFormula.Fraction:
+                    return Fraction();
+
+                case TypeOfFormula.Root:
+                    return Root();
+
                 default:
                     return LevelOne();
             }
-            throw new GeneratorComplexityLevelOutOfBoundsException();
+            throw new GeneratorFormulaTypeUnknownException();
         }
 
         private XElement LevelOne()
@@ -71,6 +78,52 @@ namespace FormulaObfuscator.BLL.Generators
             formulaNode.Add(new XElement(MathMLTags.Number, CONST_TO_ADD));
 
             return formulaNode;
+        }
+
+        /// <summary>
+        /// <code>
+        /// (mroot)
+        /// <para>(mi)x(/mi)</para>
+        /// <para>(mn)3(/mn)</para>
+        /// <para>(/mroot) </para>
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
+        private XElement Root()
+        {
+            XElement root = new XElement(MathMLTags.Root);
+            XElement degree = new XElement(MathMLTags.Identifier, SimpleExpressionGenerator.FractionNumberNumber());
+            XElement element = new XElement(MathMLTags.Number, Polynomial());
+
+            root.Add(degree);
+            root.Add(element);
+
+            return root;
+        }
+
+        /// <summary>
+        /// <code>
+        /// <para>(mfrac)</para>
+        /// <para>    (mrow)</para>
+        /// <para>        (mn)6(/mn)</para>
+        /// <para>    (/mrow)</para>
+        /// <para>    (mrow)</para>
+        /// <para>        (mn)6(/mn)</para>
+        /// <para>    (/mrow)</para>
+        /// <para>(/mfrac)</para>
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
+        private XElement Fraction()
+        {
+            XElement fraction = new XElement(MathMLTags.Fraction);
+            XElement nominator = new XElement(MathMLTags.Row, Randoms.ComplexExpression());
+            XElement denominator = new XElement(MathMLTags.Row, Polynomial());
+
+            fraction.Add(nominator);
+            fraction.Add(denominator);
+
+            return fraction;
         }
     }
 }
