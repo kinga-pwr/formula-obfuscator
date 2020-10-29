@@ -11,11 +11,13 @@ namespace FormulaObfuscator.BLL.Generators
 {
     public class EqualsOneGenerator
     {
-        public XElement Generate(int complexityLevel = 1)
+        public XElement Generate(TypeOfFormula type)
         {
-            switch (complexityLevel)
+            switch (type)
             {
-                case 1:
+                case TypeOfFormula.Polynomial:
+                    return Polynomial();
+                default:
                     return LevelOne();
             }
             throw new GeneratorComplexityLevelOutOfBoundsException();
@@ -59,6 +61,16 @@ namespace FormulaObfuscator.BLL.Generators
             }
 
             return element;
+        }
+
+        private XElement Polynomial()
+        {
+            var CONST_TO_ADD = 1;
+            var formulaNode = new EqualsZeroGenerator().Generate(TypeOfFormula.Polynomial);
+            formulaNode.Add(new XElement(MathMLTags.Operator, "+"));
+            formulaNode.Add(new XElement(MathMLTags.Number, CONST_TO_ADD));
+
+            return formulaNode;
         }
     }
 }

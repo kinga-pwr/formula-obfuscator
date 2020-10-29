@@ -11,11 +11,11 @@ namespace FormulaObfuscator.BLL.Generators
 {
     public class EqualsZeroGenerator
     {
-        public XElement Generate(int complexityLevel = 1)
+        public XElement Generate(TypeOfFormula formula)
         {
-            switch (complexityLevel)
+            switch (formula)
             {
-                case 1:
+                case TypeOfFormula.Polynomial:
                     return Polynomial();
             }
             throw new GeneratorComplexityLevelOutOfBoundsException();
