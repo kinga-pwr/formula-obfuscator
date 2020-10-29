@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Helpers
 {
-    public class Holder<T>
+    public class Holder
     {
-        private Holder(T value)
+        private Holder(XElement value)
         {
             WasSuccessful = true;
             Value = value;
@@ -19,17 +20,17 @@ namespace FormulaObfuscator.BLL.Helpers
         }
 
         public bool WasSuccessful { get; }
-        public T Value { get; }
+        public XElement Value { get; }
         public string ErrorMsg { get; }
 
-        public static Holder<T> Success(T value)
+        public static Holder Success(XElement value)
         {
-            return new Holder<T>(value);
+            return new Holder(value);
         }
 
-        public static Holder<T> Fail(string errorMsg)
+        public static Holder Fail(string errorMsg)
         {
-            return new Holder<T>(errorMsg);
+            return new Holder(errorMsg);
         }
     }
 }

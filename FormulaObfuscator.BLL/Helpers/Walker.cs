@@ -23,11 +23,11 @@ namespace FormulaObfuscator.BLL.Helpers
             }
         }
 
-        public static Holder<XElement> findTreeWithValue(XElement node, string value)
+        public static Holder findTreeWithValue(XElement node, string value)
         {
             if (node.Name.ToString().Contains(value))
             {
-                return Holder<XElement>.Success(node);
+                return Holder.Success(node);
             }
 
             foreach (XElement child in node.Elements())
@@ -37,7 +37,7 @@ namespace FormulaObfuscator.BLL.Helpers
                     return res;
             }
 
-            return Holder<XElement>.Fail(ErrorMsgs.CONVERT_FAILED_MATHML_MSG); ;
+            return Holder.Fail(ErrorMsgs.CONVERT_FAILED_MATHML_MSG); ;
         }
     }
 }

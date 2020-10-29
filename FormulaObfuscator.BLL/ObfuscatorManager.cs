@@ -1,4 +1,5 @@
 ﻿using FormulaObfuscator.BLL.Algorithms;
+using FormulaObfuscator.BLL.Generators;
 using FormulaObfuscator.BLL.Helpers;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace FormulaObfuscator.BLL
             this.UploadedText = uploadedText;
         }
 
-        public Holder<XElement> obfuscate()
+        public Holder obfuscate()
         {
             var reader = new HTMLReader(UploadedText);
             var mathmlTreeHolder = reader.convertToMathMLTree();
@@ -26,7 +27,8 @@ namespace FormulaObfuscator.BLL
             if (mathmlTreeHolder.WasSuccessful)
                 obfuscateWithSimple(mathmlTreeHolder.Value);
 
-            return mathmlTreeHolder;
+            //return mathmlTreeHolder;
+            return Holder.Success(new EqualsOneGenerator().Generate());
         }
 
         private void obfuscateWithSimple(XElement node)

@@ -16,7 +16,7 @@ namespace FormulaObfuscator.BLL.Helpers
             this.Text = text;
         }
 
-        public Holder<XElement> convertToMathMLTree()
+        public Holder convertToMathMLTree()
         {
             try
             {
@@ -30,7 +30,7 @@ namespace FormulaObfuscator.BLL.Helpers
                 Console.WriteLine(e.Message);
             }
 
-            return Holder<XElement>.Fail(ErrorMsgs.CONVERT_FAILED_MSG);
+            return Holder.Fail(ErrorMsgs.CONVERT_FAILED_MSG);
         }
 
         private XElement getMathML(XElement tree)
