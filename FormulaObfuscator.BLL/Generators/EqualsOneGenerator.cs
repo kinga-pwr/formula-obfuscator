@@ -9,8 +9,14 @@ using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Generators
 {
-    public class EqualsOneGenerator
+    public class EqualsOneGenerator : IGenerator
     {
+        public TypeOfFormula[] GetPossibleFormulas()
+        {
+            //return new[] { TypeOfFormula.Polynomial, TypeOfFormula.Fraction, TypeOfFormula.Trigonometry, TypeOfFormula.Root, TypeOfFormula.TrigonometryRedundancy };
+            return new[] { TypeOfFormula.Polynomial };
+        }
+
         public XElement Generate(TypeOfFormula type)
         {
             return type switch

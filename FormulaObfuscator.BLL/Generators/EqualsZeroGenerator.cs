@@ -9,8 +9,14 @@ using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Generators
 {
-    public class EqualsZeroGenerator
+    public class EqualsZeroGenerator : IGenerator
     {
+        public TypeOfFormula[] GetPossibleFormulas()
+        {
+            //return new[] { TypeOfFormula.Polynomial, TypeOfFormula.Fraction, TypeOfFormula.Trigonometry, TypeOfFormula.Integral };
+            return new[] { TypeOfFormula.Polynomial };
+        }
+
         public XElement Generate(TypeOfFormula formula)
         {
             return formula switch
@@ -34,7 +40,7 @@ namespace FormulaObfuscator.BLL.Generators
             // <varName> : {<power>: <const>, <power2>: <const>}
             var logs = new Dictionary<char, Dictionary<int, int>>();
 
-            var amountOfVariables = Randoms.Int(MAX_AMOUNT_OF_VARIABLES);
+            var amountOfVariables = Randoms.Int(1, MAX_AMOUNT_OF_VARIABLES);
 
             // Generate variable names
             while (logs.Keys.Count < amountOfVariables)
@@ -42,8 +48,9 @@ namespace FormulaObfuscator.BLL.Generators
                 logs.TryAdd(Randoms.Char(), new Dictionary<int, int>());
             }
 
-            var formula = "";
+            //var formula = "";
             var formulaRoot = new XElement(MathMLTags.Row);
+            var isFirst = true;
 
             // create formula
             for (int power = 0; power < MAX_COUNT_OF_GEN_FORMULA; power++)
@@ -52,8 +59,12 @@ namespace FormulaObfuscator.BLL.Generators
                 var currVarName = logs.Keys.ElementAt(Randoms.Int(amountOfVariables));
                 var currConst = Randoms.Int(MAX_CONST_VALUE);
 
-                formula += (currConst >= 0 ? "+" : "") + currConst + currVarName + "^" + currPower;
-                formulaRoot.Add(new XElement(MathMLTags.Operator, currConst >= 0 ? "+" : "-"));
+                //formula += (currConst >= 0 ? "+" : "") + currConst + currVarName + "^" + currPower;
+                if (!isFirst)
+                    formulaRoot.Add(new XElement(MathMLTags.Operator, currConst >= 0 ? "+" : "-"));
+                else
+                    isFirst = false;
+
                 formulaRoot.Add(new XElement(MathMLTags.Number, Math.Abs(currConst)));
                 formulaRoot.Add(MathMLStructures.Power(currPower, new XElement(MathMLTags.Identifier, currVarName)));
 
@@ -73,7 +84,7 @@ namespace FormulaObfuscator.BLL.Generators
                 foreach (int power in powerHistory.Keys)
                 {
                     var currConst = powerHistory[power] * -1;
-                    formula += (currConst >= 0 ? "+" : "") + currConst + variable + "^" + power;
+                    //formula += (currConst >= 0 ? "+" : "") + currConst + variable + "^" + power;
                     formulaRoot.Add(new XElement(MathMLTags.Operator, currConst >= 0 ? "+" : "-"));
                     formulaRoot.Add(new XElement(MathMLTags.Number, Math.Abs(currConst)));
                     formulaRoot.Add(MathMLStructures.Power(power, new XElement(MathMLTags.Identifier, variable)));
