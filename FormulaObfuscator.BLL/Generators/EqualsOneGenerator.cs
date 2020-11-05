@@ -130,7 +130,7 @@ namespace FormulaObfuscator.BLL.Generators
         /// </code>
         /// </summary>
         /// <returns></returns>
-        private XElement Trigonometric() 
+        private XElement Trigonometric()
             => MathMLStructures.Trigonometric(Trigonometry.cos, new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)));
 
         /// <summary>
@@ -151,7 +151,10 @@ namespace FormulaObfuscator.BLL.Generators
         /// <returns></returns>
         private XElement TrigonometricRedundancy()
         {
-            var options = new[] { (Trigonometry.sin, "+", Trigonometry.cos, 2), (Trigonometry.tg, MathMLSymbols.Multiply, Trigonometry.ctg, 1) };
+            var options = new[] {
+                (Trigonometry.sin, "+", Trigonometry.cos, 2),
+                (Trigonometry.tg, MathMLSymbols.Multiply, Trigonometry.ctg, 1)
+            };
             var formula = new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2));
             var option = options[Randoms.Int(0, 1)];
             XElement element = new XElement("container");
