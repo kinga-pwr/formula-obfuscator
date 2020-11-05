@@ -8,5 +8,7 @@ namespace FormulaObfuscator.BLL.Models
     {
         public static string Multiply => "&sdot;";
         public static string Integral => "&#x222B";
+
+        public static string Epsilon => "∑";
     }
 }
