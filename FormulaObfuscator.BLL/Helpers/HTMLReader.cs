@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Helpers
@@ -13,30 +11,20 @@ namespace FormulaObfuscator.BLL.Helpers
 
         public HTMLReader(string text)
         {
-            this.Text = text;
+            Text = text;
         }
 
-        public Holder convertToMathMLTree()
+        public void ConvertToMathMLTree(List<XElement> outputTrees)
         {
-            try
-            {
-                var tree = XElement.Parse(Text);
-                var mathMLTreeHolder = Walker.findTreeWithValue(tree, MATHML_TAG);
-
-                return mathMLTreeHolder;
-
-            } catch (System.Xml.XmlException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            return Holder.Fail(ErrorMsgs.CONVERT_FAILED_MSG);
+            var tree = XElement.Parse(Text);
+            Walker.FindTrees(tree, MATHML_TAG, outputTrees);
         }
 
-        private XElement getMathML(XElement tree)
+        public string SubstituteObfuscatedMathMLTree(Queue<XElement> obfuscatedTrees)
         {
-
-            throw new System.Xml.XmlException("MathML not found");
+            var tree = XElement.Parse(Text);
+            Walker.SubstituteObfuscatedTrees(tree, MATHML_TAG, obfuscatedTrees);
+            return tree.ToString();
         }
     }
 }

@@ -87,10 +87,10 @@ namespace FormulaObfuscator.ViewModels
         {
             await Task.Run(async () =>
             {
-                var resultHolder = new ObfuscatorManager(Input).runObfuscate();
+                var resultHolder = new ObfuscatorManager(Input).RunObfuscate();
 
                 if (resultHolder.WasSuccessful)
-                    Output = resultHolder.Value.ToString();
+                    Output = resultHolder.Value;
                 else
                 {
                     Output = string.Empty;

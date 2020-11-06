@@ -1,36 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
-
-namespace FormulaObfuscator.BLL.Helpers
+﻿namespace FormulaObfuscator.BLL.Helpers
 {
     public class Holder
     {
-        private Holder(XElement value)
-        {
-            WasSuccessful = true;
-            Value = value;
-        }
+        public bool WasSuccessful { get; private set; }
+        public string Value { get; private set; }
+        public string ErrorMsg { get; private set; }
 
-        private Holder(string errorMsg)
+        public static Holder Success(string value)
         {
-            WasSuccessful = false;
-            ErrorMsg = errorMsg;
-        }
-
-        public bool WasSuccessful { get; }
-        public XElement Value { get; }
-        public string ErrorMsg { get; }
-
-        public static Holder Success(XElement value)
-        {
-            return new Holder(value);
+            return new Holder()
+            {
+                WasSuccessful = true,
+                Value = value
+            };
         }
 
         public static Holder Fail(string errorMsg)
         {
-            return new Holder(errorMsg);
+            return new Holder()
+            {
+                WasSuccessful = false,
+                ErrorMsg = errorMsg
+            };
         }
     }
 }

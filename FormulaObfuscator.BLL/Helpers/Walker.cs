@@ -3,8 +3,6 @@ using FormulaObfuscator.BLL.Generators;
 using FormulaObfuscator.BLL.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Helpers
@@ -75,21 +73,31 @@ namespace FormulaObfuscator.BLL.Helpers
             return num < 2;
         }
 
-        public static Holder findTreeWithValue(XElement node, string value)
+        public static void FindTrees(XElement node, string value, List<XElement> outputTrees)
         {
             if (node.Name.ToString().Contains(value))
             {
-                return Holder.Success(node);
+                outputTrees.Add(node);
             }
 
             foreach (XElement child in node.Elements())
             {
-                var res = findTreeWithValue(child, value);
-                if (res.WasSuccessful)
-                    return res;
+                FindTrees(child, value, outputTrees);
+            }
+        }
+
+        public static XElement SubstituteObfuscatedTrees(XElement node, string value, Queue<XElement> outputTrees)
+        {
+            if (node.Name.ToString().Contains(value))
+            {
+                node.ReplaceNodes(outputTrees.Dequeue().Elements());
             }
 
-            return Holder.Fail(ErrorMsgs.CONVERT_FAILED_MATHML_MSG); ;
+            foreach (XElement child in node.Elements())
+            {
+                SubstituteObfuscatedTrees(child, value, outputTrees);
+            }
+            return node;
         }
     }
 }
