@@ -43,13 +43,13 @@ namespace FormulaObfuscator.BLL.Helpers
 
         public static XElement OperatorXElement()
         {
-            return new XElement(Operator().Value.ToString()) ;
+            return new XElement(Operator().Value.ToString());
         }
 
         public static XElement SimpleExpression()
         {
             var possibleExpressions = typeof(SimpleExpressionGenerator).GetMethods();
-            return (XElement)possibleExpressions[Int(possibleExpressions.GetLength(0))].Invoke(null, null);
+            return (XElement)possibleExpressions[Int(possibleExpressions.Count() - 4)].Invoke(null, null);
             //switch (possibleExpressions[Randoms.Int(possibleExpressions.GetLength(0))].Name)
             //{
             //    case "FractionNumberNumber":
@@ -62,7 +62,7 @@ namespace FormulaObfuscator.BLL.Helpers
         public static XElement ComplexExpression()
         {
             var possibleExpressions = typeof(ComplexExpressionGenerator).GetMethods();
-            return (XElement)possibleExpressions[Int(possibleExpressions.GetLength(0))].Invoke(null, null);
+            return (XElement)possibleExpressions[Int(possibleExpressions.Count() - 4)].Invoke(null, null);
         }
     }
 }

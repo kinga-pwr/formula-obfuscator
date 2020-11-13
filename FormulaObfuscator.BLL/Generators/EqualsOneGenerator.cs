@@ -13,7 +13,7 @@ namespace FormulaObfuscator.BLL.Generators
     {
         public TypeOfFormula[] GetPossibleFormulas()
         {
-            //return new[] { TypeOfFormula.Polynomial, TypeOfFormula.Fraction, TypeOfFormula.Trigonometry, TypeOfFormula.Root, TypeOfFormula.TrigonometryRedundancy };
+            return new[] { TypeOfFormula.Polynomial, TypeOfFormula.Fraction, TypeOfFormula.Trigonometry, TypeOfFormula.Root, TypeOfFormula.TrigonometryRedundancy };
             return new[] { TypeOfFormula.Polynomial };
         }
 
