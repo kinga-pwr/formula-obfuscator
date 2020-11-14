@@ -1,7 +1,4 @@
 ﻿using FormulaObfuscator.BLL.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Generators

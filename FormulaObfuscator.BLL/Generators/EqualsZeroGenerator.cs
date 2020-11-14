@@ -4,7 +4,6 @@ using FormulaObfuscator.BLL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Generators
@@ -13,12 +12,13 @@ namespace FormulaObfuscator.BLL.Generators
     {
         public TypeOfFormula[] GetPossibleFormulas()
         {
-            //return new[] { TypeOfFormula.Polynomial, TypeOfFormula.Fraction, TypeOfFormula.Trigonometry, TypeOfFormula.Integral };
-            return new[] { TypeOfFormula.Polynomial };
+            return new[] { TypeOfFormula.Polynomial, TypeOfFormula.Fraction, TypeOfFormula.Trigonometry, TypeOfFormula.Integral };
         }
 
         public XElement Generate(TypeOfFormula formula)
         {
+            if (Randoms.RecursionDepth <= 0) return LevelOne();
+
             return formula switch
             {
                 TypeOfFormula.Polynomial => Polynomial(),
@@ -28,6 +28,8 @@ namespace FormulaObfuscator.BLL.Generators
                 _ => throw new GeneratorFormulaTypeUnknownException(),
             };
         }
+
+        private XElement LevelOne() => new XElement(MathMLTags.Number, "0");
 
         private XElement Polynomial()
         {
@@ -96,6 +98,8 @@ namespace FormulaObfuscator.BLL.Generators
 
         private XElement Fraction()
         {
+            Randoms.RecursionDepth--;
+
             XElement fraction = new XElement(MathMLTags.Fraction);
             XElement nominator = new XElement(MathMLTags.Row, Polynomial());
             XElement denominator = new XElement(MathMLTags.Row, Randoms.ComplexExpression());
@@ -115,9 +119,11 @@ namespace FormulaObfuscator.BLL.Generators
         /// </code>
         /// </summary>
         /// <returns></returns>
-        private XElement Trigonometry() 
-            => MathMLStructures.Trigonometric((Trigonometry)Randoms.Int(0,1), new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)));
-
+        private XElement Trigonometry()
+        {
+            Randoms.RecursionDepth--;
+            return MathMLStructures.Trigonometric((Trigonometry)Randoms.Int(0, 1), new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)));
+        }
         /// <summary>
         /// <code>
         /// (container)
@@ -130,6 +136,9 @@ namespace FormulaObfuscator.BLL.Generators
         /// </summary>
         /// <returns></returns>
         private XElement Integral()
-            => MathMLStructures.Integral(new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 3)));
+        {
+            Randoms.RecursionDepth--;
+            return MathMLStructures.Integral(new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 3)));
+        }
     }
 }

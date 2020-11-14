@@ -7,11 +7,13 @@ namespace FormulaObfuscator.BLL.Models
     {
         public static XElement Trigonometric(Trigonometry type, XElement variable, int power = 1)
         {
-            XElement container = new XElement(MathMLTags.Container);
+            XElement container = new XElement(MathMLTags.Row);
             XElement trigonometricSymbol = new XElement(MathMLTags.Identifier, Enum.GetName(typeof(Trigonometry), type));
 
             container.Add(Power(power, trigonometricSymbol));
+            container.Add(new XElement(MathMLTags.Operator, "("));
             container.Add(variable);
+            container.Add(new XElement(MathMLTags.Operator, ")"));
             return container;
         }
         public static XElement Power(int power, XElement variable)
@@ -25,7 +27,7 @@ namespace FormulaObfuscator.BLL.Models
 
         public static XElement Integral(XElement expression, XElement upperLimit = null, XElement lowerLimit = null)
         {
-            var container = new XElement(MathMLTags.Container);
+            var container = new XElement(MathMLTags.Row);
             var integral = new XElement(MathMLTags.Integral);
             var integralSymbol = new XElement(MathMLTags.Operator, MathMLSymbols.Integral);
             integral.Add(integralSymbol);
@@ -35,7 +37,9 @@ namespace FormulaObfuscator.BLL.Models
                 integral.Add(upperLimit);
             }
             container.Add(integral);
+            container.Add(new XElement(MathMLTags.Operator, "("));
             container.Add(expression);
+            container.Add(new XElement(MathMLTags.Operator, ")"));
             return container;
         }
     }

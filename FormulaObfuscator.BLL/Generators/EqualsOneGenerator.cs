@@ -1,10 +1,6 @@
 ﻿using FormulaObfuscator.BLL.Exceptions;
 using FormulaObfuscator.BLL.Helpers;
 using FormulaObfuscator.BLL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Generators
@@ -14,11 +10,12 @@ namespace FormulaObfuscator.BLL.Generators
         public TypeOfFormula[] GetPossibleFormulas()
         {
             return new[] { TypeOfFormula.Polynomial, TypeOfFormula.Fraction, TypeOfFormula.Trigonometry, TypeOfFormula.Root, TypeOfFormula.TrigonometryRedundancy };
-            return new[] { TypeOfFormula.Polynomial };
         }
 
         public XElement Generate(TypeOfFormula type)
         {
+            if (Randoms.RecursionDepth <= 0) return LevelOne();
+
             return type switch
             {
                 TypeOfFormula.Polynomial => Polynomial(),
@@ -33,7 +30,7 @@ namespace FormulaObfuscator.BLL.Generators
 
         private XElement LevelOne()
         {
-            XElement element = new XElement("container");
+            XElement element = new XElement(MathMLTags.Row);
             for (int i = 0; i < 3; i++)
             {
                 // Initialize XML elements
@@ -53,19 +50,19 @@ namespace FormulaObfuscator.BLL.Generators
                 //letterOperator.Value = letterOp.Value.ToString();
 
                 // Add XML elements to one root
-                element.Add(new XElement(MathMLTags.Operator), numOp.Value.ToString());
-                element.Add(new XElement(MathMLTags.Number), Randoms.Int().ToString());
+                element.Add(new XElement(MathMLTags.Operator, numOp.Value.ToString()));
+                element.Add(new XElement(MathMLTags.Number, Randoms.Int().ToString()));
 
                 element.Add(new XElement(MathMLTags.Operator, numOp.Value.ToString()));
-                element.Add(new XElement(MathMLTags.Number), Randoms.Char().ToString());
+                element.Add(new XElement(MathMLTags.Number, Randoms.Char().ToString()));
 
                 // Add same elements with inverteed operators
 
-                element.Add(new XElement(MathMLTags.Operator), (!numOp).Value.ToString());
-                element.Add(new XElement(MathMLTags.Number), Randoms.Int().ToString());
+                element.Add(new XElement(MathMLTags.Operator, (!numOp).Value.ToString()));
+                element.Add(new XElement(MathMLTags.Number, Randoms.Int().ToString()));
 
                 element.Add(new XElement(MathMLTags.Operator, (!numOp).Value.ToString()));
-                element.Add(new XElement(MathMLTags.Number), Randoms.Char().ToString());
+                element.Add(new XElement(MathMLTags.Number, Randoms.Char().ToString()));
             }
 
             return element;
@@ -73,6 +70,8 @@ namespace FormulaObfuscator.BLL.Generators
 
         private XElement Polynomial()
         {
+            Randoms.RecursionDepth--;
+
             var CONST_TO_ADD = 1;
             var formulaNode = new EqualsZeroGenerator().Generate(TypeOfFormula.Polynomial);
             formulaNode.Add(new XElement(MathMLTags.Operator, "+"));
@@ -92,6 +91,8 @@ namespace FormulaObfuscator.BLL.Generators
         /// <returns></returns>
         private XElement Root()
         {
+            Randoms.RecursionDepth--;
+
             XElement root = new XElement(MathMLTags.Root);
             XElement degree = new XElement(MathMLTags.Identifier, Randoms.ComplexExpression());
             XElement element = new XElement(MathMLTags.Number, Polynomial());
@@ -117,6 +118,8 @@ namespace FormulaObfuscator.BLL.Generators
         /// <returns></returns>
         private XElement Fraction()
         {
+            Randoms.RecursionDepth--;
+
             XElement fraction = new XElement(MathMLTags.Fraction);
             XElement nominator = new XElement(MathMLTags.Row, Root());
             XElement denominator = new XElement(MathMLTags.Row, Polynomial());
@@ -137,7 +140,10 @@ namespace FormulaObfuscator.BLL.Generators
         /// </summary>
         /// <returns></returns>
         private XElement Trigonometric()
-            => MathMLStructures.Trigonometric(Trigonometry.cos, new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)));
+        {
+            Randoms.RecursionDepth--;
+            return MathMLStructures.Trigonometric(Trigonometry.cos, new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)));
+        }
 
         /// <summary>
         /// <code>
@@ -157,13 +163,15 @@ namespace FormulaObfuscator.BLL.Generators
         /// <returns></returns>
         private XElement TrigonometricRedundancy()
         {
+            Randoms.RecursionDepth--;
+
             var options = new[] {
                 (Trigonometry.sin, "+", Trigonometry.cos, 2),
                 (Trigonometry.tg, MathMLSymbols.Multiply, Trigonometry.ctg, 1)
             };
             var formula = new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2));
             var option = options[Randoms.Int(0, 1)];
-            XElement element = new XElement("container");
+            XElement element = new XElement(MathMLTags.Row);
             var part1 = MathMLStructures.Trigonometric(option.Item1, formula, option.Item4);
             var part2 = MathMLStructures.Trigonometric(option.Item3, formula, option.Item4);
             element.Add(part1);

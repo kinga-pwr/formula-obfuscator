@@ -36,7 +36,7 @@ namespace FormulaObfuscator.BLL.Helpers
                             generator = new EqualsZeroGenerator();
                             break;
                         case TypeOfOperation.MultiplyByOne:
-                            container.Add(new XElement(MathMLTags.Operator, "x"));
+                            container.Add(new XElement(MathMLTags.Operator, MathMLSymbols.Multiply));
                             generator = new EqualsOneGenerator();
                             break;
                         default:

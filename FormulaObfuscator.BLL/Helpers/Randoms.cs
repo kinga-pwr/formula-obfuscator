@@ -1,9 +1,7 @@
 ﻿using FormulaObfuscator.BLL.Generators;
 using FormulaObfuscator.BLL.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Helpers
@@ -13,6 +11,8 @@ namespace FormulaObfuscator.BLL.Helpers
         private static Random random = new Random();
         private static string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         private static string operators = "+-";
+
+        public static int RecursionDepth { get; set; } = 3;
 
         public static string String(int length = 1)
         {
@@ -43,7 +43,7 @@ namespace FormulaObfuscator.BLL.Helpers
 
         public static XElement OperatorXElement()
         {
-            return new XElement(Operator().Value.ToString());
+            return new XElement(MathMLTags.Operator, Operator().Value.ToString());
         }
 
         public static XElement SimpleExpression()

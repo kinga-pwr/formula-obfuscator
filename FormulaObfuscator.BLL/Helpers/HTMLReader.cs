@@ -24,7 +24,7 @@ namespace FormulaObfuscator.BLL.Helpers
         {
             var tree = XElement.Parse(Text);
             Walker.SubstituteObfuscatedTrees(tree, MATHML_TAG, obfuscatedTrees);
-            return tree.ToString();
+            return tree.ToString().Replace("&amp;", "&");
         }
     }
 }

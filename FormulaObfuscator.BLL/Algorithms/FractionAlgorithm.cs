@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FormulaObfuscator.BLL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,12 @@ namespace FormulaObfuscator.BLL.Algorithms
 
     public class FractionAlgorithm
     {
-        public string TagName => "mfrac";
+        public string TagName => MathMLTags.Fraction;
         public void Obfuscate(List<XElement> leaf)
         {
             XElement main = new XElement(TagName);
-            XElement nominator = new XElement("row");
-            XElement denominator = new XElement("row", 1);
+            XElement nominator = new XElement(MathMLTags.Number);
+            XElement denominator = new XElement(MathMLTags.Number, 1);
 
             leaf[0].Parent.Add(main);
 

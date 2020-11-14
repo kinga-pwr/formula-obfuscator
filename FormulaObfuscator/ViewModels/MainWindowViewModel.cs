@@ -1,12 +1,11 @@
 ﻿using FormulaObfuscator.BLL;
-using FormulaObfuscator.BLL.Helpers;
+using FormulaObfuscator.BLL.Models;
 using FormulaObfuscator.Commands;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace FormulaObfuscator.ViewModels
 {
@@ -78,16 +77,28 @@ namespace FormulaObfuscator.ViewModels
 
             progressController.SetIndeterminate();
 
-            await ObfuscateData();
-
-            await progressController.CloseAsync();
+            try
+            {
+                await ObfuscateData();
+                await progressController.CloseAsync();
+            }
+            catch
+            {
+                await progressController.CloseAsync();
+                await _dialogCoordinator.ShowMessageAsync(this, "Error", "Error occured, please try again");
+            }
         }
 
         private async Task ObfuscateData()
         {
             await Task.Run(async () =>
             {
-                var resultHolder = new ObfuscatorManager(Input).RunObfuscate();
+                var settings = new Settings()
+                {
+                    RecursionDepth = 2
+                };
+
+                var resultHolder = new ObfuscatorManager(Input).RunObfuscate(settings);
 
                 if (resultHolder.WasSuccessful)
                     Output = resultHolder.Value;

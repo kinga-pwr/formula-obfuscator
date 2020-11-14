@@ -1,15 +1,12 @@
 ﻿using FormulaObfuscator.BLL.Helpers;
 using FormulaObfuscator.BLL.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Generators
 {
     public static class ComplexExpressionGenerator
     {
-        private static int _maxDepth => 5;
+        private static int _maxLength => 5;
 
         public static XElement Fraction()
         {
@@ -17,19 +14,21 @@ namespace FormulaObfuscator.BLL.Generators
             XElement nominator = new XElement(MathMLTags.Row);
             XElement denominator = new XElement(MathMLTags.Row);
 
-            for (int i = 0; i < Randoms.Int(_maxDepth); i++)
+            var length = Randoms.Int(_maxLength);
+            for (int i = 0; i < length; i++)
             {
                 nominator.Add(Randoms.SimpleExpression());
-                if (i != _maxDepth-1)
+                if (i != length-1)
                 {
                     nominator.Add(Randoms.OperatorXElement());
                 }
             }
-            
-            for (int i = 0; i < Randoms.Int(_maxDepth); i++)
+
+            length = Randoms.Int(_maxLength);
+            for (int i = 0; i < length; i++)
             {
                 denominator.Add(Randoms.SimpleExpression());
-                if (i != _maxDepth-1)
+                if (i != length-1)
                 {
                     denominator.Add(Randoms.OperatorXElement());
                 }
@@ -48,19 +47,21 @@ namespace FormulaObfuscator.BLL.Generators
             XElement degree = new XElement(MathMLTags.Identifier);
             XElement element = new XElement(MathMLTags.Number);
 
-            for (int i = 0; i < Randoms.Int(_maxDepth); i++)
+            var length = Randoms.Int(_maxLength);
+            for (int i = 0; i < length; i++)
             {
                 degree.Add(Randoms.SimpleExpression());
-                if (i != _maxDepth - 1)
+                if (i != length - 1)
                 {
                     degree.Add(Randoms.OperatorXElement());
                 }
             }
 
-            for (int i = 0; i < Randoms.Int(_maxDepth); i++)
+            length = Randoms.Int(_maxLength);
+            for (int i = 0; i < length; i++)
             {
                 element.Add(Randoms.SimpleExpression());
-                if (i != _maxDepth - 1)
+                if (i != length - 1)
                 {
                     element.Add(Randoms.OperatorXElement());
                 }

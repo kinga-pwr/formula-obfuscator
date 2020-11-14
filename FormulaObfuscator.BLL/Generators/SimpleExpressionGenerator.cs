@@ -1,8 +1,5 @@
 ﻿using FormulaObfuscator.BLL.Helpers;
 using FormulaObfuscator.BLL.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Generators
@@ -12,8 +9,8 @@ namespace FormulaObfuscator.BLL.Generators
         public static XElement FractionNumberNumber()
         {
             XElement main = new XElement(MathMLTags.Fraction);
-            XElement nominator = new XElement(MathMLTags.Row, Randoms.Int());
-            XElement denominator = new XElement(MathMLTags.Row, Randoms.Int());
+            XElement nominator = new XElement(MathMLTags.Number, Randoms.Int());
+            XElement denominator = new XElement(MathMLTags.Number, Randoms.Int());
 
             main.Add(nominator);
             main.Add(denominator);

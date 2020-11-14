@@ -1,5 +1,6 @@
 ﻿using FormulaObfuscator.BLL.Algorithms;
 using FormulaObfuscator.BLL.Helpers;
+using FormulaObfuscator.BLL.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -15,9 +16,9 @@ namespace FormulaObfuscator.BLL
             UploadedText = uploadedText;
         }
 
-        public Holder RunObfuscate()
+        public Holder RunObfuscate(Settings settings)
         {
-            
+            ApplySettings(settings);
             var reader = new HTMLReader(UploadedText);
             var mathmlTrees = new List<XElement>();
             
@@ -50,6 +51,11 @@ namespace FormulaObfuscator.BLL
         private void Obfuscate(XElement node)
         {
             Walker.WalkWithAlgorithm(node, new SimpleAlgorithm());
+        }
+
+        private void ApplySettings(Settings settings)
+        {
+            Randoms.RecursionDepth = settings.RecursionDepth;
         }
 
         // taki jakby main

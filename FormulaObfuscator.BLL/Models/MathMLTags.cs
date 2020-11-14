@@ -69,10 +69,6 @@ namespace FormulaObfuscator.BLL.Models
         /// </value>
         public static string Power => "msup";
 
-        /// <summary>
-        /// Contrainer for more complex expressions.
-        /// </summary>
-        public static string Container => "container";
 
         /// <summary>
         /// Element used to create a set of elements with one in the middle and one above and below.
