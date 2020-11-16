@@ -59,7 +59,7 @@ namespace FormulaObfuscator.BLL.Generators
             {
                 var currPower = Randoms.Int(MAX_POWER);
                 var currVarName = logs.Keys.ElementAt(Randoms.Int(amountOfVariables));
-                var currConst = Randoms.Int(MAX_CONST_VALUE);
+                var currConst = Randoms.Int(1, MAX_CONST_VALUE);
 
                 //formula += (currConst >= 0 ? "+" : "") + currConst + currVarName + "^" + currPower;
                 if (!isFirst)

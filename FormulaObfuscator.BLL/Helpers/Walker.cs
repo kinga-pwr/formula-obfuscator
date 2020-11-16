@@ -48,7 +48,7 @@ namespace FormulaObfuscator.BLL.Helpers
                     container.Add(new XElement(MathMLTags.Operator, "("));
                     container.Add(generator.Generate(formulaToGenerate));
                     container.Add(new XElement(MathMLTags.Operator, ")"));
-                    node.Add(container);
+                    node.AddAfterSelf(container);
                 }
             }
         }
