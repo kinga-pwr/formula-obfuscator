@@ -58,9 +58,9 @@ namespace FormulaObfuscator.BLL
                 case Level.Full:
                     return Walker.WalkWithAlgorithmForWholeFormula(node);
                 case Level.Fraction:
-                    return Walker.WalkWithAlgorithmForAllFractions(node);
+                    return Walker.WalkWithAlgorithmForAllFractionsInRoot(node);
                 case Level.Variables:
-                    return Walker.WalkWithAlgorithmForVariables(node);
+                    return Walker.WalkWithAlgorithmForRootVariables(node);
             }
 
             return node;
