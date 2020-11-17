@@ -8,6 +8,7 @@ namespace FormulaObfuscator.BLL.Models
     {
         PlusZero,
         MinusZero,
-        MultiplyByOne
+        MultiplyByOne,
+        DivideByOne
     }
 }

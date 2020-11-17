@@ -21,6 +21,7 @@ namespace FormulaObfuscator.BLL
             ApplySettings(settings);
             var reader = new HTMLReader(UploadedText);
             var mathmlTrees = new List<XElement>();
+            var obfuscated = new List<XElement>();
             
             try
             {
@@ -33,6 +34,7 @@ namespace FormulaObfuscator.BLL
 
             if (mathmlTrees.Any())
             {
+
                 foreach (var tree in mathmlTrees)
                 {
                     var obfuscateCount = 1;
@@ -40,29 +42,28 @@ namespace FormulaObfuscator.BLL
 
                     while (obfuscateCount > 0)
                     {
-                        Obfuscate(tree, level);
+                        obfuscated.Add(Obfuscate(tree, level));
                         obfuscateCount--;
                     }
                 }
             }
 
-            return Holder.Success(reader.SubstituteObfuscatedMathMLTree(new Queue<XElement>(mathmlTrees)));
+            return Holder.Success(reader.SubstituteObfuscatedMathMLTree(new Queue<XElement>(obfuscated)));
         }
 
-        private void Obfuscate(XElement node, Level level)
+        private XElement Obfuscate(XElement node, Level level)
         {
             switch(level)
             {
                 case Level.Full:
-                    Walker.WalkWithAlgorithmForWholeFormula(node);
-                    break;
+                    return Walker.WalkWithAlgorithmForWholeFormula(node);
                 case Level.Fraction:
-                    Walker.WalkWithAlgorithmForAllFractions(node);
-                    break;
+                    return Walker.WalkWithAlgorithmForAllFractions(node);
                 case Level.Variables:
-                    Walker.WalkWithAlgorithmForVariables(node);
-                    break;
+                    return Walker.WalkWithAlgorithmForVariables(node);
             }
+
+            return node;
         }
 
         private void ApplySettings(Settings settings)
