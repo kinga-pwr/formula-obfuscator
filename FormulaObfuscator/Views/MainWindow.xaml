@@ -93,6 +93,18 @@
                     <sys:Int32>5</sys:Int32>
                 </Button.CommandParameter>
             </Button>
+            <Button Content="Generated sample"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="12"
+                    Margin="0 0 10 0"
+                    ToolTip="Generate a MathML sample code"
+                    Command="{Binding GenerateSampleCommand}">
+                <Button.CommandParameter>
+                    <sys:Int32>5</sys:Int32>
+                </Button.CommandParameter>
+            </Button>
         </StackPanel>
 
         <TextBox Grid.Column="0"
