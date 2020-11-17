@@ -10,6 +10,7 @@ namespace FormulaObfuscator.BLL.Helpers
     {
         private static Random random = new Random();
         private static string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        private static string greek = "αβγδεζηθικλμνξοπρσςτυφχψanω";
         private static string operators = "+-";
 
         public static int RecursionDepth { get; set; } = 3;
@@ -27,6 +28,17 @@ namespace FormulaObfuscator.BLL.Helpers
         {
             return random.Next();
         }
+
+        public static string CharOrInt()
+        {
+            if (Int(0, 4) % 2 == 0)
+            {
+                return Int(0, 145).ToString();
+            }
+
+            return Char().ToString();
+        }
+
         public static int Int(int max)
         {
             return random.Next(max);
@@ -43,7 +55,7 @@ namespace FormulaObfuscator.BLL.Helpers
 
         public static XElement OperatorXElement()
         {
-            return new XElement(MathMLTags.Operator, Operator().Value.ToString());
+            return new XElement(MathMLTags.Operator, Operator().ToString());
         }
 
         public static XElement SimpleExpression()
@@ -63,6 +75,21 @@ namespace FormulaObfuscator.BLL.Helpers
         {
             var possibleExpressions = typeof(ComplexExpressionGenerator).GetMethods();
             return (XElement)possibleExpressions[Int(possibleExpressions.Count() - 4)].Invoke(null, null);
+        }
+
+        public static string GreekLetter(int length = 1)
+        {
+            return new string(Enumerable.Repeat(greek.ToLower(), length).Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public static string MultiplicityOperator()
+        {
+            if (Int(0, 4) % 2 == 0)
+            {
+                return MathMLSymbols.Divide;
+            }
+
+            return MathMLSymbols.Multiply;
         }
     }
 }

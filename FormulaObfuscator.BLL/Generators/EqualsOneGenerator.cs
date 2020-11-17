@@ -50,18 +50,18 @@ namespace FormulaObfuscator.BLL.Generators
                 //letterOperator.Value = letterOp.Value.ToString();
 
                 // Add XML elements to one root
-                element.Add(new XElement(MathMLTags.Operator, numOp.Value.ToString()));
-                element.Add(new XElement(MathMLTags.Number, Randoms.Int().ToString()));
+                element.Add(new XElement(MathMLTags.Operator, numOp.ToString()));
+                element.Add(new XElement(MathMLTags.Number, Randoms.Int(140, 200).ToString()));
 
-                element.Add(new XElement(MathMLTags.Operator, numOp.Value.ToString()));
+                element.Add(new XElement(MathMLTags.Operator, numOp.ToString()));
                 element.Add(new XElement(MathMLTags.Number, Randoms.Char().ToString()));
 
                 // Add same elements with inverteed operators
 
-                element.Add(new XElement(MathMLTags.Operator, (!numOp).Value.ToString()));
-                element.Add(new XElement(MathMLTags.Number, Randoms.Int().ToString()));
+                element.Add(new XElement(MathMLTags.Operator, (!numOp).ToString()));
+                element.Add(new XElement(MathMLTags.Number, Randoms.Int(100, 120).ToString()));
 
-                element.Add(new XElement(MathMLTags.Operator, (!numOp).Value.ToString()));
+                element.Add(new XElement(MathMLTags.Operator, (!numOp).ToString()));
                 element.Add(new XElement(MathMLTags.Number, Randoms.Char().ToString()));
             }
 

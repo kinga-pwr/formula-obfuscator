@@ -6,6 +6,7 @@ using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using FormulaObfuscator.BLL.TestGenerator;
 
 namespace FormulaObfuscator.ViewModels
 {
@@ -18,7 +19,7 @@ namespace FormulaObfuscator.ViewModels
         public DelegateCommand ObfuscateCommand { get; set; }
         public DelegateCommand DownloadCommand { get; set; }
         public ParameterCommand<int> LoadSampleCommand { get; set; }
-
+        public DelegateCommand GenerateSampleCommand { get; set; }
 
         private string _input;
         public string Input
@@ -40,6 +41,7 @@ namespace FormulaObfuscator.ViewModels
             ObfuscateCommand = new DelegateCommand(() => Obfuscate());
             DownloadCommand = new DelegateCommand(() => DownloadResult());
             LoadSampleCommand = new ParameterCommand<int>((sampleId) => LoadSample(sampleId));
+            GenerateSampleCommand = new DelegateCommand(() => GenerateSample());
 
             _dialogCoordinator = dialogCoordinator;
 
@@ -141,6 +143,12 @@ namespace FormulaObfuscator.ViewModels
             {
                 Input = e.Message;
             }
+        }
+
+        private void GenerateSample()
+        {
+            SamplesGenerator samplesGenerator = new SamplesGenerator();
+            Input = samplesGenerator.DrawSample();
         }
     }
 }
