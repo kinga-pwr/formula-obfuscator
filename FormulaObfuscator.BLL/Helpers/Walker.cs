@@ -3,28 +3,52 @@ using FormulaObfuscator.BLL.Generators;
 using FormulaObfuscator.BLL.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Helpers
 {
     public static class Walker
     {
-        public static XElement WalkWithAlgorithmForVariables(XElement node)
+        public static XElement WalkWithAlgorithmForRootVariables(XElement root)
         {
-            foreach (XElement child in node.Elements())
+            var level = 1;
+            var currentLevel = 0;
+            for (int i = 0; i < GetMaxLevel(root); i++)
             {
-                WalkWithAlgorithmForVariables(child);
+                foreach (XElement child in root.Elements())
+                {
+                    currentLevel = 0;
+                    WalkWithAlgorithmForVariables(child, level, ref currentLevel);
+                }
+                level++;
             }
+            return root;
+        }
+
+        public static int GetMaxLevel(XElement root)
+        {
+            foreach (XElement child in root.Elements())
+            {
+                return GetMaxLevel(child) + 1;
+            }
+            return 0;
+        }
+
+        public static XElement WalkWithAlgorithmForVariables(XElement node, int level, ref int currentLevel)
+        {
+            currentLevel++;
+
             // condition when we want to add obfuscate node
             // for now find <mi>
-            if (node.Name.ToString().Contains(MathMLTags.Identifier))
+            if (currentLevel == level && node.Name.ToString().Contains(MathMLTags.Identifier))
             {
                 if (IsToObfuscate())
                 {
                     var operation = GetTypeOfOperation();
 
                     if (operation != TypeOfOperation.DivideByOne)
-                    { 
+                    {
                         node.AddAfterSelf(Obfuscate(operation));
                     }
                     else
@@ -32,6 +56,11 @@ namespace FormulaObfuscator.BLL.Helpers
                         return ObfuscateWithDivide(node, operation);
                     }
                 }
+            }
+
+            foreach (XElement child in node.Elements())
+            {
+                WalkWithAlgorithmForVariables(child, level, ref currentLevel);
             }
 
             return node;
@@ -49,13 +78,22 @@ namespace FormulaObfuscator.BLL.Helpers
                 node.AddBeforeSelf(new XElement(MathMLTags.Operator, "("));
                 last.AddAfterSelf(Obfuscate(operation));
                 last.AddAfterSelf(new XElement(MathMLTags.Operator, ")"));
-
                 return root;
 
             } else
             {
-                return ObfuscateWithDivide(root, operation);
+                return ObfuscateRootWithDivide(root, operation);
             }
+        }
+
+        public static XElement WalkWithAlgorithmForAllFractionsInRoot(XElement root)
+        {
+            foreach (XElement child in root.Elements())
+            {
+                WalkWithAlgorithmForAllFractions(child);
+            }
+
+            return root;
         }
 
         public static XElement WalkWithAlgorithmForAllFractions(XElement node)
@@ -79,6 +117,22 @@ namespace FormulaObfuscator.BLL.Helpers
 
             return node;
         }
+
+        private static XElement ObfuscateRootWithDivide(XElement root, TypeOfOperation operation)
+        {
+            var fraction = new XElement(MathMLTags.Fraction);
+            var nominator = new XElement(MathMLTags.Row);
+            nominator.Add(new XElement(MathMLTags.Operator, "("));
+            nominator.Add(root.Elements());
+            nominator.Add(new XElement(MathMLTags.Operator, ")"));
+            fraction.Add(nominator);
+            fraction.Add(Obfuscate(operation));
+
+            root.RemoveAll();
+            root.Add(fraction);
+            return root;
+        }
+
         private static XElement ObfuscateWithDivide(XNode node, TypeOfOperation operation)
         {
             var fraction = new XElement(MathMLTags.Fraction);
