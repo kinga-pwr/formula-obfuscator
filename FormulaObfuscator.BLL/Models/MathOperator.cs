@@ -7,7 +7,7 @@ namespace FormulaObfuscator.BLL.Models
 {
     public class MathOperator
     {
-        public char Value { get; set; }
+        private char Value { get; set; }
 
         public MathOperator(char value)
         {
@@ -22,6 +22,11 @@ namespace FormulaObfuscator.BLL.Models
                 '-' => new MathOperator('+'),
                 _ => throw new UnhandledOperatorException(),
             };
+        }
+
+        override public string ToString()
+        {
+            return Value.ToString();
         }
     }
 }
