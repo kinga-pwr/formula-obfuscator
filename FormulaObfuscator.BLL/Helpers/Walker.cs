@@ -1,9 +1,8 @@
-﻿using FormulaObfuscator.BLL.Algorithms;
-using FormulaObfuscator.BLL.Generators;
+﻿using FormulaObfuscator.BLL.Generators;
 using FormulaObfuscator.BLL.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Helpers
@@ -60,7 +59,8 @@ namespace FormulaObfuscator.BLL.Helpers
 
             foreach (XElement child in node.Elements())
             {
-                WalkWithAlgorithmForVariables(child, level, ref currentLevel);
+                if(!child.Name.ToString().Contains(MathMLTags.Power))
+                    WalkWithAlgorithmForVariables(child, level, ref currentLevel);
             }
 
             return node;
@@ -90,7 +90,8 @@ namespace FormulaObfuscator.BLL.Helpers
         {
             foreach (XElement child in root.Elements())
             {
-                WalkWithAlgorithmForAllFractions(child);
+                if (!child.Name.ToString().Contains(MathMLTags.Power))
+                    WalkWithAlgorithmForAllFractions(child);
             }
 
             return root;
@@ -100,7 +101,8 @@ namespace FormulaObfuscator.BLL.Helpers
         {
             foreach (XElement child in node.Elements())
             {
-                WalkWithAlgorithmForAllFractions(child);
+                if (!child.Name.ToString().Contains(MathMLTags.Power))
+                    WalkWithAlgorithmForAllFractions(child);
             }
             // condition when we want to add obfuscate node
             // for now find <mi>
@@ -120,20 +122,69 @@ namespace FormulaObfuscator.BLL.Helpers
 
         private static XElement ObfuscateRootWithDivide(XElement root, TypeOfOperation operation)
         {
+            if (ifContainsEqualities(root.Value))
+            {
+                var leftSide = new List<XElement>();
+                var rightSide = new List<XElement>();
+                XElement equalifier = null;
+                FindTreeWithEqualities(root, ref equalifier); // find equalifier
+                var childrens = equalifier.Parent.Elements(); // get all childrens
+                bool isRightSide = false;
+
+                foreach (XElement child in childrens)
+                {
+                    if (child.Name.ToString().Contains(MathMLTags.Operator) && ifContainsEqualities(child.Value.ToString()))
+                    {
+                        isRightSide = true;
+                        continue;
+                    }
+
+                    if(isRightSide)
+                    {
+                        rightSide.Add(child);
+                    } else
+                    {
+                        leftSide.Add(child);
+                    }
+                }
+
+                var leftFraction = makeFraction(leftSide, operation);
+                var rightFraction = makeFraction(rightSide, operation);
+                root.RemoveAll();
+                root.Add(leftFraction);
+                root.Add(equalifier);
+                root.Add(rightFraction);
+
+                return root;
+            }
+
+            var elements = root.Elements();
+            root.RemoveAll();
+            root.Add(makeFraction(elements, operation));
+            return root;
+        }
+
+        private static XElement makeFraction(IEnumerable<XElement> elements, TypeOfOperation operation)
+        {
             var fraction = new XElement(MathMLTags.Fraction);
             var nominator = new XElement(MathMLTags.Row);
+
             nominator.Add(new XElement(MathMLTags.Operator, "("));
-            nominator.Add(root.Elements());
+            nominator.Add(elements);
             nominator.Add(new XElement(MathMLTags.Operator, ")"));
             fraction.Add(nominator);
             fraction.Add(Obfuscate(operation));
 
-            root.RemoveAll();
-            root.Add(fraction);
-            return root;
+            return fraction;
         }
 
-        private static XElement ObfuscateWithDivide(XNode node, TypeOfOperation operation)
+        private static bool ifContainsEqualities(string value)
+        {
+            var equalities = new List<string>{ MathMLSymbols.Equal }; // TODO add rest symbols
+            return equalities.Any(equality => value.Contains(equality));
+        }
+
+        private static XElement ObfuscateWithDivide(XElement node, TypeOfOperation operation)
         {
             var fraction = new XElement(MathMLTags.Fraction);
             var nominator = new XElement(MathMLTags.Row);
@@ -207,6 +258,19 @@ namespace FormulaObfuscator.BLL.Helpers
         {
             var num = Randoms.Int(1, 10);
             return num < 7;
+        }
+
+        public static void FindTreeWithEqualities(XElement node, ref XElement outputTree)
+        {
+            if (node.Name.ToString().Contains(MathMLTags.Operator) && ifContainsEqualities(node.Value.ToString()))
+            {
+                outputTree = node;
+            }
+
+            foreach (XElement child in node.Elements())
+            {
+                FindTreeWithEqualities(child, ref outputTree);
+            }
         }
 
         public static void FindTrees(XElement node, string value, List<XElement> outputTrees)
