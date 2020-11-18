@@ -279,11 +279,13 @@ namespace FormulaObfuscator.BLL.Helpers
             {
                 outputTrees.Add(node);
             }
-
-            foreach (XElement child in node.Elements())
+            else
             {
-                FindTrees(child, value, outputTrees);
-            }
+                foreach (XElement child in node.Elements())
+                {
+                    FindTrees(child, value, outputTrees);
+                }
+            }          
         }
 
         public static XElement SubstituteObfuscatedTrees(XElement node, string value, Queue<XElement> outputTrees)
