@@ -17,7 +17,7 @@ namespace FormulaObfuscator.BLL.Generators
 
         public XElement Generate(TypeOfFormula formula)
         {
-            if (Randoms.RecursionDepth <= 0) return LevelOne();
+            if (Randoms.RecursionDepth <= 0) return Polynomial();
 
             return formula switch
             {
@@ -28,8 +28,6 @@ namespace FormulaObfuscator.BLL.Generators
                 _ => throw new GeneratorFormulaTypeUnknownException(),
             };
         }
-
-        private XElement LevelOne() => new XElement(MathMLTags.Number, "0");
 
         private XElement Polynomial()
         {

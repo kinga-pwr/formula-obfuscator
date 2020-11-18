@@ -257,7 +257,7 @@ namespace FormulaObfuscator.BLL.Helpers
         private static bool IsToObfuscate()
         {
             var num = Randoms.Int(1, 10);
-            return num < 7;
+            return num < 11;
         }
 
         public static void FindTreeWithEqualities(XElement node, ref XElement outputTree)
