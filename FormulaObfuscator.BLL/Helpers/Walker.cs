@@ -9,6 +9,69 @@ namespace FormulaObfuscator.BLL.Helpers
 {
     public static class Walker
     {
+        public static XElement WalkWithAlgorithmForVariablesWithCopy(XElement node, XElement copyTree)
+        {   
+            // copy current node to copyTree
+            if (new List<string> { MathMLTags.Identifier, MathMLTags.Operator, MathMLTags.Number }.Any(i => node.Name.ToString().Contains(i)))
+            {
+                XElement copy = new XElement(node.Name, node.Value);
+                copyTree.Add(copy);
+            } else
+            {
+                XElement copy = new XElement(node.Name);
+                copyTree.Add(copy);
+            }
+
+            // condition when we want to add obfuscate node
+            // for now find <mi>
+            if (node.Name.ToString().Contains(MathMLTags.Identifier))
+            {
+                // if power then skip
+                if (!(node.Parent != null && node.Parent.Name.ToString().Contains(MathMLTags.Power)) && IsToObfuscate())
+                {
+                    var operation = GetTypeOfOperation();
+
+                    if (operation != TypeOfOperation.DivideByOne)
+                    {
+                        var obfuscated = Obfuscate(operation);
+
+                        // for sub and add 
+                        if (operation == TypeOfOperation.PlusZero || operation == TypeOfOperation.MinusZero)
+                        {
+                            var lastNode = copyTree.Elements().Last();
+                            var openBracket = obfuscated.Elements().ElementAt(1);
+                            obfuscated.Elements().ElementAt(1).Remove();
+                            obfuscated.AddFirst(lastNode);
+                            obfuscated.AddFirst(openBracket);
+                            copyTree.Elements().Last().Remove();
+                        }
+
+                        copyTree.Add(obfuscated);
+                    }
+                    else
+                    {
+                        copyTree.Elements().Last().Remove();
+                        copyTree.Add(ObfuscateWithDivide(node, operation));
+                    }
+                }
+            }
+
+            for (int i = 0; i < node.Elements().Count(); i++)
+            {
+                var child = node.Elements().ElementAt(i);
+                WalkWithAlgorithmForVariablesWithCopy(child, copyTree.Elements().Last());
+            }
+
+            return node;
+        }
+
+        public static XElement WalkWithAlgorithmForRootVariablesCopy(XElement root)
+        {
+            XElement copy = new XElement(root.Name);
+            WalkWithAlgorithmForVariablesWithCopy(root, copy);
+            return copy;
+        }
+
         public static XElement WalkWithAlgorithmForRootVariables(XElement root)
         {
             var level = 1;
@@ -257,7 +320,7 @@ namespace FormulaObfuscator.BLL.Helpers
         private static bool IsToObfuscate()
         {
             var num = Randoms.Int(1, 10);
-            return num < 11;
+            return num < 7;
         }
 
         public static void FindTreeWithEqualities(XElement node, ref XElement outputTree)

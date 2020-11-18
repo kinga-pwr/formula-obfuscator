@@ -79,16 +79,16 @@ namespace FormulaObfuscator.ViewModels
 
             progressController.SetIndeterminate();
 
-            try
-            {
+            //try
+            //{
                 await ObfuscateData();
                 await progressController.CloseAsync();
-            }
-            catch
-            {
-                await progressController.CloseAsync();
-                await _dialogCoordinator.ShowMessageAsync(this, "Error", "Error occured, please try again");
-            }
+            //}
+            //catch
+            //{
+            //    await progressController.CloseAsync();
+            //    await _dialogCoordinator.ShowMessageAsync(this, "Error", "Error occured, please try again");
+            //}
         }
 
         private async Task ObfuscateData()

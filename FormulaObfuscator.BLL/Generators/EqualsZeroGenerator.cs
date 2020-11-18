@@ -99,8 +99,10 @@ namespace FormulaObfuscator.BLL.Generators
             Randoms.RecursionDepth--;
 
             XElement fraction = new XElement(MathMLTags.Fraction);
-            XElement nominator = new XElement(MathMLTags.Row, Polynomial());
-            XElement denominator = new XElement(MathMLTags.Row, Randoms.ComplexExpression());
+            XElement nominator = new XElement(MathMLTags.Row);
+            nominator.Add(Polynomial());
+            XElement denominator = new XElement(MathMLTags.Row);
+            denominator.Add(Randoms.ComplexExpression());
 
             fraction.Add(nominator);
             fraction.Add(denominator);
