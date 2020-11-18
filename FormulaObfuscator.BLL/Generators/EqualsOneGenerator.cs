@@ -51,18 +51,24 @@ namespace FormulaObfuscator.BLL.Generators
 
                 // Add XML elements to one root
                 element.Add(new XElement(MathMLTags.Operator, numOp.ToString()));
-                element.Add(new XElement(MathMLTags.Number, Randoms.Int(140, 200).ToString()));
+                var randInt = Randoms.Int(140, 200);
+                element.Add(new XElement(MathMLTags.Number, randInt.ToString()));
 
                 element.Add(new XElement(MathMLTags.Operator, numOp.ToString()));
-                element.Add(new XElement(MathMLTags.Number, Randoms.Char().ToString()));
+                var randChar = Randoms.Char();
+                element.Add(new XElement(MathMLTags.Number, randChar.ToString()));
 
                 // Add same elements with inverteed operators
+                if (i == 1)
+                {
+                    randInt++; // equals one is needed
+                }
 
                 element.Add(new XElement(MathMLTags.Operator, (!numOp).ToString()));
-                element.Add(new XElement(MathMLTags.Number, Randoms.Int(100, 120).ToString()));
+                element.Add(new XElement(MathMLTags.Number, randInt.ToString()));
 
                 element.Add(new XElement(MathMLTags.Operator, (!numOp).ToString()));
-                element.Add(new XElement(MathMLTags.Number, Randoms.Char().ToString()));
+                element.Add(new XElement(MathMLTags.Number, randChar.ToString()));
             }
 
             return element;

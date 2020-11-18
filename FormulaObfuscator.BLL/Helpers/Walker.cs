@@ -294,10 +294,12 @@ namespace FormulaObfuscator.BLL.Helpers
             {
                 node.ReplaceNodes(outputTrees.Dequeue().Elements());
             }
-
-            foreach (XElement child in node.Elements())
+            else
             {
-                SubstituteObfuscatedTrees(child, value, outputTrees);
+                foreach (XElement child in node.Elements())
+                {
+                    SubstituteObfuscatedTrees(child, value, outputTrees);
+                }
             }
             return node;
         }
