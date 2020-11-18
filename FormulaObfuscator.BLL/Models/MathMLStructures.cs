@@ -36,6 +36,11 @@ namespace FormulaObfuscator.BLL.Models
                 integral.Add(lowerLimit);
                 integral.Add(upperLimit);
             }
+            else
+            {
+                integral.Add(new XElement(MathMLTags.Number));
+                integral.Add(new XElement(MathMLTags.Number));
+            }
             container.Add(integral);
             container.Add(new XElement(MathMLTags.Operator, "("));
             container.Add(expression);
