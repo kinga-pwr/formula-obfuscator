@@ -14,7 +14,7 @@ namespace FormulaObfuscator.BLL.Generators
 
         public XElement Generate(TypeOfFormula type)
         {
-            if (Randoms.RecursionDepth <= 0) return LevelOne();
+            if (Randoms.RecursionDepth <= 0) return Polynomial();
 
             return type switch
             {
@@ -23,51 +23,20 @@ namespace FormulaObfuscator.BLL.Generators
                 TypeOfFormula.Root => Root(),
                 TypeOfFormula.Trigonometry => Trigonometric(),
                 TypeOfFormula.TrigonometryRedundancy => TrigonometricRedundancy(),
-                _ => LevelOne(),
+                _ => Polynomial(),
             };
             throw new GeneratorFormulaTypeUnknownException();
         }
 
-        private XElement LevelOne()
-        {
-            XElement element = new XElement(MathMLTags.Row);
-            for (int i = 0; i < 3; i++)
-            {
-                // Initialize XML elements
-                //XElement numOperator = new XElement(MathMLTags.Operator);
-                //XElement letterOperator = new XElement(MathMLTags.Operator, );
-                //XElement num = new XElement(MathMLTags.Number);
-                //XElement letter = new XElement(MathMLTags.Number);
-
-                // Set numberic value and its operator (-6)
-                var numOp = Randoms.Operator();
-                //numOperator.Value = numOp.Value.ToString();
-                //num.Value = Randoms.Int().ToString();
-
-                // Set character value and its operator (+s)
-                var letterOp = Randoms.Operator();
-                //letter.Value = Randoms.Char().ToString();
-                //letterOperator.Value = letterOp.Value.ToString();
-
-                // Add XML elements to one root
-                element.Add(new XElement(MathMLTags.Operator, numOp.ToString()));
-                element.Add(new XElement(MathMLTags.Number, Randoms.Int(140, 200).ToString()));
-
-                element.Add(new XElement(MathMLTags.Operator, numOp.ToString()));
-                element.Add(new XElement(MathMLTags.Number, Randoms.Char().ToString()));
-
-                // Add same elements with inverteed operators
-
-                element.Add(new XElement(MathMLTags.Operator, (!numOp).ToString()));
-                element.Add(new XElement(MathMLTags.Number, Randoms.Int(100, 120).ToString()));
-
-                element.Add(new XElement(MathMLTags.Operator, (!numOp).ToString()));
-                element.Add(new XElement(MathMLTags.Number, Randoms.Char().ToString()));
-            }
-
-            return element;
-        }
-
+        /// <summary>
+        /// <code>
+        /// (msup)
+        /// <para>(mi)x(/mi)</para>
+        /// <para>(mn)3(/mn)</para>
+        /// <para>(/msup) </para>
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
         private XElement Polynomial()
         {
             Randoms.RecursionDepth--;
@@ -94,11 +63,13 @@ namespace FormulaObfuscator.BLL.Generators
             Randoms.RecursionDepth--;
 
             XElement root = new XElement(MathMLTags.Root);
-            XElement degree = new XElement(MathMLTags.Identifier, Randoms.ComplexExpression());
-            XElement element = new XElement(MathMLTags.Number, Polynomial());
+            XElement degree = new XElement(MathMLTags.Row);
+            degree.Add(Randoms.ComplexExpression());
+            XElement element = new XElement(MathMLTags.Row);
+            element.Add(Polynomial());
 
-            root.Add(degree);
             root.Add(element);
+            root.Add(degree);
 
             return root;
         }
@@ -121,8 +92,10 @@ namespace FormulaObfuscator.BLL.Generators
             Randoms.RecursionDepth--;
 
             XElement fraction = new XElement(MathMLTags.Fraction);
-            XElement nominator = new XElement(MathMLTags.Row, Root());
-            XElement denominator = new XElement(MathMLTags.Row, Polynomial());
+            XElement nominator = new XElement(MathMLTags.Row);
+            nominator.Add(Root());
+            XElement denominator = new XElement(MathMLTags.Row);
+            denominator.Add(Polynomial());
 
             fraction.Add(nominator);
             fraction.Add(denominator);
