@@ -197,9 +197,9 @@ namespace FormulaObfuscator.BLL.Helpers
                 return root;
             }
 
-            var elements = root.Elements();
+            var elements = makeFraction(root.Elements(), operation);
             root.RemoveAll();
-            root.Add(makeFraction(elements, operation));
+            root.Add(elements);
             return root;
         }
 

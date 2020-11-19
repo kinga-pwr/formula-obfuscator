@@ -1,4 +1,4 @@
-﻿using FormulaObfuscator.BLL.Algorithms;
+using FormulaObfuscator.BLL.Algorithms;
 using FormulaObfuscator.BLL.Helpers;
 using FormulaObfuscator.BLL.Models;
 using System.Collections.Generic;
