@@ -38,7 +38,7 @@ namespace FormulaObfuscator.BLL
                 foreach (var tree in mathmlTrees)
                 {
                     var obfuscateCount = 1;
-                    var level = Level.Test;
+                    var level = Level.Variables;
 
                     while (obfuscateCount > 0)
                     {
@@ -61,8 +61,6 @@ namespace FormulaObfuscator.BLL
                     return Walker.WalkWithAlgorithmForAllFractionsInRoot(node);
                 case Level.Variables:
                     return Walker.WalkWithAlgorithmForRootVariables(node);
-                case Level.Test:
-                    return Walker.WalkWithAlgorithmForRootVariablesCopy(node);
             }
 
             return node;
@@ -72,15 +70,6 @@ namespace FormulaObfuscator.BLL
         {
             Randoms.RecursionDepth = settings.RecursionDepth;
         }
-
-        // taki jakby main
-    //    XElement root = new XElement("");
-    //    Random random = new Random();
-    //    List<IAlgorithm> ListaAlgorytmów = new List<IAlgorithm>();
-    //        for (int i = 0; i< 7; i++)
-    //        {
-    //            ListaAlgorytmów[random.Next(ListaAlgorytmów.Count)].Obfuscate(root);
-    //}
 
 }
 }
