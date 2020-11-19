@@ -9,25 +9,27 @@ namespace FormulaObfuscator.BLL.Helpers
 {
     public static class Walker
     {
-        public static XElement WalkWithAlgorithmForVariablesWithCopy(XElement node, XElement copyTree)
+        static List<string> TAGS_WITH_VALUES = new List<string>{ MathMLTags.Identifier, MathMLTags.Operator, MathMLTags.Number };
+        static TypeOfOperation OPERATIONS_WITH_EXTRA_BRACKETS = TypeOfOperation.MultiplyByOne;
+
+        public static XElement WalkWithAlgorithmForVariables(XElement node, XElement copyTree)
         {   
             // copy current node to copyTree
-            if (new List<string> { MathMLTags.Identifier, MathMLTags.Operator, MathMLTags.Number }.Any(i => node.Name.ToString().Contains(i)))
+            if (TAGS_WITH_VALUES.Any(i => node.Name.ToString().Contains(i)))
             {
-                XElement copy = new XElement(node.Name, node.Value);
-                copyTree.Add(copy);
+                copyTree.Add(new XElement(node.Name, node.Value));
             } else
             {
-                XElement copy = new XElement(node.Name);
-                copyTree.Add(copy);
+                copyTree.Add(new XElement(node.Name));
             }
+
+            var copy = copyTree.Elements().Last();
 
             // condition when we want to add obfuscate node
             // for now find <mi>
             if (node.Name.ToString().Contains(MathMLTags.Identifier))
             {
-                // if power then skip
-                if (!(node.Parent != null && node.Parent.Name.ToString().Contains(MathMLTags.Power)) && IsToObfuscate())
+                if (IsToObfuscate())
                 {
                     var operation = GetTypeOfOperation();
 
@@ -35,18 +37,21 @@ namespace FormulaObfuscator.BLL.Helpers
                     {
                         var obfuscated = Obfuscate(operation);
 
-                        // for sub and add 
-                        if (operation == TypeOfOperation.PlusZero || operation == TypeOfOperation.MinusZero)
-                        {
-                            var lastNode = copyTree.Elements().Last();
-                            var openBracket = obfuscated.Elements().ElementAt(1);
+                        if (operation != OPERATIONS_WITH_EXTRA_BRACKETS)
                             obfuscated.Elements().ElementAt(1).Remove();
-                            obfuscated.AddFirst(lastNode);
-                            obfuscated.AddFirst(openBracket);
-                            copyTree.Elements().Last().Remove();
-                        }
+
+                        obfuscated.AddFirst(copy);
+                        obfuscated.AddFirst(new XElement(MathMLTags.Operator, "("));
+
+                        if (operation == OPERATIONS_WITH_EXTRA_BRACKETS)
+                            obfuscated.Add(new XElement(MathMLTags.Operator, ")"));
+
+                        copyTree.Elements().Last().Remove();
 
                         copyTree.Add(obfuscated);
+                        // get added copy of identifier
+                        // identifier is second element in obfuscated node
+                        copy = copyTree.Elements().Last().Elements().ElementAt(1);
                     }
                     else
                     {
@@ -59,33 +64,18 @@ namespace FormulaObfuscator.BLL.Helpers
             for (int i = 0; i < node.Elements().Count(); i++)
             {
                 var child = node.Elements().ElementAt(i);
-                WalkWithAlgorithmForVariablesWithCopy(child, copyTree.Elements().Last());
+                WalkWithAlgorithmForVariables(child, copy);
             }
 
             return node;
         }
 
-        public static XElement WalkWithAlgorithmForRootVariablesCopy(XElement root)
-        {
-            XElement copy = new XElement(root.Name);
-            WalkWithAlgorithmForVariablesWithCopy(root, copy);
-            return copy;
-        }
-
         public static XElement WalkWithAlgorithmForRootVariables(XElement root)
         {
-            var level = 1;
-            var currentLevel = 0;
-            for (int i = 0; i < GetMaxLevel(root); i++)
-            {
-                foreach (XElement child in root.Elements())
-                {
-                    currentLevel = 0;
-                    WalkWithAlgorithmForVariables(child, level, ref currentLevel);
-                }
-                level++;
-            }
-            return root;
+            XElement copy = new XElement(root.Name);
+            WalkWithAlgorithmForVariables(root, copy);
+
+            return copy;
         }
 
         public static int GetMaxLevel(XElement root)
@@ -97,42 +87,9 @@ namespace FormulaObfuscator.BLL.Helpers
             return 0;
         }
 
-        public static XElement WalkWithAlgorithmForVariables(XElement node, int level, ref int currentLevel)
-        {
-            currentLevel++;
-
-            // condition when we want to add obfuscate node
-            // for now find <mi>
-            if (currentLevel == level && node.Name.ToString().Contains(MathMLTags.Identifier))
-            {
-                if (IsToObfuscate())
-                {
-                    var operation = GetTypeOfOperation();
-
-                    if (operation != TypeOfOperation.DivideByOne)
-                    {
-                        node.AddAfterSelf(Obfuscate(operation));
-                    }
-                    else
-                    {
-                        return ObfuscateWithDivide(node, operation);
-                    }
-                }
-            }
-
-            foreach (XElement child in node.Elements())
-            {
-                if(!child.Name.ToString().Contains(MathMLTags.Power))
-                    WalkWithAlgorithmForVariables(child, level, ref currentLevel);
-            }
-
-            return node;
-        }
-
         public static XElement WalkWithAlgorithmForWholeFormula(XElement root)
         {
-            //var operation = GetTypeOfOperation();
-            var operation = TypeOfOperation.DivideByOne;
+            var operation = GetTypeOfOperation();
 
             if (operation != TypeOfOperation.DivideByOne)
             {
@@ -151,33 +108,52 @@ namespace FormulaObfuscator.BLL.Helpers
 
         public static XElement WalkWithAlgorithmForAllFractionsInRoot(XElement root)
         {
-            foreach (XElement child in root.Elements())
-            {
-                if (!child.Name.ToString().Contains(MathMLTags.Power))
-                    WalkWithAlgorithmForAllFractions(child);
-            }
+            XElement copy = new XElement(root.Name);
+            WalkWithAlgorithmForAllFractions(root, copy);
 
-            return root;
+            return copy;
         }
 
-        public static XElement WalkWithAlgorithmForAllFractions(XElement node)
+        public static XElement WalkWithAlgorithmForAllFractions(XElement node, XElement copyTree)
         {
-            foreach (XElement child in node.Elements())
+            // copy current node to copyTree
+            if (TAGS_WITH_VALUES.Any(i => node.Name.ToString().Contains(i)))
             {
-                if (!child.Name.ToString().Contains(MathMLTags.Power))
-                    WalkWithAlgorithmForAllFractions(child);
+                copyTree.Add(new XElement(node.Name, node.Value));
             }
+            else
+            {
+                copyTree.Add(new XElement(node.Name));
+            }
+
+            var copy = copyTree.Elements().Last();
+
             // condition when we want to add obfuscate node
-            // for now find <mi>
+            // for now find <fraction>
             if (node.Name.ToString().Contains(MathMLTags.Fraction))
             {
                 if (IsToObfuscate())
                 {
                     var operation = GetTypeOfOperationWithoutDivide();
-                    node.AddBeforeSelf(new XElement(MathMLTags.Operator, "("));
-                    node.AddAfterSelf(Obfuscate(operation));
-                    node.AddAfterSelf(new XElement(MathMLTags.Operator, ")"));
+
+                    var obfuscated = Obfuscate(operation);
+
+                    obfuscated.AddFirst(copy);
+                    obfuscated.AddFirst(new XElement(MathMLTags.Operator, "("));
+                    obfuscated.Add(new XElement(MathMLTags.Operator, ")"));
+                    copyTree.Elements().Last().Remove();
+
+                    copyTree.Add(obfuscated);
+                    // get added copy of fraction
+                    // fraction is second element in obfuscated node
+                    copy = copyTree.Elements().Last().Elements().ElementAt(1);
                 }
+            }
+
+            for (int i = 0; i < node.Elements().Count(); i++)
+            {
+                var child = node.Elements().ElementAt(i);
+                WalkWithAlgorithmForAllFractions(child, copy);
             }
 
             return node;
@@ -221,9 +197,9 @@ namespace FormulaObfuscator.BLL.Helpers
                 return root;
             }
 
-            var elements = root.Elements();
+            var elements = makeFraction(root.Elements(), operation);
             root.RemoveAll();
-            root.Add(makeFraction(elements, operation));
+            root.Add(elements);
             return root;
         }
 
