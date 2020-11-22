@@ -79,16 +79,16 @@ namespace FormulaObfuscator.ViewModels
 
             progressController.SetIndeterminate();
 
-            //try
-            //{
+            try
+            {
                 await ObfuscateData();
                 await progressController.CloseAsync();
-            //}
-            //catch
-            //{
-            //    await progressController.CloseAsync();
-            //    await _dialogCoordinator.ShowMessageAsync(this, "Error", "Error occured, please try again");
-            //}
+            }
+            catch
+            {
+                await progressController.CloseAsync();
+                await _dialogCoordinator.ShowMessageAsync(this, "Error", "Error occured, please try again");
+            }
         }
 
         private async Task ObfuscateData()
@@ -97,7 +97,7 @@ namespace FormulaObfuscator.ViewModels
             {
                 var settings = new Settings()
                 {
-                    RecursionDepth = 2
+                    RecursionDepth = 4
                 };
 
                 var resultHolder = new ObfuscatorManager(Input).RunObfuscate(settings);

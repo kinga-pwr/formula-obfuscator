@@ -38,7 +38,7 @@ namespace FormulaObfuscator.BLL
                 foreach (var tree in mathmlTrees)
                 {
                     var obfuscateCount = 1;
-                    var level = Level.Test;
+                    var level = Level.Variables;
 
                     while (obfuscateCount > 0)
                     {

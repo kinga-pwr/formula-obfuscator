@@ -7,10 +7,20 @@ namespace FormulaObfuscator.BLL.Generators
 {
     public class EqualsOneGenerator : IGenerator
     {
-        public TypeOfFormula[] GetPossibleFormulas()
-        {
-            return new[] { TypeOfFormula.Polynomial, TypeOfFormula.Fraction, TypeOfFormula.Trigonometry, TypeOfFormula.Root, TypeOfFormula.TrigonometryRedundancy };
-        }
+        public static TypeOfFormula[] PossibleFormulas => 
+            new[]
+            {
+                TypeOfFormula.Polynomial,
+                TypeOfFormula.Fraction,
+                TypeOfFormula.Trigonometry,
+                TypeOfFormula.Root,
+                TypeOfFormula.TrigonometryRedundancy,
+                TypeOfFormula.Equation
+            };
+
+        public TypeOfFormula[] GetPossibleFormulas() => PossibleFormulas;
+
+        public static TypeOfFormula RandomFormula => PossibleFormulas[Randoms.Int(PossibleFormulas.Length)];
 
         public XElement Generate(TypeOfFormula type)
         {
@@ -23,6 +33,7 @@ namespace FormulaObfuscator.BLL.Generators
                 TypeOfFormula.Root => Root(),
                 TypeOfFormula.Trigonometry => Trigonometric(),
                 TypeOfFormula.TrigonometryRedundancy => TrigonometricRedundancy(),
+                TypeOfFormula.Equation => Equation(),
                 _ => Polynomial(),
             };
             throw new GeneratorFormulaTypeUnknownException();
@@ -64,7 +75,7 @@ namespace FormulaObfuscator.BLL.Generators
 
             XElement root = new XElement(MathMLTags.Root);
             XElement degree = new XElement(MathMLTags.Row);
-            degree.Add(Randoms.ComplexExpression());
+            degree.Add(Generate(RandomFormula));
             XElement element = new XElement(MathMLTags.Row);
             element.Add(Polynomial());
 
@@ -142,15 +153,33 @@ namespace FormulaObfuscator.BLL.Generators
                 (Trigonometry.sin, "+", Trigonometry.cos, 2),
                 (Trigonometry.tg, MathMLSymbols.Multiply, Trigonometry.ctg, 1)
             };
-            var formula = new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2));
             var option = options[Randoms.Int(0, 1)];
             XElement element = new XElement(MathMLTags.Row);
-            var part1 = MathMLStructures.Trigonometric(option.Item1, formula, option.Item4);
-            var part2 = MathMLStructures.Trigonometric(option.Item3, formula, option.Item4);
+            var part1 = MathMLStructures.Trigonometric(option.Item1, new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)), option.Item4);
+            var part2 = MathMLStructures.Trigonometric(option.Item3, new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)), option.Item4);
             element.Add(part1);
             element.Add(new XElement(MathMLTags.Operator, option.Item2));
             element.Add(part2);
             return element;
+        }
+
+        private XElement Equation()
+        {
+            Randoms.RecursionDepth--;
+
+            var container = new XElement(MathMLTags.Row);
+            container.Add(new XElement(MathMLTags.Operator, "("));
+            container.Add(new XElement(MathMLTags.Number, "2"));
+            container.Add(new XElement(MathMLTags.Operator, "("));
+            container.Add(Generate(RandomFormula));
+            container.Add(new XElement(MathMLTags.Operator, ")"));
+            container.Add(new XElement(MathMLTags.Operator, "-"));
+            container.Add(new XElement(MathMLTags.Operator, "("));
+            container.Add(Generate(RandomFormula));
+            container.Add(new XElement(MathMLTags.Operator, ")"));
+            container.Add(new XElement(MathMLTags.Operator, ")"));
+
+            return container;
         }
     }
 }

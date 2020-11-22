@@ -8,9 +8,10 @@ namespace FormulaObfuscator.BLL.Models
     {
         Polynomial,
         Fraction,
+        Root,
+        Equation,
         Trigonometry, // should be always last because it's recursive
         Integral, // should be always last because it's recursive
-        Root,
         TrigonometryRedundancy, // should be always last because it's recursive
     }
 }

@@ -45,6 +45,7 @@ namespace FormulaObfuscator.BLL.Models
             container.Add(new XElement(MathMLTags.Operator, "("));
             container.Add(expression);
             container.Add(new XElement(MathMLTags.Operator, ")"));
+            container.Add(new XElement(MathMLTags.Identifier, "&nbsp;dx"));
             return container;
         }
     }

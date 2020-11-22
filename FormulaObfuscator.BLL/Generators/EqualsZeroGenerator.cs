@@ -10,10 +10,16 @@ namespace FormulaObfuscator.BLL.Generators
 {
     public class EqualsZeroGenerator : IGenerator
     {
-        public TypeOfFormula[] GetPossibleFormulas()
-        {
-            return new[] { TypeOfFormula.Polynomial, TypeOfFormula.Fraction, TypeOfFormula.Trigonometry, TypeOfFormula.Integral };
-        }
+        public static TypeOfFormula[] PossibleFormulas =>
+            new[] 
+            { 
+                TypeOfFormula.Polynomial, 
+                TypeOfFormula.Fraction, 
+                TypeOfFormula.Trigonometry, 
+                TypeOfFormula.Integral 
+            };
+
+        public TypeOfFormula[] GetPossibleFormulas() => PossibleFormulas;
 
         public XElement Generate(TypeOfFormula formula)
         {
@@ -56,6 +62,7 @@ namespace FormulaObfuscator.BLL.Generators
             for (int power = 0; power < MAX_COUNT_OF_GEN_FORMULA; power++)
             {
                 var currPower = Randoms.Int(MAX_POWER);
+                if (currPower % 2 != 0) currPower++; // only even powers
                 var currVarName = logs.Keys.ElementAt(Randoms.Int(amountOfVariables));
                 var currConst = Randoms.Int(1, MAX_CONST_VALUE);
 
@@ -102,7 +109,7 @@ namespace FormulaObfuscator.BLL.Generators
             XElement nominator = new XElement(MathMLTags.Row);
             nominator.Add(Polynomial());
             XElement denominator = new XElement(MathMLTags.Row);
-            denominator.Add(Randoms.ComplexExpression());
+            denominator.Add(new EqualsOneGenerator().Generate(EqualsOneGenerator.RandomFormula));
 
             fraction.Add(nominator);
             fraction.Add(denominator);
@@ -122,7 +129,7 @@ namespace FormulaObfuscator.BLL.Generators
         private XElement Trigonometry()
         {
             Randoms.RecursionDepth--;
-            return MathMLStructures.Trigonometric((Trigonometry)Randoms.Int(0, 1), new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)));
+            return MathMLStructures.Trigonometric((Trigonometry)Randoms.Int(0, 1), Generate((TypeOfFormula)Randoms.Int(0, 2)));
         }
         /// <summary>
         /// <code>
@@ -138,7 +145,9 @@ namespace FormulaObfuscator.BLL.Generators
         private XElement Integral()
         {
             Randoms.RecursionDepth--;
-            return MathMLStructures.Integral(new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 3)));
+            var upperLimit = new XElement(MathMLTags.Identifier, MathMLSymbols.Infinite);
+            var lowerLimit = new XElement(MathMLTags.Number, 0);
+            return MathMLStructures.Integral(Generate((TypeOfFormula)Randoms.Int(0, 3)), upperLimit, lowerLimit);
         }
     }
 }

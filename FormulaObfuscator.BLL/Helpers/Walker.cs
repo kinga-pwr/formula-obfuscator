@@ -305,7 +305,7 @@ namespace FormulaObfuscator.BLL.Helpers
 
         private static TypeOfOperation GetTypeOfOperationWithoutDivide()
         {
-            TypeOfOperation[] operations = { TypeOfOperation.PlusZero, TypeOfOperation.MinusZero, TypeOfOperation.MultiplyByOne};
+            TypeOfOperation[] operations = { TypeOfOperation.MultiplyByOne };
 
             return operations[(Randoms.Int(operations.Length))];
         }
