@@ -8,7 +8,6 @@ namespace FormulaObfuscator.BLL.Models
     {
         Full,
         Fraction,
-        Variables,
-        Test
+        Variables
     }
 }
