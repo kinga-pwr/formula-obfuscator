@@ -8,6 +8,7 @@
                  xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
                  xmlns:sys="clr-namespace:System;assembly=mscorlib"
                  mc:Ignorable="d"
+                 Closing="MetroWindow_Closing"
                  Dialog:DialogParticipation.Register="{Binding}"
                  WindowState="Normal"
                  MinHeight="250"

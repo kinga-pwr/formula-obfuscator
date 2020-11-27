@@ -1,12 +1,13 @@
 ﻿using FormulaObfuscator.BLL;
 using FormulaObfuscator.BLL.Models;
+using FormulaObfuscator.BLL.TestGenerator;
 using FormulaObfuscator.Commands;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using FormulaObfuscator.BLL.TestGenerator;
 
 namespace FormulaObfuscator.ViewModels
 {
@@ -64,8 +65,8 @@ namespace FormulaObfuscator.ViewModels
 
         private bool CheckIfFirefoxIsInstalled()
         {
-            string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\Mozilla";
-            string valueName = "Mozilla Firefox";
+            string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\Mozilla\Mozilla Firefox";
+            string valueName = "CurrentVersion";
             return Registry.GetValue(keyName, valueName, null) != null;
         }
 
@@ -174,8 +175,27 @@ namespace FormulaObfuscator.ViewModels
             Input = samplesGenerator.DrawSample(settings);
         }
 
-        private void OpenInFirefox(string data)
+        private async void OpenInFirefox(string data)
         {
+            string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\Mozilla\Mozilla Firefox";
+            string valueName = "CurrentVersion";
+            var mozillaVersion = Registry.GetValue(keyName, valueName, null);
+            keyName = $@"HKEY_LOCAL_MACHINE\SOFTWARE\Mozilla\Mozilla Firefox\{mozillaVersion}\Main";
+            valueName = "PathToExe";
+            var mozillaExe = Registry.GetValue(keyName, valueName, null).ToString();
+            if (mozillaExe != null)
+            {
+                File.WriteAllText("temp", data);
+                Process.Start(mozillaExe, "temp");
+            }
+            else
+            {
+                await _dialogCoordinator.ShowMessageAsync(this, "Error", "Error opening Firefox!",
+                        settings: new MetroDialogSettings()
+                        {
+                            ColorScheme = MetroDialogColorScheme.Accented
+                        });
+            }
         }
     }
 }
