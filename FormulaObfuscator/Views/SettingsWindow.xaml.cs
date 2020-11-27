@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace FormulaObfuscator.Views
 {
     /// <summary>
-    /// Interaction logic for ConfigurationWindow.xaml
+    /// Interaction logic for SettingsWindow.xaml
     /// </summary>
-    public partial class ConfigurationWindow : MetroWindow
+    public partial class SettingsWindow : MetroWindow
     {
-        public ConfigurationWindow()
+        public SettingsWindow()
         {
             InitializeComponent();
         }
