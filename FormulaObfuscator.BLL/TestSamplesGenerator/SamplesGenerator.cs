@@ -1,30 +1,53 @@
 ﻿using FormulaObfuscator.BLL.Helpers;
 using FormulaObfuscator.BLL.Models;
 using FormulaObfuscator.BLL.TestSamplesGenerator;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.TestGenerator
 {
     public class SamplesGenerator
     {
-        List<ITestSample> testSamples;
-        public SamplesGenerator()
+        List<ITestSample> testSamples = new List<ITestSample>();
+
+        private void ApplySettings(Settings settings)
         {
+            Settings.CurrentSettings = settings;
+
             testSamples = new List<ITestSample>();
-            testSamples.Add(new DetSumPi());
-            testSamples.Add(new Fi());
-            testSamples.Add(new FuncBracket());
-            testSamples.Add(new Integral());
-            testSamples.Add(new Limit());
-            testSamples.Add(new SqrtRecursive());
-            testSamples.Add(new Sum());
+            foreach (var generatorMethod in settings.MethodsForSamplesGenerator)
+            {
+                switch (generatorMethod)
+                {
+                    case SamplesGeneratorMethod.DetSumPi:
+                        testSamples.Add(new DetSumPi());
+                        break;
+                    case SamplesGeneratorMethod.Fi:
+                        testSamples.Add(new Fi());
+                        break;
+                    case SamplesGeneratorMethod.FuncBracket:
+                        testSamples.Add(new FuncBracket());
+                        break;
+                    case SamplesGeneratorMethod.Integral:
+                        testSamples.Add(new Integral());
+                        break;
+                    case SamplesGeneratorMethod.Limit:
+                        testSamples.Add(new Limit());
+                        break;
+                    case SamplesGeneratorMethod.SqrtRecursive:
+                        testSamples.Add(new SqrtRecursive());
+                        break;
+                    case SamplesGeneratorMethod.Sum:
+                        testSamples.Add(new Sum());
+                        break;
+                }
+            }
         }
 
-        public string DrawSample()
+        public string DrawSample(Settings settings)
         {
+            ApplySettings(settings);
+
             string result = @"<math display=""block""
                             xmlns=""http://www.w3.org/1998/Math/MathML"">";
             result += testSamples[Randoms.Int(0, testSamples.Count - 1)].Generate();
@@ -45,7 +68,5 @@ namespace FormulaObfuscator.BLL.TestGenerator
             result += "</math>";
             return result;
         }
-
-
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FormulaObfuscator.BLL
+﻿namespace FormulaObfuscator.BLL
 {
     public static class ErrorMsgs
     {

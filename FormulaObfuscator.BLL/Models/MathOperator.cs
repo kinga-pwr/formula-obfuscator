@@ -1,13 +1,10 @@
 ﻿using FormulaObfuscator.BLL.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FormulaObfuscator.BLL.Models
 {
     public class MathOperator
     {
-        private char Value { get; set; }
+        private char Value { get; }
 
         public MathOperator(char value)
         {

@@ -1,5 +1,4 @@
-﻿using FormulaObfuscator.BLL.Exceptions;
-using FormulaObfuscator.BLL.Helpers;
+﻿using FormulaObfuscator.BLL.Helpers;
 using FormulaObfuscator.BLL.Models;
 using System.Xml.Linq;
 
@@ -18,9 +17,11 @@ namespace FormulaObfuscator.BLL.Generators
                 TypeOfMethod.Equation
             };
 
-        public TypeOfMethod[] GetPossibleFormulas() => PossibleFormulas;
+        public static TypeOfMethod[] AvailableFormulas => Settings.CurrentSettings.MethodsForOneGenerator.ToArray();
 
-        public static TypeOfMethod RandomFormula => PossibleFormulas[Randoms.Int(PossibleFormulas.Length)];
+        public TypeOfMethod[] GetPossibleFormulas() => AvailableFormulas;
+
+        public static TypeOfMethod RandomFormula => AvailableFormulas[Randoms.Int(AvailableFormulas.Length)];
 
         public XElement Generate(TypeOfMethod type)
         {
@@ -36,15 +37,14 @@ namespace FormulaObfuscator.BLL.Generators
                 TypeOfMethod.Equation => Equation(),
                 _ => Polynomial(),
             };
-            throw new GeneratorFormulaTypeUnknownException();
         }
 
         /// <summary>
         /// <code>
         /// (msup)
-        /// <para>(mi)x(/mi)</para>
-        /// <para>(mn)3(/mn)</para>
-        /// <para>(/msup) </para>
+        ///     (mi)x(/mi)
+        ///     (mn)3(/mn)
+        /// (/msup)
         /// </code>
         /// </summary>
         /// <returns></returns>
@@ -63,9 +63,9 @@ namespace FormulaObfuscator.BLL.Generators
         /// <summary>
         /// <code>
         /// (mroot)
-        /// <para>(mi)x(/mi)</para>
-        /// <para>(mn)3(/mn)</para>
-        /// <para>(/mroot) </para>
+        ///     (mi)x(/mi)
+        ///     (mn)3(/mn)
+        /// (/mroot)
         /// </code>
         /// </summary>
         /// <returns></returns>
@@ -87,14 +87,14 @@ namespace FormulaObfuscator.BLL.Generators
 
         /// <summary>
         /// <code>
-        /// <para>(mfrac)</para>
-        /// <para>    (mrow)</para>
-        /// <para>        (mn)6(/mn)</para>
-        /// <para>    (/mrow)</para>
-        /// <para>    (mrow)</para>
-        /// <para>        (mn)6(/mn)</para>
-        /// <para>    (/mrow)</para>
-        /// <para>(/mfrac)</para>
+        /// (mfrac)
+        ///     (mrow)
+        ///         (mn)6(/mn)
+        ///     (/mrow)
+        ///     (mrow)
+        ///         (mn)6(/mn)
+        ///     (/mrow)
+        /// (/mfrac)
         /// </code>
         /// </summary>
         /// <returns></returns>
@@ -116,10 +116,10 @@ namespace FormulaObfuscator.BLL.Generators
 
         /// <summary>
         /// <code>
-        /// (container)
-        /// <para>(mi)cos(/mi)</para>
-        /// <para>(mn)3(/mn)</para>
-        /// (/container)
+        /// (mrow)
+        ///     (mi)cos(/mi)
+        ///     (mn)3(/mn)
+        /// (/mrow)
         /// </code>
         /// </summary>
         /// <returns></returns>
@@ -131,7 +131,7 @@ namespace FormulaObfuscator.BLL.Generators
 
         /// <summary>
         /// <code>
-        /// (container)
+        /// (mrow)
         ///    (msup)
         ///      (mi)sin(/mi)
         ///      (mn)2(/mn)
@@ -141,7 +141,7 @@ namespace FormulaObfuscator.BLL.Generators
         ///      (mi)cos(/mi)
         ///      (mn)2(/mn)
         ///    (/msup)
-        /// (/container)
+        /// (/mrow)
         /// </code>
         /// </summary>
         /// <returns></returns>
@@ -163,6 +163,17 @@ namespace FormulaObfuscator.BLL.Generators
             return element;
         }
 
+        /// <summary>
+        /// <code>
+        /// (mrow)
+        ///      (mn)2(/mn)
+        ///      (mrow)(/mrow)
+        ///      (mo)-(/mo)
+        ///      (mrow)(/mrow)
+        /// (/mrow)
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
         private XElement Equation()
         {
             Randoms.RecursionDepth--;

@@ -1,7 +1,4 @@
 ﻿using FormulaObfuscator.BLL.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FormulaObfuscator.BLL.TestSamplesGenerator
 {
@@ -12,11 +9,10 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
             string f = Randoms.GreekLetter();
             string x;
             x = Randoms.Char().ToString();
-            int int1 = Randoms.Int(0, 25);
+            int int1 = Randoms.Int();
             int int2 = Randoms.Int(int1, int1 + 10);
             int int3 = Randoms.Int(int2, int2 + 10);
             int int4 = Randoms.Int(int3, int3 + 10);
-            int int5 = Randoms.Int(int4, int4 + 10);
 
 
             return $@"
@@ -32,9 +28,9 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
                                 <mtr>
                                     <mtd columnalign=""center"">
                                         <mrow>
-                                            <mn>{Randoms.SimpleExpression().ToString()}</mn>
+                                            <mn>{Randoms.SimpleExpression()}</mn>
                                             <mo>{Randoms.MultiplicityOperator()}</mo>
-                                            <mn>{Randoms.SimpleExpression().ToString()}</mn>
+                                            <mn>{Randoms.SimpleExpression()}</mn>
                                         </mrow>
                                     </mtd>
                                     <mtd columnalign=""left"">
@@ -52,9 +48,9 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
                                 <mtr>
                                     <mtd columnalign=""center"">
                                         <mrow>
-                                            <mn>{Randoms.ComplexExpression().ToString()}</mn>
+                                            <mn>{Randoms.ComplexExpression()}</mn>
                                             <mo>{Randoms.MultiplicityOperator()}</mo>
-                                            <mn>{Randoms.ComplexExpression().ToString()}</mn>
+                                            <mn>{Randoms.ComplexExpression()}</mn>
                                         </mrow>
                                     </mtd>
                                     <mtd columnalign=""center"">
@@ -71,7 +67,7 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
                                 </mtr>
                                 <mtr>
                                     <mtd columnalign=""center"">
-                                        <mn>{Randoms.ComplexExpression().ToString()}</mn>
+                                        <mn>{Randoms.ComplexExpression()}</mn>
                                     </mtd>
                                     <mtd columnalign=""center"">
                                         <mrow>

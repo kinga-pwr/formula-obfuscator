@@ -1,7 +1,4 @@
 ﻿using FormulaObfuscator.BLL.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FormulaObfuscator.BLL.TestSamplesGenerator
 {
@@ -24,13 +21,13 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
                             <mfrac>
                               <msup>
                                 <mo>{greek}</mo>
-                                <mn>{Randoms.Int(-100, 100)}</mn>
+                                <mn>{Randoms.Int()}</mn>
                               </msup>
                               <mrow>
                                 <mo>{greek}</mo>
                                 <msup>
                                   <mi>{x}</mi>
-                                  <mn>{Randoms.Int(-100, 100)}</mn>
+                                  <mn>{Randoms.Int()}</mn>
                                 </msup>
                               </mrow>
                             </mfrac>
@@ -38,13 +35,13 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
                             <mfrac>
                               <msup>
                                 <mo>{greek}</mo>
-                                <mn>{Randoms.Int(-100, 100)}</mn>
+                                <mn>{Randoms.Int()}</mn>
                               </msup>
                               <mrow>
                                 <mo>{greek}</mo>
                                 <msup>
                                   <mi>{y}</mi>
-                                  <mn>{Randoms.Int(-100, 100)}</mn>
+                                  <mn>{Randoms.Int()}</mn>
                                 </msup>
                               </mrow>
                             </mfrac>
@@ -62,10 +59,10 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
                               <mo stretchy=""false"">)</mo>
                               <mo minsize=""150%"">|</mo>
                             </mrow>
-                            <mn>{Randoms.Int(-100, 100)}</mn>
+                            <mn>{Randoms.Int()}</mn>
                           </msup>
                           <mo>=</mo>
-                          <mn>{Randoms.SimpleExpression().ToString()}</mn>
+                          <mn>{Randoms.SimpleExpression()}</mn>
                         </mrow>";
         }
     }

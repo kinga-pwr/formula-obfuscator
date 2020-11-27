@@ -19,7 +19,9 @@ namespace FormulaObfuscator.BLL.Generators
                 TypeOfMethod.Integral 
             };
 
-        public TypeOfMethod[] GetPossibleFormulas() => PossibleFormulas;
+        public static TypeOfMethod[] AvailableFormulas => Settings.CurrentSettings.MethodsForZeroGenerator.ToArray();
+
+        public TypeOfMethod[] GetPossibleFormulas() => AvailableFormulas;
 
         public XElement Generate(TypeOfMethod formula)
         {
@@ -35,6 +37,15 @@ namespace FormulaObfuscator.BLL.Generators
             };
         }
 
+        /// <summary>
+        /// <code>
+        /// (msup)
+        ///     (mi)x(/mi)
+        ///     (mn)3(/mn)
+        /// (/msup)
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
         private XElement Polynomial()
         {
             var MAX_AMOUNT_OF_VARIABLES = 10;
@@ -101,6 +112,19 @@ namespace FormulaObfuscator.BLL.Generators
             return formulaRoot;
         }
 
+        /// <summary>
+        /// <code>
+        /// (mfrac)
+        ///     (mrow)
+        ///         (mn)0(/mn)
+        ///     (/mrow)
+        ///     (mrow)
+        ///         (mn)6(/mn)
+        ///     (/mrow)
+        /// (/mfrac)
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
         private XElement Fraction()
         {
             Randoms.RecursionDepth--;
@@ -119,10 +143,10 @@ namespace FormulaObfuscator.BLL.Generators
 
         /// <summary>
         /// <code>
-        /// (container)
-        /// <para>(mi)sin(/mi)</para>
-        /// <para>(mn)0(/mn)</para>
-        /// (/container)
+        /// (mrow)
+        ///     (mi)sin(/mi)
+        ///     (mn)0(/mn)
+        /// (/mrow)
         /// </code>
         /// </summary>
         /// <returns></returns>
@@ -133,12 +157,12 @@ namespace FormulaObfuscator.BLL.Generators
         }
         /// <summary>
         /// <code>
-        /// (container)
-        /// (munderover)
-        /// <para>(mo)#integral sign#(/mo)</para>
-        /// <para>(mn)0(/mn)</para>
-        /// (/munderover)
-        /// (/container)
+        /// (mrow)
+        ///     (munderover)
+        ///         (mo)#integral sign#(/mo)
+        ///         (mn)0(/mn)
+        ///     (/munderover)
+        /// (/mrow)
         /// </code>
         /// </summary>
         /// <returns></returns>

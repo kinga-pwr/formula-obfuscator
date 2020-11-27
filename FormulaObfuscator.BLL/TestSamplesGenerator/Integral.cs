@@ -1,8 +1,5 @@
-﻿using System;
+﻿using FormulaObfuscator.BLL.Helpers;
 using FormulaObfuscator.BLL.Models;
-using System.Collections.Generic;
-using System.Text;
-using FormulaObfuscator.BLL.Helpers;
 
 namespace FormulaObfuscator.BLL.TestSamplesGenerator
 {
