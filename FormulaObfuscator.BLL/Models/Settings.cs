@@ -7,7 +7,7 @@ namespace FormulaObfuscator.BLL.Models
     {
         public int RecursionDepth { get; set; }
         public ObfuscateLevel ObfuscateLevel { get; set; }
-        public string Letters { get; set; }
+        public string Letters { get; set; } 
         public string GreekLetters { get; set; }
         public int MinNumber { get; set; }
         public int MaxNumber { get; set; }

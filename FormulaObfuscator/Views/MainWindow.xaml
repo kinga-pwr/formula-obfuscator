@@ -18,7 +18,7 @@
             <StackPanel Name="menuHolder" Orientation="Horizontal">
                 <TextBlock Padding="10,5,10,5" Text="Math formula obfuscator"></TextBlock>
                 <Menu Name="mymenu" Margin="0,2,0,2" FontSize="11">
-                    <MenuItem Name="Settings" Header="Settings">
+                    <MenuItem Name="Settings" Header="Settings" Command="{Binding OpenSettingsCommand}">
                     </MenuItem>
                 </Menu>
             </StackPanel>

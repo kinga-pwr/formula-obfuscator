@@ -1,4 +1,6 @@
-﻿using MahApps.Metro.Controls;
+﻿using FormulaObfuscator.BLL.Models;
+using FormulaObfuscator.Commands;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,9 +20,30 @@ namespace FormulaObfuscator.Views
     /// </summary>
     public partial class SettingsWindow : MetroWindow
     {
-        public SettingsWindow()
+        public Settings Settings { get; set; }
+
+        public DelegateCommand ObfuscateLevelsCommand { get; set; }
+
+        public SettingsWindow(Settings settings)
         {
+            Settings = settings;
+
+            ObfuscateLevelsCommand = new DelegateCommand(() => GetAllObfuscateLevels());
+
             InitializeComponent();
+
+            InitialFields();
+        }
+
+        private List<string> GetAllObfuscateLevels()
+        {
+            return new List<string> { "Full formula", "Fractions", "Variables"};
+        }
+
+        private void InitialFields()
+        {
+            TextBoxLetters.Text = Settings.Letters;
+            DropDownButtonObfuscatedLevels.ItemsSource = GetAllObfuscateLevels();
         }
     }
 }

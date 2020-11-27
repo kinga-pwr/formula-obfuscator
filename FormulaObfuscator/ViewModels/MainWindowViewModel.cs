@@ -7,6 +7,8 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using FormulaObfuscator.BLL.TestGenerator;
+using System.Windows;
+using FormulaObfuscator.Views;
 
 namespace FormulaObfuscator.ViewModels
 {
@@ -20,6 +22,7 @@ namespace FormulaObfuscator.ViewModels
         public DelegateCommand DownloadCommand { get; set; }
         public ParameterCommand<int> LoadSampleCommand { get; set; }
         public DelegateCommand GenerateSampleCommand { get; set; }
+        public DelegateCommand OpenSettingsCommand { get; set; }
 
         private string _input;
         public string Input
@@ -42,10 +45,17 @@ namespace FormulaObfuscator.ViewModels
             DownloadCommand = new DelegateCommand(() => DownloadResult());
             LoadSampleCommand = new ParameterCommand<int>((sampleId) => LoadSample(sampleId));
             GenerateSampleCommand = new DelegateCommand(() => GenerateSample());
+            OpenSettingsCommand = new DelegateCommand(() => OpenSettings());
 
             _dialogCoordinator = dialogCoordinator;
 
             LoadInitialFile();
+        }
+
+        private void OpenSettings()
+        {
+            SettingsWindow settingsWindow = new SettingsWindow(new Settings());
+            settingsWindow.Show();
         }
 
         /// <summary>
