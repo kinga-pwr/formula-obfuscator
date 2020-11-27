@@ -4,10 +4,9 @@ using System.Text;
 
 namespace FormulaObfuscator.BLL.Models
 {
-    public enum Level
+    public enum ComplexGeneratorMethod
     {
-        Full,
         Fraction,
-        Variables
+        Root
     }
 }

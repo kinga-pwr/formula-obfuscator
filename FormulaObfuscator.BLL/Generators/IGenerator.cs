@@ -5,7 +5,7 @@ namespace FormulaObfuscator.BLL.Generators
 {
     public interface IGenerator
     {
-        XElement Generate(TypeOfFormula type);
-        TypeOfFormula[] GetPossibleFormulas();
+        XElement Generate(TypeOfMethod type);
+        TypeOfMethod[] GetPossibleFormulas();
     }
 }

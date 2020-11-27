@@ -95,6 +95,15 @@ namespace FormulaObfuscator.BLL.Helpers
             {
                 var node = root.FirstNode;
                 var last = root.LastNode;
+
+                if (ifContainsEqualities(root.Value))
+                {
+                    XElement equalifier = null;
+                    FindTreeWithEqualities(root, ref equalifier); // find equalifier
+                    node = equalifier.ElementsAfterSelf().First();
+                    last = equalifier.ElementsAfterSelf().Last();
+                }
+                
                 node.AddBeforeSelf(new XElement(MathMLTags.Operator, "("));
                 last.AddAfterSelf(Obfuscate(operation));
                 last.AddAfterSelf(new XElement(MathMLTags.Operator, ")"));
@@ -286,7 +295,7 @@ namespace FormulaObfuscator.BLL.Helpers
             return operations[(Randoms.Int(operations.Length))];
         }
 
-        private static TypeOfFormula GetFormula(IGenerator generator)
+        private static TypeOfMethod GetFormula(IGenerator generator)
         {
             var operations = generator.GetPossibleFormulas();
 

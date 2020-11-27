@@ -7,33 +7,33 @@ namespace FormulaObfuscator.BLL.Generators
 {
     public class EqualsOneGenerator : IGenerator
     {
-        public static TypeOfFormula[] PossibleFormulas => 
+        public static TypeOfMethod[] PossibleFormulas => 
             new[]
             {
-                TypeOfFormula.Polynomial,
-                TypeOfFormula.Fraction,
-                TypeOfFormula.Trigonometry,
-                TypeOfFormula.Root,
-                TypeOfFormula.TrigonometryRedundancy,
-                TypeOfFormula.Equation
+                TypeOfMethod.Polynomial,
+                TypeOfMethod.Fraction,
+                TypeOfMethod.Trigonometry,
+                TypeOfMethod.Root,
+                TypeOfMethod.TrigonometryRedundancy,
+                TypeOfMethod.Equation
             };
 
-        public TypeOfFormula[] GetPossibleFormulas() => PossibleFormulas;
+        public TypeOfMethod[] GetPossibleFormulas() => PossibleFormulas;
 
-        public static TypeOfFormula RandomFormula => PossibleFormulas[Randoms.Int(PossibleFormulas.Length)];
+        public static TypeOfMethod RandomFormula => PossibleFormulas[Randoms.Int(PossibleFormulas.Length)];
 
-        public XElement Generate(TypeOfFormula type)
+        public XElement Generate(TypeOfMethod type)
         {
             if (Randoms.RecursionDepth <= 0) return Polynomial();
 
             return type switch
             {
-                TypeOfFormula.Polynomial => Polynomial(),
-                TypeOfFormula.Fraction => Fraction(),
-                TypeOfFormula.Root => Root(),
-                TypeOfFormula.Trigonometry => Trigonometric(),
-                TypeOfFormula.TrigonometryRedundancy => TrigonometricRedundancy(),
-                TypeOfFormula.Equation => Equation(),
+                TypeOfMethod.Polynomial => Polynomial(),
+                TypeOfMethod.Fraction => Fraction(),
+                TypeOfMethod.Root => Root(),
+                TypeOfMethod.Trigonometry => Trigonometric(),
+                TypeOfMethod.TrigonometryRedundancy => TrigonometricRedundancy(),
+                TypeOfMethod.Equation => Equation(),
                 _ => Polynomial(),
             };
             throw new GeneratorFormulaTypeUnknownException();
@@ -53,7 +53,7 @@ namespace FormulaObfuscator.BLL.Generators
             Randoms.RecursionDepth--;
 
             var CONST_TO_ADD = 1;
-            var formulaNode = new EqualsZeroGenerator().Generate(TypeOfFormula.Polynomial);
+            var formulaNode = new EqualsZeroGenerator().Generate(TypeOfMethod.Polynomial);
             formulaNode.Add(new XElement(MathMLTags.Operator, "+"));
             formulaNode.Add(new XElement(MathMLTags.Number, CONST_TO_ADD));
 
@@ -126,7 +126,7 @@ namespace FormulaObfuscator.BLL.Generators
         private XElement Trigonometric()
         {
             Randoms.RecursionDepth--;
-            return MathMLStructures.Trigonometric(Trigonometry.cos, new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)));
+            return MathMLStructures.Trigonometric(Trigonometry.cos, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(0, 2)));
         }
 
         /// <summary>
@@ -155,8 +155,8 @@ namespace FormulaObfuscator.BLL.Generators
             };
             var option = options[Randoms.Int(0, 1)];
             XElement element = new XElement(MathMLTags.Row);
-            var part1 = MathMLStructures.Trigonometric(option.Item1, new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)), option.Item4);
-            var part2 = MathMLStructures.Trigonometric(option.Item3, new EqualsZeroGenerator().Generate((TypeOfFormula)Randoms.Int(0, 2)), option.Item4);
+            var part1 = MathMLStructures.Trigonometric(option.Item1, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(0, 2)), option.Item4);
+            var part2 = MathMLStructures.Trigonometric(option.Item3, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(0, 2)), option.Item4);
             element.Add(part1);
             element.Add(new XElement(MathMLTags.Operator, option.Item2));
             element.Add(part2);

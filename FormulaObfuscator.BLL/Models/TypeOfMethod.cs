@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FormulaObfuscator.BLL.Models
 {
-    public enum TypeOfFormula
+    public enum TypeOfMethod
     {
         Polynomial,
         Fraction,

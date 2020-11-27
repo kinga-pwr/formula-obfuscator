@@ -38,7 +38,7 @@ namespace FormulaObfuscator.BLL
                 foreach (var tree in mathmlTrees)
                 {
                     var obfuscateCount = 1;
-                    var level = Level.Variables;
+                    var level = ObfuscateLevel.Variables;
 
                     while (obfuscateCount > 0)
                     {
@@ -51,15 +51,15 @@ namespace FormulaObfuscator.BLL
             return Holder.Success(reader.SubstituteObfuscatedMathMLTree(new Queue<XElement>(obfuscated)));
         }
 
-        private XElement Obfuscate(XElement node, Level level)
+        private XElement Obfuscate(XElement node, ObfuscateLevel level)
         {
             switch(level)
             {
-                case Level.Full:
+                case ObfuscateLevel.Full:
                     return Walker.WalkWithAlgorithmForWholeFormula(node);
-                case Level.Fraction:
+                case ObfuscateLevel.Fraction:
                     return Walker.WalkWithAlgorithmForAllFractionsInRoot(node);
-                case Level.Variables:
+                case ObfuscateLevel.Variables:
                     return Walker.WalkWithAlgorithmForRootVariables(node);
             }
 
