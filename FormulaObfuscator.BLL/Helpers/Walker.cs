@@ -181,7 +181,7 @@ namespace FormulaObfuscator.BLL.Helpers
 
                 foreach (XElement child in childrens)
                 {
-                    if (child.Name.ToString().Contains(MathMLTags.Operator) && ifContainsEqualities(child.Value.ToString()))
+                    if (child.Name.ToString().Contains(MathMLTags.Operator) && ifContainsEqualities(child.Value))
                     {
                         isRightSide = true;
                         continue;
@@ -228,7 +228,7 @@ namespace FormulaObfuscator.BLL.Helpers
 
         private static bool ifContainsEqualities(string value)
         {
-            var equalities = new List<string>{ MathMLSymbols.Equal }; // TODO add rest symbols
+            var equalities = new List<string>{ MathMLSymbols.Equal };
             return equalities.Any(equality => value.Contains(equality));
         }
 
@@ -304,13 +304,13 @@ namespace FormulaObfuscator.BLL.Helpers
 
         private static bool IsToObfuscate()
         {
-            var num = Randoms.Int(1, 10);
-            return num < 7;
+            var num = Randoms.Int(0, 100);
+            return num < Settings.CurrentSettings.ObfucateProbability;
         }
 
         public static void FindTreeWithEqualities(XElement node, ref XElement outputTree)
         {
-            if (node.Name.ToString().Contains(MathMLTags.Operator) && ifContainsEqualities(node.Value.ToString()))
+            if (node.Name.ToString().Contains(MathMLTags.Operator) && ifContainsEqualities(node.Value))
             {
                 outputTree = node;
             }

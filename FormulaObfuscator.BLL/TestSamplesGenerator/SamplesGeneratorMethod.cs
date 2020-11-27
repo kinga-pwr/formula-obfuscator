@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FormulaObfuscator.BLL.TestSamplesGenerator
+﻿namespace FormulaObfuscator.BLL.TestSamplesGenerator
 {
     public enum SamplesGeneratorMethod
     {

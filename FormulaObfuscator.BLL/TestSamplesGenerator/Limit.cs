@@ -1,8 +1,5 @@
 ﻿using FormulaObfuscator.BLL.Helpers;
 using FormulaObfuscator.BLL.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FormulaObfuscator.BLL.TestSamplesGenerator
 {
@@ -11,9 +8,9 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
         public string Generate()
         {
             string n = Randoms.Char().ToString().ToLower();
-            string pi = Randoms.GreekLetter().ToString().ToLower();
+            string pi = Randoms.GreekLetter().ToLower();
             string e;
-            do { e = Randoms.GreekLetter().ToString().ToLower(); } while (e == pi);
+            do { e = Randoms.GreekLetter().ToLower(); } while (e == pi);
             
 
             return $@"
@@ -24,14 +21,14 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
                             <mrow>
                                 <mi>{n}</mi>
                                 <mo stretchy=""false"">→</mo>
-                                <mo>{Randoms.Operator().ToString()}</mo>
+                                <mo>{Randoms.Operator()}</mo>
                                 <mn>{MathMLSymbols.Infinite}</mn>
                             </mrow>
                         </munder>
                         <mfrac>
                             <msqrt>
                                 <mrow>
-                                    <mn>{Randoms.Int(1, 25).ToString()}</mn>
+                                    <mn>{Randoms.Int()}</mn>
                                     <mi>{pi}</mi>
                                     <mi>{n}</mi>
                                 </mrow>
@@ -54,7 +51,7 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
                         </msup>
                     </mrow>
                     <mo>=</mo>
-                    {Randoms.ComplexExpression().ToString()}";
+                    {Randoms.ComplexExpression()}";
         }
     }
 }

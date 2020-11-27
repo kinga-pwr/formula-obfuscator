@@ -95,10 +95,7 @@ namespace FormulaObfuscator.ViewModels
         {
             await Task.Run(async () =>
             {
-                var settings = new Settings()
-                {
-                    RecursionDepth = 4
-                };
+                var settings = new Settings(); // todo: Pass this from settings window
 
                 var resultHolder = new ObfuscatorManager(Input).RunObfuscate(settings);
 
@@ -147,8 +144,13 @@ namespace FormulaObfuscator.ViewModels
 
         private void GenerateSample()
         {
-            SamplesGenerator samplesGenerator = new SamplesGenerator();
-            Input = samplesGenerator.DrawSample();
+            var settings = new Settings() // todo: Pass this from settings window
+            {
+                MinNumber = -100
+            };
+
+            var samplesGenerator = new SamplesGenerator();
+            Input = samplesGenerator.DrawSample(settings);
         }
     }
 }

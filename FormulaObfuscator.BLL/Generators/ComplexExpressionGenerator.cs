@@ -8,6 +8,19 @@ namespace FormulaObfuscator.BLL.Generators
     {
         private static int _maxLength => 7;
 
+        /// <summary>
+        /// <code>
+        /// (mfrac)
+        ///     (mrow)
+        ///         (mn)6(/mn)
+        ///     (/mrow)
+        ///     (mrow)
+        ///         (mn)6(/mn)
+        ///     (/mrow)
+        /// (/mfrac)
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
         public static XElement Fraction()
         {
             XElement fraction = new XElement(MathMLTags.Fraction);
@@ -40,9 +53,17 @@ namespace FormulaObfuscator.BLL.Generators
             return fraction;
         }
 
+        /// <summary>
+        /// <code>
+        /// (mroot)
+        ///     (mi)x(/mi)
+        ///     (mn)3(/mn)
+        /// (/mroot)
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
         public static XElement Root()
         {
-
             XElement root = new XElement(MathMLTags.Root);
             XElement degree = new XElement(MathMLTags.Identifier);
             XElement element = new XElement(MathMLTags.Number);
@@ -70,7 +91,6 @@ namespace FormulaObfuscator.BLL.Generators
             root.Add(degree);
             root.Add(element);
             return root;
-
         }
     }
 }

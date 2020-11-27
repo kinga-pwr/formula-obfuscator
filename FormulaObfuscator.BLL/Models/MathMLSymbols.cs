@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FormulaObfuscator.BLL.Models
+﻿namespace FormulaObfuscator.BLL.Models
 {
     public static class MathMLSymbols
     {
         public static string Multiply => "&sdot;";
         public static string Integral => "&int;";
 
-        /// <summary>
-        /// >
-        /// </summary>
-        public static string LessThan => "&gt;";
+        public static string GreaterThan => "&gt;";
 
         public static string Epsilon => "∑";
 

@@ -1,4 +1,3 @@
-using FormulaObfuscator.BLL.Algorithms;
 using FormulaObfuscator.BLL.Helpers;
 using FormulaObfuscator.BLL.Models;
 using System.Collections.Generic;
@@ -16,13 +15,20 @@ namespace FormulaObfuscator.BLL
             UploadedText = uploadedText;
         }
 
+        private void ApplySettings(Settings settings)
+        {
+            Settings.CurrentSettings = settings;
+            Randoms.ResetSettings();
+        }
+
         public Holder RunObfuscate(Settings settings)
         {
             ApplySettings(settings);
+
             var reader = new HTMLReader(UploadedText);
             var mathmlTrees = new List<XElement>();
             var obfuscated = new List<XElement>();
-            
+
             try
             {
                 reader.ConvertToMathMLTree(mathmlTrees);
@@ -34,15 +40,12 @@ namespace FormulaObfuscator.BLL
 
             if (mathmlTrees.Any())
             {
-
                 foreach (var tree in mathmlTrees)
                 {
-                    var obfuscateCount = 1;
-                    var level = ObfuscateLevel.Variables;
-
+                    var obfuscateCount = Settings.CurrentSettings.ObfucateCount;
                     while (obfuscateCount > 0)
                     {
-                        obfuscated.Add(Obfuscate(tree, level));
+                        obfuscated.Add(Obfuscate(tree, Settings.CurrentSettings.ObfuscateLevel));
                         obfuscateCount--;
                     }
                 }
@@ -51,25 +54,15 @@ namespace FormulaObfuscator.BLL
             return Holder.Success(reader.SubstituteObfuscatedMathMLTree(new Queue<XElement>(obfuscated)));
         }
 
-        private XElement Obfuscate(XElement node, ObfuscateLevel level)
+        private static XElement Obfuscate(XElement node, ObfuscateLevel level)
         {
-            switch(level)
+            return level switch
             {
-                case ObfuscateLevel.Full:
-                    return Walker.WalkWithAlgorithmForWholeFormula(node);
-                case ObfuscateLevel.Fraction:
-                    return Walker.WalkWithAlgorithmForAllFractionsInRoot(node);
-                case ObfuscateLevel.Variables:
-                    return Walker.WalkWithAlgorithmForRootVariables(node);
-            }
-
-            return node;
+                ObfuscateLevel.Full => Walker.WalkWithAlgorithmForWholeFormula(node),
+                ObfuscateLevel.Fraction => Walker.WalkWithAlgorithmForAllFractionsInRoot(node),
+                ObfuscateLevel.Variables => Walker.WalkWithAlgorithmForRootVariables(node),
+                _ => node,
+            };
         }
-
-        private void ApplySettings(Settings settings)
-        {
-            Randoms.RecursionDepth = settings.RecursionDepth;
-        }
-
-}
+    }
 }
