@@ -21,6 +21,14 @@ namespace FormulaObfuscator.ViewModels
         public ParameterCommand<int> LoadSampleCommand { get; set; }
         public DelegateCommand GenerateSampleCommand { get; set; }
 
+        public DelegateCommand InputFirefoxCommand { get; set; }
+        public DelegateCommand OutputFirefoxCommand { get; set; }
+
+        public bool HasFirefox { get; }
+        public string FirefoxTooltip => HasFirefox 
+            ? "Open Firefox with html file from text box" 
+            : "No Firefox detected, functionality not available";
+
         private string _input;
         public string Input
         {
@@ -42,10 +50,23 @@ namespace FormulaObfuscator.ViewModels
             DownloadCommand = new DelegateCommand(() => DownloadResult());
             LoadSampleCommand = new ParameterCommand<int>((sampleId) => LoadSample(sampleId));
             GenerateSampleCommand = new DelegateCommand(() => GenerateSample());
+            InputFirefoxCommand = new DelegateCommand(() => OpenInFirefox(Input));
+            OutputFirefoxCommand = new DelegateCommand(() => OpenInFirefox(Output));
 
             _dialogCoordinator = dialogCoordinator;
 
+            HasFirefox = CheckIfFirefoxIsInstalled();
+            OnPropertyChanged(nameof(HasFirefox));
+            OnPropertyChanged(nameof(FirefoxTooltip));
+
             LoadInitialFile();
+        }
+
+        private bool CheckIfFirefoxIsInstalled()
+        {
+            string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\Mozilla";
+            string valueName = "Mozilla Firefox";
+            return Registry.GetValue(keyName, valueName, null) != null;
         }
 
         /// <summary>
@@ -151,6 +172,10 @@ namespace FormulaObfuscator.ViewModels
 
             var samplesGenerator = new SamplesGenerator();
             Input = samplesGenerator.DrawSample(settings);
+        }
+
+        private void OpenInFirefox(string data)
+        {
         }
     }
 }
