@@ -7,7 +7,7 @@ namespace FormulaObfuscator.BLL.Models
     public class Settings
     {
         public int RecursionDepth { get; set; } = 3;
-        public ObfuscateLevel ObfuscateLevel { get; set; } = ObfuscateLevel.Fraction;
+        public ObfuscateLevel ObfuscateLevel { get; set; } = ObfuscateLevel.Variables;
         public int ObfucateCount { get; set; } = 1;
         public int ObfucateProbability { get; set; } = 70;
         public string Letters { get; set; } = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0abcdefghijklmnopqrstuwyz";

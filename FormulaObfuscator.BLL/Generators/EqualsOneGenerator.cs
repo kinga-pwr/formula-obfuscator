@@ -178,13 +178,16 @@ namespace FormulaObfuscator.BLL.Generators
         {
             Randoms.RecursionDepth--;
 
+            var number = Randoms.Int(2, 100);
+
             var container = new XElement(MathMLTags.Row);
             container.Add(new XElement(MathMLTags.Operator, "("));
-            container.Add(new XElement(MathMLTags.Number, "2"));
+            container.Add(new XElement(MathMLTags.Number, number.ToString()));
             container.Add(new XElement(MathMLTags.Operator, "("));
             container.Add(Generate(RandomFormula));
             container.Add(new XElement(MathMLTags.Operator, ")"));
             container.Add(new XElement(MathMLTags.Operator, "-"));
+            container.Add(new XElement(MathMLTags.Number, (number-1).ToString()));
             container.Add(new XElement(MathMLTags.Operator, "("));
             container.Add(Generate(RandomFormula));
             container.Add(new XElement(MathMLTags.Operator, ")"));
