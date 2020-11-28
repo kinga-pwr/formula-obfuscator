@@ -18,7 +18,8 @@ namespace FormulaObfuscator.ViewModels
 
         public DelegateCommand UploadCommand { get; set; }
         public DelegateCommand ObfuscateCommand { get; set; }
-        public DelegateCommand DownloadCommand { get; set; }
+        public DelegateCommand InputDownloadCommand { get; set; }
+        public DelegateCommand OutputDownloadCommand { get; set; }
         public ParameterCommand<int> LoadSampleCommand { get; set; }
         public DelegateCommand GenerateSampleCommand { get; set; }
 
@@ -48,7 +49,8 @@ namespace FormulaObfuscator.ViewModels
         {
             UploadCommand = new DelegateCommand(() => UploadFile());
             ObfuscateCommand = new DelegateCommand(() => Obfuscate());
-            DownloadCommand = new DelegateCommand(() => DownloadResult());
+            InputDownloadCommand = new DelegateCommand(() => DownloadCode(Input, "Obfustactor input"));
+            OutputDownloadCommand = new DelegateCommand(() => DownloadCode(Output, "Obfuscated result"));
             LoadSampleCommand = new ParameterCommand<int>((sampleId) => LoadSample(sampleId));
             GenerateSampleCommand = new DelegateCommand(() => GenerateSample());
             InputFirefoxCommand = new DelegateCommand(() => OpenInFirefox(Input));
@@ -135,11 +137,11 @@ namespace FormulaObfuscator.ViewModels
             });
         }
 
-        private async void DownloadResult()
+        private async void DownloadCode(string data, string name)
         {
             var saveDialog = new SaveFileDialog
             {
-                FileName = $"Obfuscated result {DateTime.Now:dd-MM-yyyy HH_mm}",
+                FileName = $"{name} {DateTime.Now:dd-MM-yyyy HH_mm}",
                 Filter = "HTML Files|*.html",
                 FilterIndex = 2,
                 RestoreDirectory = true
@@ -147,8 +149,8 @@ namespace FormulaObfuscator.ViewModels
 
             if (saveDialog.ShowDialog() == true)
             {
-                File.WriteAllText(saveDialog.FileName, Output);
-                await _dialogCoordinator.ShowMessageAsync(this, "File exported", "Obfuscated file successfully exported!");
+                File.WriteAllText(saveDialog.FileName, data);
+                await _dialogCoordinator.ShowMessageAsync(this, "File exported", "Code file successfully exported!");
             }
         }
 

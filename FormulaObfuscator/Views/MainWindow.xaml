@@ -161,7 +161,7 @@
                 Command="{Binding InputFirefoxCommand}"
                 Height="50"
                 Width="100"
-                Margin="0,0,0,0"
+                Margin="0,0,10,0"
                 IsEnabled="{Binding HasFirefox, Mode=OneWay}"
                 ToolTip="{Binding FirefoxTooltip, Mode=OneWay}"
                 ToolTipService.ShowOnDisabled="True"
@@ -172,6 +172,19 @@
                                                     VerticalAlignment="Center"
                                                     HorizontalAlignment="Center" />
                     <Label Content="Open in Firefox" />
+                </StackPanel>
+            </Button>
+            <Button 
+                Command="{Binding InputDownloadCommand}"
+                Height="50"
+                Width="80"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Right">
+                <StackPanel>
+                    <iconPacks:PackIconMaterial Kind="FileDownloadOutline"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center" />
+                    <Label Content="Download" />
                 </StackPanel>
             </Button>
         </StackPanel>
@@ -234,7 +247,7 @@
                 </StackPanel>
             </Button>
             <Button 
-                Command="{Binding DownloadCommand}"
+                Command="{Binding OutputDownloadCommand}"
                 Height="50"
                 Width="80"
                 Margin="0,0,0,0"
