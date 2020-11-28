@@ -79,8 +79,7 @@ namespace FormulaObfuscator.ViewModels
 
         private void OpenSettings()
         {
-            SettingsWindow settingsWindow = new SettingsWindow(Settings);
-            settingsWindow.Show();
+            new SettingsWindow(Settings).ShowDialog();
         }
 
         /// <summary>
