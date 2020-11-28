@@ -12,10 +12,10 @@ namespace FormulaObfuscator.BLL.Generators
     {
         public static TypeOfMethod[] PossibleFormulas =>
             new[] 
-            { 
-                TypeOfMethod.Polynomial, 
-                TypeOfMethod.Fraction, 
-                TypeOfMethod.Trigonometry, 
+            {
+                TypeOfMethod.Polynomial,
+                TypeOfMethod.Fraction,
+                TypeOfMethod.Trigonometry,
                 TypeOfMethod.Integral 
             };
 

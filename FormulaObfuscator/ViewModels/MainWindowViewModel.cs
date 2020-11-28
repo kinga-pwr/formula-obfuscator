@@ -8,8 +8,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using FormulaObfuscator.BLL.TestGenerator;
-using System.Windows;
 using FormulaObfuscator.Views;
 
 namespace FormulaObfuscator.ViewModels
@@ -29,6 +27,8 @@ namespace FormulaObfuscator.ViewModels
 
         public DelegateCommand InputFirefoxCommand { get; set; }
         public DelegateCommand OutputFirefoxCommand { get; set; }
+
+        private Settings Settings = new Settings();
 
         public bool HasFirefox { get; }
         public string FirefoxTooltip => HasFirefox 
@@ -79,7 +79,7 @@ namespace FormulaObfuscator.ViewModels
 
         private void OpenSettings()
         {
-            SettingsWindow settingsWindow = new SettingsWindow(new Settings());
+            SettingsWindow settingsWindow = new SettingsWindow(Settings);
             settingsWindow.Show();
         }
 
@@ -130,9 +130,7 @@ namespace FormulaObfuscator.ViewModels
         {
             await Task.Run(async () =>
             {
-                var settings = new Settings(); // todo: Pass this from settings window
-
-                var resultHolder = new ObfuscatorManager(Input).RunObfuscate(settings);
+                var resultHolder = new ObfuscatorManager(Input).RunObfuscate(Settings);
 
                 if (resultHolder.WasSuccessful)
                     Output = resultHolder.Value;
@@ -179,13 +177,8 @@ namespace FormulaObfuscator.ViewModels
 
         private void GenerateSample()
         {
-            var settings = new Settings() // todo: Pass this from settings window
-            {
-                MinNumber = -100
-            };
-
             var samplesGenerator = new SamplesGenerator();
-            Input = samplesGenerator.DrawSample(settings);
+            Input = samplesGenerator.DrawSample(Settings);
         }
 
         private async void OpenInFirefox(string data)

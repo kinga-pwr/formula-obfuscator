@@ -13,100 +13,112 @@
         <StackPanel Margin="30,30,30,0">
         <Label Content="Common Settings" FontWeight="Bold" FontSize="20" FontStyle="Italic"/>
         <StackPanel Orientation="Horizontal" Height="50">
-            <Label Content="Used letters: " Width="200" HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
+            <Label Content="Used letters: " Width="150" HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
             <TextBox x:Name="TextBoxLetters" TextWrapping="NoWrap" Width="400" Margin="0,5,0,5" Height="34"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Height="50">
-            <Label Content="Used Greek letters: " Width="200" HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
+                <Label Content="Used Greek letters: " Width="150" HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
             <TextBox x:Name="TextBoxGreekLetters" TextWrapping="NoWrap" Width="400" Margin="0,5,0,5" Height="34"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Height="50">
-            <Label Content="Used numbers: " Width="200" HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
+                <Label Content="Used numbers: " Width="150" HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
             <Label Content="Min: " Width="60" HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
             <mah:NumericUpDown Minimum="0"
                    Maximum="10000"
                    Interval="1"
-                   StringFormat="C2" Width="100" Margin="0,5,5,5"/>
+                   Height="34"
+                   Width="100" Margin="0,5,5,5"
+                   x:Name="UpDownMin"/>
             <Label Content="Max: " Width="60" HorizontalAlignment="Left" Margin="20,5,0,5" VerticalAlignment="Center" Height="34"/>
             <mah:NumericUpDown Minimum="0"
                    Maximum="10000"
                    Interval="100"
-                   StringFormat="C2" Width="100" Margin="0,5,5,5"/>
+                   Height="34"
+                   Width="100" Margin="0,5,5,5"
+                   x:Name="UpDownMax"/>
         </StackPanel>
-        <Border BorderBrush="Beige" BorderThickness="0.5" HorizontalAlignment="Center" Margin="0,20,0,20" VerticalAlignment="Top" Width="700" Opacity="0.3"/>
+        <Border BorderBrush="Beige" BorderThickness="0.5" HorizontalAlignment="Center" Margin="0,10,0,10" VerticalAlignment="Top" Width="700" Opacity="0.3"/>
         <Label Content="Obfuscate Settings"  FontWeight="Bold" FontSize="20" FontStyle="Italic"/>
         <StackPanel Orientation="Horizontal">
             <StackPanel Orientation="Horizontal" Height="50">
-                <Label Content="Recurence level: " Width="200" HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
+                    <Label Content="Recursion depth: " Width="150" HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
                 <mah:NumericUpDown Minimum="0"
                        Maximum="10000"
                        Interval="1"
-                       StringFormat="C2" Width="100" Margin="0,5,5,5"/>
+                       Height="34"
+                       Width="100" Margin="0,5,5,5"
+                       x:Name="UpDownRecursionDepth"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="50">
-                <Label Content="Tree walks: " Width="100" HorizontalAlignment="Left" Margin="20,5,0,5" VerticalAlignment="Center" Height="34"/>
+                    <Label Content="Tree walks: " Width="130" HorizontalContentAlignment="Right" Margin="20,5,20,5" VerticalAlignment="Center" Height="34"/>
                 <mah:NumericUpDown Minimum="0"
                        Maximum="10000"
                        Interval="1"
-                       StringFormat="C2" Width="100" Margin="0,5,5,5"/>
+                       Height="34"
+                       Width="100" Margin="0,5,5,5"
+                       x:Name="UpDownTreeWalks"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Height="50">
-            <Label Content="Obfuscate level: " Width="200" HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
-            <mah:DropDownButton Margin="0,5,5,5" Width="100"
-                    Content="Levels"
-                    x:Name="DropDownButtonObfuscatedLevels">
-            </mah:DropDownButton>
-        </StackPanel>
+                <Label Content="Obfuscate level: " Width="150" HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
+                <ComboBox Margin="0,5,5,5" x:Name="DropDownButtonObfuscatedLevels" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Height="34"/>
+                <Label Content="Obfuscate probability: " Width="130" HorizontalAlignment="Left" Margin="20,5,20,5" VerticalAlignment="Center" Height="34"/>
+                <mah:NumericUpDown Minimum="0"
+                   Maximum="10000"
+                   Interval="100"
+                   Height="34"
+                   Width="100" Margin="0,5,5,5"
+                   x:Name="UpDownProbability"/>
+            </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,10,30,0" HorizontalAlignment="Center">
             <StackPanel>
                 <Label Content="Choose methods for equals one generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
-                <CheckBox Content="Polynomial" Margin="25,0,0,0"/>
-                <CheckBox Content="Fraction" Margin="25,3,0,0"/>
-                <CheckBox Content="Trigonometry" Margin="25,3,0,0"/>
-                <CheckBox Content="Root" Margin="25,3,0,0"/>
-                <CheckBox Content="Trigonometry Redundancy" Margin="25,3,0,0"/>
-                <CheckBox Content="Equation" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBEqualsOnePolynomial" Content="Polynomial" Margin="25,0,0,0"/>
+                    <CheckBox x:Name="CBEqualsOneFraction" Content="Fraction" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBEqualsOneTrigonometry" Content="Trigonometry" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBEqualsOneRoot" Content="Root" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBEqualsOneTrigonometryRed" Content="Trigonometry Redundancy" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBEqualsOneEquation" Content="Equation" Margin="25,3,0,0"/>
             </StackPanel>
             <StackPanel Margin="100,0,0,0">
-                <Label Content="Choose methods for equals one generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
-                <CheckBox Content="Polynomial" Margin="25,3,0,0"/>
-                <CheckBox Content="Fraction" Margin="25,3,0,0"/>
-                <CheckBox Content="Trigonometry" Margin="25,3,0,0"/>
-                <CheckBox Content="Integral" Margin="25,3,0,0"/>
+                <Label Content="Choose methods for equals zero generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
+                    <CheckBox x:Name="CBEqualsZeroPolynomial" Content="Polynomial" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBEqualsZeroFraction" Content="Fraction" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBEqualsZeroTrigonometry" Content="Trigonometry" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBEqualsZeroIntegral" Content="Integral" Margin="25,3,0,0"/>
             </StackPanel>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center"/>
-        <Border BorderBrush="Beige" BorderThickness="0.5" HorizontalAlignment="Center" Margin="0,20,0,20" VerticalAlignment="Top" Width="700" Opacity="0.3"/>
+        <Border BorderBrush="Beige" BorderThickness="0.5" HorizontalAlignment="Center" Margin="0,20,0,10" VerticalAlignment="Top" Width="700" Opacity="0.3"/>
         <Label Content="Test Generator Settings"   FontWeight="Bold" FontSize="20" FontStyle="Italic"/>
         <StackPanel Orientation="Horizontal" Margin="0,10,0,20" HorizontalAlignment="Center">
             <StackPanel Margin="20,0,0,0">
                 <Label Content="Choose methods for samples generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
-                <CheckBox Content="DetSumPi" Margin="25,0,0,0"/>
-                <CheckBox Content="Fi" Margin="25,3,0,0"/>
-                <CheckBox Content="FuncBracket" Margin="25,3,0,0"/>
-                <CheckBox Content="Integral" Margin="25,3,0,0"/>
-                <CheckBox Content="Limit" Margin="25,3,0,0"/>
-                <CheckBox Content="SqrtRecursive" Margin="25,3,0,0"/>
-                <CheckBox Content="Sum" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBSamplesDetSumPi" Content="DetSumPi" Margin="25,0,0,0"/>
+                    <CheckBox x:Name="CBSamplesFi" Content="Fi" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBSamplesFuncBracket" Content="FuncBracket" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBSamplesIntegral" Content="Integral" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBSamplesLimit" Content="Limit" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBSamplesSqrtRecursive" Content="SqrtRecursive" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBSamplesSum" Content="Sum" Margin="25,3,0,0"/>
             </StackPanel>
             <StackPanel Margin="20,0,0,0">
                 <Label Content="Choose methods for simple generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
-                <CheckBox Content="Fraction"/>
-                <CheckBox Content="Power" Margin="0,3,0,0"/>
-                <CheckBox Content="Root" Margin="0,3,0,0"/>
+                    <CheckBox x:Name="CBSimpleFraction" Content="Fraction" Margin="25,0,0,0"/>
+                    <CheckBox x:Name="CBSimplePower" Content="Power" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBSimpleRoot" Content="Root" Margin="25,3,0,0"/>
             </StackPanel>
             <StackPanel Margin="20,0,0,0">
                 <Label Content="Choose methods for complex generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
-                <CheckBox Content="Fraction" Margin="0,3,0,0"/>
-                <CheckBox Content="Root" Margin="0,3,0,0"/>
+                    <CheckBox x:Name="CBComplexFraction" Content="Fraction" Margin="25,3,0,0"/>
+                    <CheckBox x:Name="CBComplexRoot" Content="Root" Margin="25,3,0,0"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="35" HorizontalAlignment="Right" Margin="0,0,0,20">
-            <Button Content="Wczytaj" Margin="0,0,5,0"/>
-            <Button Content="Zapisz na dysku" Margin="0,0,5,0"/>
-            <Button Content="Zapisz" Margin="0,0,10,0"/>
+            <Button Content="Upload" Margin="0,0,5,0"/>
+            <Button Content="Save as" Margin="0,0,5,0"/>
+            <Button Content="Save" Margin="0,0,10,0" Click="ButtonSave_Clicked"/>
         </StackPanel>
     </StackPanel>
     </ScrollViewer>
