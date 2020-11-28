@@ -32,7 +32,7 @@
             <Label Content="Max: " Width="60" HorizontalAlignment="Left" Margin="20,5,0,5" VerticalAlignment="Center" Height="34"/>
             <mah:NumericUpDown Minimum="0"
                    Maximum="10000"
-                   Interval="100"
+                   Interval="1"
                    Height="34"
                    Width="100" Margin="0,5,5,5"
                    x:Name="UpDownMax"/>
@@ -65,7 +65,7 @@
                 <Label Content="Obfuscate probability: " Width="130" HorizontalAlignment="Left" Margin="20,5,20,5" VerticalAlignment="Center" Height="34"/>
                 <mah:NumericUpDown Minimum="0"
                    Maximum="10000"
-                   Interval="100"
+                   Interval="1"
                    Height="34"
                    Width="100" Margin="0,5,5,5"
                    x:Name="UpDownProbability"/>
@@ -116,8 +116,8 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="35" HorizontalAlignment="Right" Margin="0,0,0,20">
-            <Button Content="Upload" Margin="0,0,5,0"/>
-            <Button Content="Save as" Margin="0,0,5,0"/>
+            <Button Content="Upload" Margin="0,0,5,0" Click="ButtonUpload_Clicked"/>
+            <Button Content="Export" Margin="0,0,5,0" Click="ButtonExport_Clicked"/>
             <Button Content="Save" Margin="0,0,10,0" Click="ButtonSave_Clicked"/>
         </StackPanel>
     </StackPanel>

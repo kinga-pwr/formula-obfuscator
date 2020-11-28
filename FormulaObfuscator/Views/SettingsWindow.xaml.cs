@@ -161,5 +161,14 @@ namespace FormulaObfuscator.Views
             return result;
         }
 
+        private void ButtonUpload_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonSaveAs_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
