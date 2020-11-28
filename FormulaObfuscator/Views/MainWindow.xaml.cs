@@ -1,6 +1,7 @@
 ﻿using FormulaObfuscator.ViewModels;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using System.IO;
 
 namespace FormulaObfuscator.Views
 {
@@ -14,6 +15,11 @@ namespace FormulaObfuscator.Views
             InitializeComponent();
 
             DataContext = new MainWindowViewModel(DialogCoordinator.Instance);
+        }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            File.Delete("temp");
         }
     }
 }

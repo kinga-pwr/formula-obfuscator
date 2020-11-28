@@ -1,9 +1,11 @@
 ﻿using FormulaObfuscator.BLL;
 using FormulaObfuscator.BLL.Models;
+using FormulaObfuscator.BLL.TestGenerator;
 using FormulaObfuscator.Commands;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using FormulaObfuscator.BLL.TestGenerator;
@@ -19,10 +21,19 @@ namespace FormulaObfuscator.ViewModels
 
         public DelegateCommand UploadCommand { get; set; }
         public DelegateCommand ObfuscateCommand { get; set; }
-        public DelegateCommand DownloadCommand { get; set; }
+        public DelegateCommand InputDownloadCommand { get; set; }
+        public DelegateCommand OutputDownloadCommand { get; set; }
         public ParameterCommand<int> LoadSampleCommand { get; set; }
         public DelegateCommand GenerateSampleCommand { get; set; }
         public DelegateCommand OpenSettingsCommand { get; set; }
+
+        public DelegateCommand InputFirefoxCommand { get; set; }
+        public DelegateCommand OutputFirefoxCommand { get; set; }
+
+        public bool HasFirefox { get; }
+        public string FirefoxTooltip => HasFirefox 
+            ? "Open Firefox with html file from text box" 
+            : "No Firefox detected, functionality not available";
 
         private string _input;
         public string Input
@@ -42,14 +53,28 @@ namespace FormulaObfuscator.ViewModels
         {
             UploadCommand = new DelegateCommand(() => UploadFile());
             ObfuscateCommand = new DelegateCommand(() => Obfuscate());
-            DownloadCommand = new DelegateCommand(() => DownloadResult());
+            InputDownloadCommand = new DelegateCommand(() => DownloadCode(Input, "Obfustactor input"));
+            OutputDownloadCommand = new DelegateCommand(() => DownloadCode(Output, "Obfuscated result"));
             LoadSampleCommand = new ParameterCommand<int>((sampleId) => LoadSample(sampleId));
             GenerateSampleCommand = new DelegateCommand(() => GenerateSample());
             OpenSettingsCommand = new DelegateCommand(() => OpenSettings());
+            InputFirefoxCommand = new DelegateCommand(() => OpenInFirefox(Input));
+            OutputFirefoxCommand = new DelegateCommand(() => OpenInFirefox(Output));
 
             _dialogCoordinator = dialogCoordinator;
 
+            HasFirefox = CheckIfFirefoxIsInstalled();
+            OnPropertyChanged(nameof(HasFirefox));
+            OnPropertyChanged(nameof(FirefoxTooltip));
+
             LoadInitialFile();
+        }
+
+        private bool CheckIfFirefoxIsInstalled()
+        {
+            string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\Mozilla\Mozilla Firefox";
+            string valueName = "CurrentVersion";
+            return Registry.GetValue(keyName, valueName, null) != null;
         }
 
         private void OpenSettings()
@@ -123,11 +148,11 @@ namespace FormulaObfuscator.ViewModels
             });
         }
 
-        private async void DownloadResult()
+        private async void DownloadCode(string data, string name)
         {
             var saveDialog = new SaveFileDialog
             {
-                FileName = $"Obfuscated result {DateTime.Now:dd-MM-yyyy HH_mm}",
+                FileName = $"{name} {DateTime.Now:dd-MM-yyyy HH_mm}",
                 Filter = "HTML Files|*.html",
                 FilterIndex = 2,
                 RestoreDirectory = true
@@ -135,8 +160,8 @@ namespace FormulaObfuscator.ViewModels
 
             if (saveDialog.ShowDialog() == true)
             {
-                File.WriteAllText(saveDialog.FileName, Output);
-                await _dialogCoordinator.ShowMessageAsync(this, "File exported", "Obfuscated file successfully exported!");
+                File.WriteAllText(saveDialog.FileName, data);
+                await _dialogCoordinator.ShowMessageAsync(this, "File exported", "Code file successfully exported!");
             }
         }
 
@@ -161,6 +186,29 @@ namespace FormulaObfuscator.ViewModels
 
             var samplesGenerator = new SamplesGenerator();
             Input = samplesGenerator.DrawSample(settings);
+        }
+
+        private async void OpenInFirefox(string data)
+        {
+            string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\Mozilla\Mozilla Firefox";
+            string valueName = "CurrentVersion";
+            var mozillaVersion = Registry.GetValue(keyName, valueName, null);
+            keyName = $@"HKEY_LOCAL_MACHINE\SOFTWARE\Mozilla\Mozilla Firefox\{mozillaVersion}\Main";
+            valueName = "PathToExe";
+            var mozillaExe = Registry.GetValue(keyName, valueName, null).ToString();
+            if (mozillaExe != null)
+            {
+                File.WriteAllText("temp", data);
+                Process.Start(mozillaExe, "temp");
+            }
+            else
+            {
+                await _dialogCoordinator.ShowMessageAsync(this, "Error", "Error opening Firefox!",
+                        settings: new MetroDialogSettings()
+                        {
+                            ColorScheme = MetroDialogColorScheme.Accented
+                        });
+            }
         }
     }
 }
