@@ -125,6 +125,7 @@ namespace FormulaObfuscator.ViewModels
             }
         }
 
+
         private async Task ObfuscateData()
         {
             await Task.Run(async () =>

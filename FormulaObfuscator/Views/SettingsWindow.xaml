@@ -10,9 +10,12 @@
         Height="650"
         Width="800">
     <ScrollViewer>
-        <StackPanel Margin="30,30,30,0">
-        <Label Content="Common Settings" FontWeight="Bold" FontSize="20" FontStyle="Italic"/>
-        <StackPanel Orientation="Horizontal" Height="50">
+        <StackPanel Margin="30,10,30,0">
+            <StackPanel Orientation="Horizontal" Height="50">
+                <Label Content="Common Settings" FontWeight="Bold" FontSize="20" FontStyle="Italic"/>
+                <Button Content="Reset to default" Margin="430,0,5,0"  Click="ButtonReset_Clicked" Height="30"/>
+                </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="50">
             <Label Content="Used letters: " Width="150" HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
             <TextBox x:Name="TextBoxLetters" TextWrapping="NoWrap" Width="400" Margin="0,5,0,5" Height="34"/>
         </StackPanel>
@@ -116,7 +119,7 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="35" HorizontalAlignment="Right" Margin="0,0,0,20">
-            <Button Content="Upload" Margin="0,0,5,0" Click="ButtonUpload_Clicked"/>
+            <Button Content="Upload" Margin="0,0,5,0"  Click="ButtonUpload_Clicked"/>
             <Button Content="Export" Margin="0,0,5,0" Click="ButtonExport_Clicked"/>
             <Button Content="Save" Margin="0,0,10,0" Click="ButtonSave_Clicked"/>
         </StackPanel>

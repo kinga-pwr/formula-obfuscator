@@ -2,9 +2,13 @@
 using FormulaObfuscator.BLL.TestSamplesGenerator;
 using FormulaObfuscator.Commands;
 using MahApps.Metro.Controls;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,7 +23,7 @@ namespace FormulaObfuscator.Views
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
     /// </summary>
-    public partial class SettingsWindow : MetroWindow
+    public partial class SettingsWindow : MetroWindow 
     {
         private Settings Settings { get; set; }
         private List<CheckBox> SimpleMethods = new List<CheckBox> { };
@@ -28,19 +32,15 @@ namespace FormulaObfuscator.Views
         private Dictionary<TypeOfMethod, CheckBox> EqualZeroMethods = new Dictionary<TypeOfMethod, CheckBox> { };
         private List<CheckBox> SamplesMethods = new List<CheckBox> { };
 
-        public DelegateCommand ObfuscateLevelsCommand { get; set; }
-
         public SettingsWindow(Settings settings)
         {
             Settings = settings;
-
-            ObfuscateLevelsCommand = new DelegateCommand(() => GetAllObfuscateLevels());
 
             InitializeComponent();
 
             MakeCheckBoxGroups();
 
-            InitialFields();
+            InitialFields(Settings);
         }
 
         private void MakeCheckBoxGroups()
@@ -78,23 +78,23 @@ namespace FormulaObfuscator.Views
             return new List<string> { "Full formula", "Fractions", "Variables"};
         }
 
-        private void InitialFields()
+        private void InitialFields(Settings toFill)
         {
-            TextBoxLetters.Text = Settings.Letters;
-            TextBoxGreekLetters.Text = Settings.GreekLetters;
+            TextBoxLetters.Text = toFill.Letters;
+            TextBoxGreekLetters.Text = toFill.GreekLetters;
             DropDownButtonObfuscatedLevels.ItemsSource = GetAllObfuscateLevels();
-            DropDownButtonObfuscatedLevels.SelectedIndex = (int) Settings.ObfuscateLevel;
-            UpDownMin.Value = Settings.MinNumber;
-            UpDownMax.Value = Settings.MaxNumber;
-            UpDownRecursionDepth.Value = Settings.RecursionDepth;
-            UpDownTreeWalks.Value = Settings.ObfucateCount;
-            UpDownProbability.Value = Settings.ObfucateProbability;
+            DropDownButtonObfuscatedLevels.SelectedIndex = (int)toFill.ObfuscateLevel;
+            UpDownMin.Value = toFill.MinNumber;
+            UpDownMax.Value = toFill.MaxNumber;
+            UpDownRecursionDepth.Value = toFill.RecursionDepth;
+            UpDownTreeWalks.Value = toFill.ObfucateCount;
+            UpDownProbability.Value = toFill.ObfucateProbability;
 
-            CheckSelectedCheckboxes(SimpleMethods, Settings.SimpleMethods);
-            CheckSelectedCheckboxes(ComplexMethods, Settings.ComplexMethods);
-            CheckSelectedCheckboxes(EqualOneMethods, Settings.MethodsForOneGenerator);
-            CheckSelectedCheckboxes(EqualZeroMethods, Settings.MethodsForZeroGenerator);
-            CheckSelectedCheckboxes(SamplesMethods, Settings.MethodsForSamplesGenerator);
+            CheckSelectedCheckboxes(SimpleMethods, toFill.SimpleMethods);
+            CheckSelectedCheckboxes(ComplexMethods, toFill.ComplexMethods);
+            CheckSelectedCheckboxes(EqualOneMethods, toFill.MethodsForOneGenerator);
+            CheckSelectedCheckboxes(EqualZeroMethods, toFill.MethodsForZeroGenerator);
+            CheckSelectedCheckboxes(SamplesMethods, toFill.MethodsForSamplesGenerator);
         }
 
         private static void CheckSelectedCheckboxes<EnumType>(List<CheckBox> methodsCB, List<EnumType> methods)
@@ -107,30 +107,34 @@ namespace FormulaObfuscator.Views
 
         private static void CheckSelectedCheckboxes(Dictionary<TypeOfMethod, CheckBox> methodsCB, List<TypeOfMethod> methods)
         {
-            foreach (var method in methods)
+            foreach (var method in methodsCB.Keys)
             {
-                methodsCB.TryGetValue(method, out CheckBox toCheck);
-                toCheck.IsChecked = true;
+                methodsCB[method].IsChecked = methods.Contains(method);
             }
         }
 
         private void ButtonSave_Clicked(object sender, RoutedEventArgs e)
         {
             // TODO validation
-            Settings.RecursionDepth = (int) UpDownRecursionDepth.Value;
-            Settings.ObfuscateLevel = (ObfuscateLevel) DropDownButtonObfuscatedLevels.SelectedIndex;
-            Settings.ObfucateCount = (int) UpDownTreeWalks.Value;
-            Settings.Letters = TextBoxLetters.Text;
-            Settings.GreekLetters = TextBoxGreekLetters.Text;
-            Settings.MinNumber = (int) UpDownMin.Value;
-            Settings.MaxNumber = (int) UpDownMax.Value;
-            Settings.SimpleMethods = GetAllCheckedMethods<SimpleGeneratorMethod>(SimpleMethods);
-            Settings.ComplexMethods = GetAllCheckedMethods<ComplexGeneratorMethod>(ComplexMethods);
-            Settings.MethodsForOneGenerator = GetAllCheckedMethods(EqualOneMethods);
-            Settings.MethodsForZeroGenerator = GetAllCheckedMethods(EqualZeroMethods);
-            Settings.MethodsForSamplesGenerator = GetAllCheckedMethods<SamplesGeneratorMethod>(SamplesMethods);
+            GetConfigurationFromUI(Settings);
 
             this.Close();
+        }
+
+        private void GetConfigurationFromUI(Settings toStore)
+        {
+            toStore.RecursionDepth = (int)UpDownRecursionDepth.Value;
+            toStore.ObfuscateLevel = (ObfuscateLevel)DropDownButtonObfuscatedLevels.SelectedIndex;
+            toStore.ObfucateCount = (int)UpDownTreeWalks.Value;
+            toStore.Letters = TextBoxLetters.Text;
+            toStore.GreekLetters = TextBoxGreekLetters.Text;
+            toStore.MinNumber = (int)UpDownMin.Value;
+            toStore.MaxNumber = (int)UpDownMax.Value;
+            toStore.SimpleMethods = GetAllCheckedMethods<SimpleGeneratorMethod>(SimpleMethods);
+            toStore.ComplexMethods = GetAllCheckedMethods<ComplexGeneratorMethod>(ComplexMethods);
+            toStore.MethodsForOneGenerator = GetAllCheckedMethods(EqualOneMethods);
+            toStore.MethodsForZeroGenerator = GetAllCheckedMethods(EqualZeroMethods);
+            toStore.MethodsForSamplesGenerator = GetAllCheckedMethods<SamplesGeneratorMethod>(SamplesMethods);
         }
 
         private List<TypeOfMethod> GetAllCheckedMethods(Dictionary<TypeOfMethod, CheckBox> methods)
@@ -161,14 +165,50 @@ namespace FormulaObfuscator.Views
             return result;
         }
 
-        private void ButtonUpload_Clicked(object sender, RoutedEventArgs e)
+        private void ButtonExport_Clicked(object sender, RoutedEventArgs e)
         {
+            var saveDialog = new SaveFileDialog
+            {
+                FileName = $"Configuration {DateTime.Now:dd-MM-yyyy HH_mm}",
+                Filter = "Json Files|*.json",
+                FilterIndex = 2,
+                RestoreDirectory = true
+            };
 
+            if (saveDialog.ShowDialog() == true)
+            {
+                var serializerOptions = new JsonSerializerOptions();
+                serializerOptions.WriteIndented = true;
+                Settings tmpSettings = new Settings();
+                GetConfigurationFromUI(tmpSettings);
+                var serializedSettings = JsonSerializer.Serialize<Settings>(tmpSettings, serializerOptions);
+                File.WriteAllText(saveDialog.FileName, serializedSettings.ToString());
+            }
         }
 
-        private void ButtonSaveAs_Clicked(object sender, RoutedEventArgs e)
+        private void ButtonUpload_Clicked(object sender, RoutedEventArgs e)
         {
+            var openDialog = new OpenFileDialog
+            {
+                Filter = "Json Files|*.json",
+                FilterIndex = 2,
+                RestoreDirectory = true
+            };
 
+            if (openDialog.ShowDialog() == true)
+            {
+                using (StreamReader r = new StreamReader(openDialog.FileName))
+                {
+                    string json = r.ReadToEnd();
+                    var uploadedSettings = JsonSerializer.Deserialize<Settings>(json);
+                    InitialFields(uploadedSettings);
+                }
+            }
+        }
+
+        private void ButtonReset_Clicked(object sender, RoutedEventArgs e)
+        {
+            InitialFields(new Settings());
         }
     }
 }
