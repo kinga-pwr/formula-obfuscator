@@ -10,7 +10,7 @@ namespace FormulaObfuscator.BLL.Helpers
     public static class Walker
     {
         static List<string> TAGS_WITH_VALUES = new List<string>{ MathMLTags.Identifier, MathMLTags.Operator, MathMLTags.Number };
-        static TypeOfOperation OPERATIONS_WITH_EXTRA_BRACKETS = TypeOfOperation.MultiplyByOne;
+        static List<TypeOfOperation> OPERATIONS_WITH_EXTRA_BRACKETS = new List<TypeOfOperation>{ TypeOfOperation.MultiplyByOne, TypeOfOperation.MinusZero };
 
         public static XElement WalkWithAlgorithmForVariables(XElement node, XElement copyTree)
         {   
@@ -36,14 +36,15 @@ namespace FormulaObfuscator.BLL.Helpers
                     if (operation != TypeOfOperation.DivideByOne)
                     {
                         var obfuscated = Obfuscate(operation);
+                        var isOperationWithExtraBrackets = OPERATIONS_WITH_EXTRA_BRACKETS.Contains(operation);
 
-                        if (operation != OPERATIONS_WITH_EXTRA_BRACKETS)
+                        if (!isOperationWithExtraBrackets)
                             obfuscated.Elements().ElementAt(1).Remove();
 
                         obfuscated.AddFirst(copy);
                         obfuscated.AddFirst(new XElement(MathMLTags.Operator, "("));
 
-                        if (operation == OPERATIONS_WITH_EXTRA_BRACKETS)
+                        if (isOperationWithExtraBrackets)
                             obfuscated.Add(new XElement(MathMLTags.Operator, ")"));
 
                         copyTree.Elements().Last().Remove();
