@@ -6,6 +6,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -209,6 +210,25 @@ namespace FormulaObfuscator.Views
         private void ButtonReset_Clicked(object sender, RoutedEventArgs e)
         {
             InitialFields(new Settings());
+        }
+
+        private void ValidateAll(object sender, RoutedEventArgs e)
+        {
+            var isValid = BindingOperations.GetBindingExpression(TextBoxLetters, TextBox.TextProperty).ValidateWithoutUpdate()
+                && BindingOperations.GetBindingExpression(TextBoxGreekLetters, TextBox.TextProperty).ValidateWithoutUpdate()
+                && !AreAllCheckboxesUnchecked(ComplexMethods)
+                && !AreAllCheckboxesUnchecked(SimpleMethods)
+                && !AreAllCheckboxesUnchecked(SamplesMethods)
+                && !AreAllCheckboxesUnchecked(EqualOneMethods.Values.ToList())
+                && !AreAllCheckboxesUnchecked(EqualZeroMethods.Values.ToList());
+
+            SaveButton.IsEnabled = isValid;
+            ExportButton.IsEnabled = isValid;
+        }
+
+        private bool AreAllCheckboxesUnchecked(List<CheckBox> checkBoxes)
+        {
+            return checkBoxes.TrueForAll(cb => !((bool)cb.IsChecked));
         }
     }
 }
