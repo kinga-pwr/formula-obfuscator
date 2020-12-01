@@ -32,12 +32,15 @@ namespace FormulaObfuscator.Views
         private Dictionary<TypeOfMethod, CheckBox> EqualOneMethods = new Dictionary<TypeOfMethod, CheckBox> { };
         private Dictionary<TypeOfMethod, CheckBox> EqualZeroMethods = new Dictionary<TypeOfMethod, CheckBox> { };
         private List<CheckBox> SamplesMethods = new List<CheckBox> { };
+        private Brush DefaultValue;
 
         public SettingsWindow(Settings settings)
         {
             Settings = settings;
 
             InitializeComponent();
+
+            DefaultValue = ComplexLabel.Foreground;
 
             MakeCheckBoxGroups();
 
@@ -214,21 +217,34 @@ namespace FormulaObfuscator.Views
 
         private void ValidateAll(object sender, RoutedEventArgs e)
         {
-            var isValid = BindingOperations.GetBindingExpression(TextBoxLetters, TextBox.TextProperty).ValidateWithoutUpdate()
-                && BindingOperations.GetBindingExpression(TextBoxGreekLetters, TextBox.TextProperty).ValidateWithoutUpdate()
-                && !AreAllCheckboxesUnchecked(ComplexMethods)
-                && !AreAllCheckboxesUnchecked(SimpleMethods)
-                && !AreAllCheckboxesUnchecked(SamplesMethods)
-                && !AreAllCheckboxesUnchecked(EqualOneMethods.Values.ToList())
-                && !AreAllCheckboxesUnchecked(EqualZeroMethods.Values.ToList());
+            var areComplexValid = !AreAllCheckboxesUnchecked(ComplexMethods, ComplexLabel);
+            var areSimpleValid = !AreAllCheckboxesUnchecked(SimpleMethods, SimpleLabel);
+            var areSamplesValid = !AreAllCheckboxesUnchecked(SamplesMethods, SamplesLabel);
+            var areEqualsOneValid = !AreAllCheckboxesUnchecked(EqualOneMethods.Values.ToList(), EqualsOneLabel);
+            var areEqualsZeroValid = !AreAllCheckboxesUnchecked(EqualZeroMethods.Values.ToList(), EqualsZeroLabel);
 
-            SaveButton.IsEnabled = isValid;
-            ExportButton.IsEnabled = isValid;
+            var areAllValid = BindingOperations.GetBindingExpression(TextBoxLetters, TextBox.TextProperty).ValidateWithoutUpdate()
+                && BindingOperations.GetBindingExpression(TextBoxGreekLetters, TextBox.TextProperty).ValidateWithoutUpdate()
+                && areComplexValid
+                && areSimpleValid
+                && areSamplesValid
+                && areEqualsOneValid
+                && areEqualsZeroValid;
+
+            SaveButton.IsEnabled = areAllValid;
+            ExportButton.IsEnabled = areAllValid;
         }
 
-        private bool AreAllCheckboxesUnchecked(List<CheckBox> checkBoxes)
+        private bool AreAllCheckboxesUnchecked(List<CheckBox> checkBoxes, Label label)
         {
-            return checkBoxes.TrueForAll(cb => !((bool)cb.IsChecked));
+            var isValid = checkBoxes.TrueForAll(cb => !((bool)cb.IsChecked));
+
+            if (isValid)
+                label.Foreground = Brushes.Red;
+            else
+                label.Foreground = DefaultValue;
+
+            return isValid;
         }
     }
 }

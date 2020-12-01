@@ -91,7 +91,7 @@
             </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,10,30,0" HorizontalAlignment="Center">
             <StackPanel>
-                <Label Content="Choose methods for equals one generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
+                    <Label x:Name="EqualsOneLabel" Content="Choose methods for equals one generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
                     <CheckBox x:Name="CBEqualsOnePolynomial" Content="Polynomial" Margin="25,0,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
                     <CheckBox x:Name="CBEqualsOneFraction" Content="Fraction" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
                     <CheckBox x:Name="CBEqualsOneTrigonometry" Content="Trigonometry" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
@@ -100,7 +100,7 @@
                     <CheckBox x:Name="CBEqualsOneEquation" Content="Equation" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
             </StackPanel>
             <StackPanel Margin="100,0,0,0">
-                <Label Content="Choose methods for equals zero generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
+                <Label x:Name="EqualsZeroLabel" Content="Choose methods for equals zero generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
                     <CheckBox x:Name="CBEqualsZeroPolynomial" Content="Polynomial" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
                     <CheckBox x:Name="CBEqualsZeroFraction" Content="Fraction" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
                     <CheckBox x:Name="CBEqualsZeroTrigonometry" Content="Trigonometry" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
@@ -112,7 +112,7 @@
         <Label Content="Test Generator Settings"   FontWeight="Bold" FontSize="20" FontStyle="Italic"/>
         <StackPanel Orientation="Horizontal" Margin="0,10,0,20" HorizontalAlignment="Center">
             <StackPanel Margin="20,0,0,0">
-                <Label Content="Choose methods for samples generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34" />
+                    <Label x:Name="SamplesLabel" Content="Choose methods for samples generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34" />
                     <CheckBox x:Name="CBSamplesDetSumPi" Content="DetSumPi" Margin="25,0,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
                     <CheckBox x:Name="CBSamplesFi" Content="Fi" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
                     <CheckBox x:Name="CBSamplesFuncBracket" Content="FuncBracket" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
@@ -122,13 +122,13 @@
                     <CheckBox x:Name="CBSamplesSum" Content="Sum" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
             </StackPanel>
             <StackPanel Margin="20,0,0,0">
-                <Label Content="Choose methods for simple generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
+                    <Label x:Name="SimpleLabel" Content="Choose methods for simple generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
                     <CheckBox x:Name="CBSimpleFraction" Content="Fraction" Margin="25,0,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
                     <CheckBox x:Name="CBSimplePower" Content="Power" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
                     <CheckBox x:Name="CBSimpleRoot" Content="Root" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
             </StackPanel>
             <StackPanel Margin="20,0,0,0">
-                <Label Content="Choose methods for complex generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
+                    <Label x:Name="ComplexLabel" Content="Choose methods for complex generator: " HorizontalAlignment="Left" Margin="0,5,0,5" VerticalAlignment="Center" Height="34"/>
                     <CheckBox x:Name="CBComplexFraction" Content="Fraction" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
                     <CheckBox x:Name="CBComplexRoot" Content="Root" Margin="25,3,0,0" Checked="ValidateAll" Unchecked="ValidateAll"/>
             </StackPanel>
