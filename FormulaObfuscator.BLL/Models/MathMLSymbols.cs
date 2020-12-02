@@ -2,10 +2,10 @@
 {
     public static class MathMLSymbols
     {
-        public static string Multiply => "&sdot;";
-        public static string Integral => "&int;";
+        public static string Multiply => "⋅";
+        public static string Integral => "∫";
 
-        public static string GreaterThan => "&gt;";
+        public static string GreaterThan => "≤";
 
         public static string Epsilon => "∑";
 

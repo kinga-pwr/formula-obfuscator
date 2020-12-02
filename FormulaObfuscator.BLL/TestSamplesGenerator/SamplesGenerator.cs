@@ -47,11 +47,12 @@ namespace FormulaObfuscator.BLL.TestGenerator
         public string DrawSample(Settings settings)
         {
             ApplySettings(settings);
+            int index = Randoms.Int(0, testSamples.Count - 1);
 
-            string result = @"<math display=""block""
-                            xmlns=""http://www.w3.org/1998/Math/MathML"">";
-            result += testSamples[Randoms.Int(0, testSamples.Count - 1)].Generate();
-            result += "</math>";
+            string result = @"<html><math display=""block"" xmlns=""http://www.w3.org/1998/Math/MathML"">";
+            result += testSamples[index].Generate();
+            System.Console.WriteLine(testSamples[index].ToString());
+            result += "</math></html>";
             return result;
         }
 
