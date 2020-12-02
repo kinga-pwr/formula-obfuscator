@@ -153,7 +153,7 @@ namespace FormulaObfuscator.BLL.Generators
                 (Trigonometry.sin, "+", Trigonometry.cos, 2),
                 (Trigonometry.tg, MathMLSymbols.Multiply, Trigonometry.ctg, 1)
             };
-            var option = options[Randoms.Int(0, 1)];
+            var option = options[Randoms.Int(0, 2)];
             XElement element = new XElement(MathMLTags.Row);
             var part1 = MathMLStructures.Trigonometric(option.Item1, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(0, 2)), option.Item4);
             var part2 = MathMLStructures.Trigonometric(option.Item3, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(0, 2)), option.Item4);
