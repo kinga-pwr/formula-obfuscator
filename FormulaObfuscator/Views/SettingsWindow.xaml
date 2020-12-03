@@ -4,28 +4,36 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                  xmlns:validationrules="clr-namespace:FormulaObfuscator.Helpers"
+                  xmlns:validationrules="clr-namespace:FormulaObfuscator.Helpers" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                   mc:Ignorable="d"
                   Title="Settings"
                   WindowState="Normal"
                   Height="650"
-                  MaxHeight="925"
+                  MaxHeight="940"
                   MinHeight="300"
                   Width="800"
                   MaxWidth="800"
                   MinWidth="790">
     <ScrollViewer>
         <StackPanel Margin="30,10,30,0">
-            <StackPanel Orientation="Horizontal"
+            <StackPanel Orientation="Horizontal" 
                         Height="50">
                 <Label Content="Common Settings"
                        FontWeight="Bold"
                        FontSize="20"
-                       FontStyle="Italic" />
-                <Button Content="Reset to default"
-                        Margin="430,0,5,0"
+                       FontStyle="Italic"/>
+                <Button
+                        Margin="420,0,0,0"
+                    Padding="10 0 10 0"
                         Click="ButtonReset_Clicked"
-                        Height="30" />
+                        Height="35">
+                    <StackPanel Orientation="Horizontal" Height="25">
+                        <Label Content="Reset to default"/>
+                        <iconPacks:PackIconFontAwesome Kind="UndoSolid"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center" Margin="3 0 0 0" />
+                    </StackPanel>
+                </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         Height="50">
@@ -357,20 +365,46 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
-                        Height="35"
+                        Height="55"
                         HorizontalAlignment="Right"
                         Margin="0,0,0,20">
-                <Button Content="Upload"
+                <Button
+                        Width="80"
                         Margin="0,0,5,0"
-                        Click="ButtonUpload_Clicked" />
+                        Padding="0 5 0 0"
+                        Click="ButtonUpload_Clicked" >
+                    <StackPanel>
+                        <iconPacks:PackIconFontAwesome Kind="FileImportSolid"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center" />
+                        <Label Content="IMPORT" />
+                    </StackPanel>
+                </Button>
                 <Button x:Name="ExportButton"
-                        Content="Export"
+                        Width="80"
                         Margin="0,0,5,0"
-                        Click="ButtonExport_Clicked" />
+                        Padding="0 5 0 0"
+                        Click="ButtonExport_Clicked">
+                    <StackPanel>
+                        <iconPacks:PackIconFontAwesome Kind="FileExportSolid"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center" />
+                        <Label Content="EXPORT" />
+                    </StackPanel>
+                </Button>
                 <Button x:Name="SaveButton"
-                        Content="Save"
+                        Width="80"
                         Margin="0,0,10,0"
-                        Click="ButtonSave_Clicked" />
+                        Padding="0 5 0 0"
+                        Click="ButtonSave_Clicked">
+                    <StackPanel>
+                        <iconPacks:PackIconFontAwesome Kind="SaveSolid"
+                                                    Foreground="GreenYellow"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center" />
+                        <Label Content="SAVE" />
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
