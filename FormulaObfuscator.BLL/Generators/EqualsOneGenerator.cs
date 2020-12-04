@@ -52,10 +52,14 @@ namespace FormulaObfuscator.BLL.Generators
         {
             Randoms.RecursionDepth--;
 
-            var CONST_TO_ADD = 1;
+            // format: const + (equals 0) - (const-1)
+            // example 3+2x-1x-1x-2
+            var CONST_TO_ADD = Randoms.Int(2, 100);
             var formulaNode = new EqualsZeroGenerator().Generate(TypeOfMethod.Polynomial);
-            formulaNode.Add(new XElement(MathMLTags.Operator, "+"));
-            formulaNode.Add(new XElement(MathMLTags.Number, CONST_TO_ADD));
+            formulaNode.AddFirst(new XElement(MathMLTags.Operator, "+"));
+            formulaNode.AddFirst(new XElement(MathMLTags.Number, CONST_TO_ADD));
+            formulaNode.Add(new XElement(MathMLTags.Operator, "-"));
+            formulaNode.Add(new XElement(MathMLTags.Number, CONST_TO_ADD-1));
 
             return formulaNode;
         }

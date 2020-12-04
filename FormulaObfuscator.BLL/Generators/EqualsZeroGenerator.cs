@@ -53,6 +53,8 @@ namespace FormulaObfuscator.BLL.Generators
             var MAX_COUNT_OF_GEN_FORMULA = 3;
             var MAX_CONST_VALUE = 20;
 
+            var elementsCollection = new List<List<XElement>>();
+
             // a : {2: 6, 6: -2 } == 6a^2 - 2a^6
             // <varName> : {<power>: <const>, <power2>: <const>}
             var logs = new Dictionary<char, Dictionary<int, int>>();
@@ -79,12 +81,21 @@ namespace FormulaObfuscator.BLL.Generators
 
                 //formula += (currConst >= 0 ? "+" : "") + currConst + currVarName + "^" + currPower;
                 if (!isFirst)
-                    formulaRoot.Add(new XElement(MathMLTags.Operator, currConst >= 0 ? "+" : "-"));
+                {
+                    var piecesContainer = new List<XElement>
+                    {
+                        new XElement(MathMLTags.Operator, currConst >= 0 ? "+" : "-"),
+                        new XElement(MathMLTags.Number, Math.Abs(currConst)),
+                        MathMLStructures.Power(currPower, new XElement(MathMLTags.Identifier, currVarName))
+                    };
+                    elementsCollection.Add(piecesContainer);
+                }
                 else
+                {
                     isFirst = false;
-
-                formulaRoot.Add(new XElement(MathMLTags.Number, Math.Abs(currConst)));
-                formulaRoot.Add(MathMLStructures.Power(currPower, new XElement(MathMLTags.Identifier, currVarName)));
+                    formulaRoot.Add(new XElement(MathMLTags.Number, Math.Abs(currConst)));
+                    formulaRoot.Add(MathMLStructures.Power(currPower, new XElement(MathMLTags.Identifier, currVarName)));
+                }
 
                 var varHistory = logs[currVarName];
 
@@ -102,10 +113,38 @@ namespace FormulaObfuscator.BLL.Generators
                 foreach (int power in powerHistory.Keys)
                 {
                     var currConst = powerHistory[power] * -1;
-                    //formula += (currConst >= 0 ? "+" : "") + currConst + variable + "^" + power;
-                    formulaRoot.Add(new XElement(MathMLTags.Operator, currConst >= 0 ? "+" : "-"));
-                    formulaRoot.Add(new XElement(MathMLTags.Number, Math.Abs(currConst)));
-                    formulaRoot.Add(MathMLStructures.Power(power, new XElement(MathMLTags.Identifier, variable)));
+
+                    // original const is split into two parts
+                    // example equation: 4x-1x-3x instead of: 4x-4x
+                    var constPart1 = currConst / 3;
+                    var constPart2 = currConst - constPart1;
+
+                    var piecesContainer = new List<XElement>
+                    {
+                        //formula += (currConst >= 0 ? "+" : "") + currConst + variable + "^" + power;
+                        new XElement(MathMLTags.Operator, constPart1 >= 0 ? "+" : "-"),
+                        new XElement(MathMLTags.Number, Math.Abs(constPart1)),
+                        MathMLStructures.Power(power, new XElement(MathMLTags.Identifier, variable))
+                    };
+                    elementsCollection.Add(piecesContainer);
+
+                    piecesContainer = new List<XElement>
+                    {
+                        //formula += (currConst >= 0 ? "+" : "") + currConst + variable + "^" + power;
+                        new XElement(MathMLTags.Operator, constPart2 >= 0 ? "+" : "-"),
+                        new XElement(MathMLTags.Number, Math.Abs(constPart2)),
+                        MathMLStructures.Power(power, new XElement(MathMLTags.Identifier, variable))
+                    };
+                    elementsCollection.Add(piecesContainer);
+                }
+            }
+
+            // shuffle order of elements
+            foreach(var element in elementsCollection.OrderBy(e => Guid.NewGuid()))
+            {
+                foreach(var elementPart in element)
+                {
+                    formulaRoot.Add(elementPart);
                 }
             }
 
