@@ -4,6 +4,8 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using FormulaObfuscator.BLL.Deobfuscators;
+using FormulaObfuscator.BLL.Deobfuscators.StructurePatterns;
 
 namespace FormulaObfuscator.BLL.Helpers
 {
@@ -337,7 +339,28 @@ namespace FormulaObfuscator.BLL.Helpers
             }          
         }
 
-        public static XElement SubstituteObfuscatedTrees(XElement node, string value, Queue<XElement> outputTrees)
+        public static XElement WalkWithAlgorithmForDeobfuscation(XElement element)
+        {
+            int i = 0;
+            while (i < element.Elements().Count())
+            {
+                WalkWithAlgorithmForDeobfuscation(element.Elements().ElementAt(i));
+                foreach (var deobfuscationPattern in DeobfuscationManager.AvailableStructurePatterns)
+                {
+                    var isObfuscatingElem = deobfuscationPattern.DetectObfuscation(element.Elements().ElementAt(i));
+                    if (isObfuscatingElem)
+                    {
+                        var deobfuscatedElem = deobfuscationPattern.RemoveObfuscation(element.Elements().ElementAt(i));
+                        element.Elements().ElementAt(i).ReplaceWith(deobfuscatedElem);
+                        continue;
+                    }
+                }
+                i++;
+            }
+            return element;
+        }
+
+        public static XElement SubstituteModifiedTrees(XElement node, string value, Queue<XElement> outputTrees)
         {
             if (node.Name.ToString().Contains(value))
             {
@@ -347,10 +370,10 @@ namespace FormulaObfuscator.BLL.Helpers
             {
                 foreach (XElement child in node.Elements())
                 {
-                    SubstituteObfuscatedTrees(child, value, outputTrees);
+                    SubstituteModifiedTrees(child, value, outputTrees);
                 }
             }
             return node;
-        }
+        } 
     }
 }

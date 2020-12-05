@@ -20,10 +20,10 @@ namespace FormulaObfuscator.BLL.Helpers
             Walker.FindTrees(tree, MATHML_TAG, outputTrees);
         }
 
-        public string SubstituteObfuscatedMathMLTree(Queue<XElement> obfuscatedTrees)
+        public string SubstituteModifiedMathMLTree(Queue<XElement> obfuscatedTrees)
         {
             var tree = XElement.Parse(Text);
-            Walker.SubstituteObfuscatedTrees(tree, MATHML_TAG, obfuscatedTrees);
+            Walker.SubstituteModifiedTrees(tree, MATHML_TAG, obfuscatedTrees);
             return tree.ToString().Replace("&amp;", "&");
         }
     }

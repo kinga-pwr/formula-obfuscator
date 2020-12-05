@@ -47,7 +47,7 @@
                Grid.Row="0"
                Margin="0 0 10 0"
                    Padding="0 5 0 0"
-               Content="INPUT:"
+               Content="PLAIN:"
                    FontWeight="Bold"
                    VerticalAlignment="Center"/>
 
@@ -191,33 +191,57 @@
         </StackPanel>
 
         <!-- ACTION -->
-        <Button Grid.Column="1"
+        <StackPanel Grid.Column="1"
                 Grid.Row="0"
                 Grid.RowSpan="3"
+                VerticalAlignment="Center">
+            <Button
                 Command="{Binding ObfuscateCommand}"
-                Height="80"
-                Width="80"
-                Margin="20,0,20,0"
+                Height="85"
+                Width="85"
+                Margin="20,0,20,20"
                 HorizontalAlignment="Left">
-            <StackPanel>
-                <iconPacks:PackIconMaterial Kind="FileLock"
+                <StackPanel>
+                    <iconPacks:PackIconMaterial Kind="FileLock"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Center"
                                             Height="30"
                                             Width="30" />
-                <iconPacks:PackIconMaterial Kind="ArrowRightThick"
+                    <iconPacks:PackIconMaterial Kind="ArrowRightThick"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Center"
-                                            Foreground="CadetBlue"
+                                            Foreground="PaleVioletRed"
                                             Margin="30,-8,0,0" />
-                <Label Content="Obfuscate" />
-            </StackPanel>
-        </Button>
+                    <Label Content="Obfuscate" />
+                </StackPanel>
+            </Button>
+            <Button
+                Command="{Binding DeobfuscateCommand}"
+                Height="85"
+                Width="85"
+                Margin="20,0,20,0"
+                HorizontalAlignment="Left">
+                <StackPanel>
+                    <iconPacks:PackIconMaterial Kind="FileKey"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            Height="30"
+                                            Width="30" />
+                    <iconPacks:PackIconMaterial Kind="ArrowLeftThick"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            Foreground="LimeGreen"
+                                            Margin="-30,-8,0,0" />
+                    <Label Content="Deobfuscate" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        
 
         <!-- OUTPUT -->
         <Label Grid.Column="2"
                Grid.Row="0"
-               Content="OUTPUT:"
+               Content="OBFUSCATED:"
                FontWeight="Bold"
                VerticalAlignment="Center"/>
 

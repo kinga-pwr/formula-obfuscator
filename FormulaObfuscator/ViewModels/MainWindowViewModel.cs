@@ -19,6 +19,7 @@ namespace FormulaObfuscator.ViewModels
 
         public DelegateCommand UploadCommand { get; set; }
         public DelegateCommand ObfuscateCommand { get; set; }
+        public DelegateCommand DeobfuscateCommand { get; set; }
         public DelegateCommand InputDownloadCommand { get; set; }
         public DelegateCommand OutputDownloadCommand { get; set; }
         public ParameterCommand<int> LoadSampleCommand { get; set; }
@@ -53,6 +54,7 @@ namespace FormulaObfuscator.ViewModels
         {
             UploadCommand = new DelegateCommand(() => UploadFile());
             ObfuscateCommand = new DelegateCommand(() => Obfuscate());
+            DeobfuscateCommand = new DelegateCommand(() => Deobfuscate());
             InputDownloadCommand = new DelegateCommand(() => DownloadCode(Input, "Obfustactor input"));
             OutputDownloadCommand = new DelegateCommand(() => DownloadCode(Output, "Obfuscated result"));
             LoadSampleCommand = new ParameterCommand<int>((sampleId) => LoadSample(sampleId));
@@ -121,7 +123,7 @@ namespace FormulaObfuscator.ViewModels
             catch
             {
                 await progressController.CloseAsync();
-                await _dialogCoordinator.ShowMessageAsync(this, "Error", "Error occured, please try again");
+                await _dialogCoordinator.ShowMessageAsync(this, "Error", "Error occured!");
             }
         }
 
@@ -138,6 +140,44 @@ namespace FormulaObfuscator.ViewModels
                 {
                     Output = string.Empty;
                     await _dialogCoordinator.ShowMessageAsync(this, "Error", resultHolder.ErrorMsg, 
+                        settings: new MetroDialogSettings()
+                        {
+                            ColorScheme = MetroDialogColorScheme.Accented
+                        });
+                }
+            });
+        }
+
+        private async void Deobfuscate()
+        {
+            var progressController = await _dialogCoordinator.ShowProgressAsync(this, "Deobfuscating", "Deobfuscating data...");
+
+            progressController.SetIndeterminate();
+
+            try
+            {
+                await DeobfuscateData();
+                await progressController.CloseAsync();
+            }
+            catch
+            {
+                await progressController.CloseAsync();
+                await _dialogCoordinator.ShowMessageAsync(this, "Error", "Error occured!");
+            }
+        }
+
+        private async Task DeobfuscateData()
+        {
+            await Task.Run(async () =>
+            {
+                var resultHolder = new ObfuscatorManager(Output).RunDeobfuscate();
+
+                if (resultHolder.WasSuccessful)
+                    Input = resultHolder.Value;
+                else
+                {
+                    Input = string.Empty;
+                    await _dialogCoordinator.ShowMessageAsync(this, "Error", resultHolder.ErrorMsg,
                         settings: new MetroDialogSettings()
                         {
                             ColorScheme = MetroDialogColorScheme.Accented

@@ -51,7 +51,7 @@ namespace FormulaObfuscator.BLL
                 }
             }
 
-            return Holder.Success(reader.SubstituteObfuscatedMathMLTree(new Queue<XElement>(obfuscated)));
+            return Holder.Success(reader.SubstituteModifiedMathMLTree(new Queue<XElement>(obfuscated)));
         }
 
         private static XElement Obfuscate(XElement node, ObfuscateLevel level)
@@ -63,6 +63,37 @@ namespace FormulaObfuscator.BLL
                 ObfuscateLevel.Variables => Walker.WalkWithAlgorithmForRootVariables(node),
                 _ => node,
             };
+        }
+
+        public Holder RunDeobfuscate()
+        {
+            var reader = new HTMLReader(UploadedText);
+            var mathmlTrees = new List<XElement>();
+            var deobfuscated = new List<XElement>();
+
+            try
+            {
+                reader.ConvertToMathMLTree(mathmlTrees);
+            }
+            catch
+            {
+                return Holder.Fail(ErrorMsgs.CONVERT_FAILED_MSG);
+            }
+
+            if (mathmlTrees.Any())
+            {
+                foreach (var tree in mathmlTrees)
+                {
+                    deobfuscated.Add(Deobfuscate(tree));
+                }
+            }
+
+            return Holder.Success(reader.SubstituteModifiedMathMLTree(new Queue<XElement>(deobfuscated)));
+        }
+
+        private static XElement Deobfuscate(XElement node)
+        {
+            return Walker.WalkWithAlgorithmForDeobfuscation(node);
         }
     }
 }
