@@ -40,6 +40,25 @@ namespace FormulaObfuscator.BLL
 
             if (mathmlTrees.Any())
             {
+                var retryAtteptms = 3;
+
+                while (retryAtteptms > 0)
+                {
+                    if (TryObfusctate(mathmlTrees, obfuscated))
+                    {
+                        return Holder.Success(reader.SubstituteModifiedMathMLTree(new Queue<XElement>(obfuscated)));
+                    }
+                    retryAtteptms--;
+                }
+            }
+
+            return Holder.Fail(ErrorMsgs.OBFUSCATION_FAILED_MSG);
+        }
+
+        private static bool TryObfusctate(List<XElement> mathmlTrees, List<XElement> obfuscated)
+        {
+            try
+            {
                 foreach (var tree in mathmlTrees)
                 {
                     var obfuscateCount = Settings.CurrentSettings.ObfucateCount;
@@ -49,9 +68,12 @@ namespace FormulaObfuscator.BLL
                         obfuscateCount--;
                     }
                 }
+                return true;
             }
-
-            return Holder.Success(reader.SubstituteModifiedMathMLTree(new Queue<XElement>(obfuscated)));
+            catch
+            {
+                return false;
+            }
         }
 
         private static XElement Obfuscate(XElement node, ObfuscateLevel level)

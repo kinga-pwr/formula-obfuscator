@@ -17,7 +17,8 @@ namespace FormulaObfuscator.ViewModels
         private const string DefaultInputFile = "Input.html";
         private readonly IDialogCoordinator _dialogCoordinator;
 
-        public DelegateCommand UploadCommand { get; set; }
+        public DelegateCommand InputUploadCommand { get; set; }
+        public DelegateCommand OutputUploadCommand { get; set; }
         public DelegateCommand ObfuscateCommand { get; set; }
         public DelegateCommand DeobfuscateCommand { get; set; }
         public DelegateCommand InputDownloadCommand { get; set; }
@@ -52,11 +53,12 @@ namespace FormulaObfuscator.ViewModels
 
         public MainWindowViewModel(IDialogCoordinator dialogCoordinator)
         {
-            UploadCommand = new DelegateCommand(() => UploadFile());
+            InputUploadCommand = new DelegateCommand(() => UploadFile(true));
+            OutputUploadCommand = new DelegateCommand(() => UploadFile(false));
             ObfuscateCommand = new DelegateCommand(() => Obfuscate());
             DeobfuscateCommand = new DelegateCommand(() => Deobfuscate());
-            InputDownloadCommand = new DelegateCommand(() => DownloadCode(Input, "Obfustactor input"));
-            OutputDownloadCommand = new DelegateCommand(() => DownloadCode(Output, "Obfuscated result"));
+            InputDownloadCommand = new DelegateCommand(() => DownloadCode(Input, "Plain html"));
+            OutputDownloadCommand = new DelegateCommand(() => DownloadCode(Output, "Obfuscated html"));
             LoadSampleCommand = new ParameterCommand<int>((sampleId) => LoadSample(sampleId));
             GenerateSampleCommand = new DelegateCommand(() => GenerateSample());
             OpenSettingsCommand = new DelegateCommand(() => OpenSettings());
@@ -95,7 +97,7 @@ namespace FormulaObfuscator.ViewModels
             }
         }
 
-        private void UploadFile()
+        private void UploadFile(bool isInput)
         {
             var openDialog = new OpenFileDialog
             {
@@ -105,7 +107,8 @@ namespace FormulaObfuscator.ViewModels
             };
             if (openDialog.ShowDialog() == true)
             {
-                Input = File.ReadAllText(openDialog.FileName);
+                if (isInput) Input = File.ReadAllText(openDialog.FileName);
+                else Output = File.ReadAllText(openDialog.FileName);
             }
         }
 
@@ -115,16 +118,8 @@ namespace FormulaObfuscator.ViewModels
 
             progressController.SetIndeterminate();
 
-            try
-            {
-                await ObfuscateData();
-                await progressController.CloseAsync();
-            }
-            catch
-            {
-                await progressController.CloseAsync();
-                await _dialogCoordinator.ShowMessageAsync(this, "Error", "Error occured!");
-            }
+            await ObfuscateData();
+            await progressController.CloseAsync();
         }
 
 
