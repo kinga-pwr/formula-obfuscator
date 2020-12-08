@@ -49,25 +49,29 @@ namespace FormulaObfuscator.BLL.TestGenerator
             ApplySettings(settings);
             int index = Randoms.Int(0, testSamples.Count - 1);
 
-            string result = @"<html><math display=""block"" xmlns=""http://www.w3.org/1998/Math/MathML"">";
-            result += testSamples[index].Generate();
+            string mathML = @"<html><math display=""block"" xmlns=""http://www.w3.org/1998/Math/MathML"">";
+            mathML += testSamples[index].Generate();
             System.Console.WriteLine(testSamples[index].ToString());
-            result += "</math></html>";
-            return result;
+            mathML += "</math></html>";
+
+            XDocument result = XDocument.Parse(mathML);
+            return result.ToString();
         }
 
         public string DrawMany(int n)
         {
-            string result = @"<math display=""block""
+            string mathML = @"<html><math display=""block""
                             xmlns=""http://www.w3.org/1998/Math/MathML"">";
             for (int i = 0; i < n; i++)
             {
-                result += testSamples[Randoms.Int(0, testSamples.Count - 1)].Generate();
+                mathML += testSamples[Randoms.Int(0, testSamples.Count - 1)].Generate();
                 if (i != n - 1)
-                    result += new XElement(MathMLTags.Operator, Randoms.Operator().ToString());
+                    mathML += new XElement(MathMLTags.Operator, Randoms.Operator().ToString());
             }
-            result += "</math>";
-            return result;
+            mathML += "</math></html>";
+
+            XDocument result = XDocument.Parse(mathML);
+            return result.ToString();
         }
     }
 }
