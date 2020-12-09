@@ -215,26 +215,7 @@
                     <Label Content="Obfuscate" />
                 </StackPanel>
             </Button>
-            <Button
-                Command="{Binding DeobfuscateCommand}"
-                Height="85"
-                Width="85"
-                Margin="20,0,20,0"
-                HorizontalAlignment="Left">
-                <StackPanel>
-                    <iconPacks:PackIconMaterial Kind="FileKey"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Center"
-                                            Height="30"
-                                            Width="30" />
-                    <iconPacks:PackIconMaterial Kind="ArrowLeftThick"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Center"
-                                            Foreground="LimeGreen"
-                                            Margin="-30,-8,0,0" />
-                    <Label Content="Deobfuscate" />
-                </StackPanel>
-            </Button>
+            
         </StackPanel>
         
 
