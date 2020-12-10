@@ -119,7 +119,6 @@ namespace FormulaObfuscator.Views
 
         private void ButtonSave_Clicked(object sender, RoutedEventArgs e)
         {
-            // TODO validation
             GetConfigurationFromUI(Settings);
 
             this.Close();
@@ -130,6 +129,7 @@ namespace FormulaObfuscator.Views
             toStore.RecursionDepth = (int)UpDownRecursionDepth.Value;
             toStore.ObfuscateLevel = (ObfuscateLevel)DropDownButtonObfuscatedLevels.SelectedIndex;
             toStore.ObfucateCount = (int)UpDownTreeWalks.Value;
+            toStore.ObfucateProbability = (int)UpDownProbability.Value;
             toStore.Letters = TextBoxLetters.Text;
             toStore.GreekLetters = TextBoxGreekLetters.Text;
             toStore.MinNumber = (int)UpDownMin.Value;

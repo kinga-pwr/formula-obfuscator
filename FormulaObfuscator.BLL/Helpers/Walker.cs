@@ -99,7 +99,7 @@ namespace FormulaObfuscator.BLL.Helpers
                 var node = root.FirstNode;
                 var last = root.LastNode;
 
-                if (ifContainsEqualities(root.Value))
+                if (IfContainsEqualities(root.Value))
                 {
                     XElement equalifier = null;
                     FindTreeWithEqualities(root, ref equalifier); // find equalifier
@@ -173,7 +173,7 @@ namespace FormulaObfuscator.BLL.Helpers
 
         private static XElement ObfuscateRootWithDivide(XElement root, TypeOfOperation operation)
         {
-            if (ifContainsEqualities(root.Value))
+            if (IfContainsEqualities(root.Value))
             {
                 var leftSide = new List<XElement>();
                 var rightSide = new List<XElement>();
@@ -184,7 +184,7 @@ namespace FormulaObfuscator.BLL.Helpers
 
                 foreach (XElement child in childrens)
                 {
-                    if (child.Name.ToString().Contains(MathMLTags.Operator) && ifContainsEqualities(child.Value))
+                    if (child.Name.ToString().Contains(MathMLTags.Operator) && IfContainsEqualities(child.Value))
                     {
                         isRightSide = true;
                         continue;
@@ -219,17 +219,19 @@ namespace FormulaObfuscator.BLL.Helpers
         {
             var fraction = new XElement(MathMLTags.Fraction);
             var nominator = new XElement(MathMLTags.Row);
+            var formula = new XElement(MathMLTags.Row);
 
-            nominator.Add(new XElement(MathMLTags.Operator, "("));
-            nominator.Add(elements);
-            nominator.Add(new XElement(MathMLTags.Operator, ")"));
+            formula.Add(new XElement(MathMLTags.Operator, "("));
+            nominator.Add(elements);            
             fraction.Add(nominator);
             fraction.Add(Obfuscate(operation));
+            formula.Add(fraction);
+            formula.Add(new XElement(MathMLTags.Operator, ")"));
 
-            return fraction;
+            return formula;
         }
 
-        private static bool ifContainsEqualities(string value)
+        private static bool IfContainsEqualities(string value)
         {
             var equalities = new List<string>{ MathMLSymbols.Equal };
             return equalities.Any(equality => value.Contains(equality));
@@ -239,13 +241,16 @@ namespace FormulaObfuscator.BLL.Helpers
         {
             var fraction = new XElement(MathMLTags.Fraction);
             var nominator = new XElement(MathMLTags.Row);
-            nominator.Add(new XElement(MathMLTags.Operator, "("));
+            var formula = new XElement(MathMLTags.Row);
+
+            formula.Add(new XElement(MathMLTags.Operator, "("));
             nominator.Add(node);
-            nominator.Add(new XElement(MathMLTags.Operator, ")"));
             fraction.Add(nominator);
             fraction.Add(Obfuscate(operation));
+            formula.Add(fraction);
+            formula.Add(new XElement(MathMLTags.Operator, ")"));
 
-            return fraction;
+            return formula;
         }
 
         private static XElement Obfuscate(TypeOfOperation operation)
@@ -313,7 +318,7 @@ namespace FormulaObfuscator.BLL.Helpers
 
         public static void FindTreeWithEqualities(XElement node, ref XElement outputTree)
         {
-            if (node.Name.ToString().Contains(MathMLTags.Operator) && ifContainsEqualities(node.Value))
+            if (node.Name.ToString().Contains(MathMLTags.Operator) && IfContainsEqualities(node.Value))
             {
                 outputTree = node;
             }
