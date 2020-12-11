@@ -8,10 +8,10 @@ namespace FormulaObfuscator.BLL.Helpers
 {
     public static class Randoms
     {
-        private static Random random = new Random();
-        public static string Chars { get; set; } = Settings.CurrentSettings.Letters;
-        public static string Greek { get; set; } = Settings.CurrentSettings.GreekLetters;
-        private static string operators = "+-";
+        private static readonly Random random = new Random();
+        public static string Chars => Settings.CurrentSettings.Letters;
+        public static string Greek => Settings.CurrentSettings.GreekLetters;
+        private static readonly string operators = "+-";
 
         public static void ResetSettings()
         {
