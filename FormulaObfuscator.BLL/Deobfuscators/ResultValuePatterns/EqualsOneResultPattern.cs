@@ -60,7 +60,7 @@ namespace FormulaObfuscator.BLL.Deobfuscators.ResultValuePatterns
                         }
                         i += 3;
                     }
-                    return !valuesDictionary.Any();
+                    return !valuesDictionary.Any() || valuesDictionary.All(vd => vd.Value == 0);
                 }
             }
             catch { }

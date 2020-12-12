@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Deobfuscators.StructurePatterns
 {
-    public class VariableStructurePattern : IStructurePattern
+    public class VariableStructureFlatPattern : IStructurePattern
     {
         private static readonly List<string> PossibleOperators = new List<string>() { MathMLSymbols.Multiply, "+", "-" };
         private static readonly Dictionary<string, IResultValuePattern> OperatorValueDictionary = new Dictionary<string, IResultValuePattern>() 
@@ -18,25 +18,28 @@ namespace FormulaObfuscator.BLL.Deobfuscators.StructurePatterns
 
         public bool DetectObfuscation(XElement element)
         {
-            return DetectVariableObfucationStructure(element) && ValidateValue(element);
+            return DetectVariableObfucationFlatStructure(element) && ValidateFlatValue(element);
         }
 
-        private bool DetectVariableObfucationStructure(XElement element)
+        private bool DetectVariableObfucationFlatStructure(XElement element)
         {
             // mrow
             // surrounded by brackets
             // 3rd is operator 
-            // 4th is another set of brackets
+            // 4th is another set of brackets or just polynomial
             return element.Name == MathMLTags.Row
                 && element.Elements().First().Value == "(" && element.Elements().Last().Value == ")"
-                && element.Elements().ElementAt(2).Name == MathMLTags.Operator && PossibleOperators.Contains(element.Elements().ElementAt(2).Value)
-                && element.Elements().ElementAt(3).Value == "(" && element.Elements().ElementAt(5).Value == ")";
+                && element.Elements().ElementAt(2).Name == MathMLTags.Operator && PossibleOperators.Contains(element.Elements().ElementAt(2).Value);
         }
 
-        private bool ValidateValue(XElement element)
+        private bool ValidateFlatValue(XElement element)
         {
             var elementOperator = element.Elements().ElementAt(2).Value;
-            return OperatorValueDictionary[elementOperator].ValidateResultValue(element.Elements().ElementAt(4));
+            if (element.Elements().ElementAt(3).Value == "(" && element.Elements().ElementAt(5).Value == ")")
+            {
+                return OperatorValueDictionary[elementOperator].ValidateResultValue(element.Elements().ElementAt(4));
+            }
+            else return OperatorValueDictionary[elementOperator].ValidateResultValue(element.Elements().ElementAt(3));
         }
 
         public XElement RemoveObfuscation(XElement element) => element.Elements().ElementAt(1);

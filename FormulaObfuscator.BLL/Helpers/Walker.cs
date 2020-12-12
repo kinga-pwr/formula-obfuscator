@@ -349,7 +349,6 @@ namespace FormulaObfuscator.BLL.Helpers
             int i = 0;
             while (i < element.Elements().Count())
             {
-                WalkWithAlgorithmForDeobfuscation(element.Elements().ElementAt(i));
                 foreach (var deobfuscationPattern in DeobfuscationManager.AvailableStructurePatterns)
                 {
                     var isObfuscatingElem = deobfuscationPattern.DetectObfuscation(element.Elements().ElementAt(i));
@@ -357,9 +356,10 @@ namespace FormulaObfuscator.BLL.Helpers
                     {
                         var deobfuscatedElem = deobfuscationPattern.RemoveObfuscation(element.Elements().ElementAt(i));
                         element.Elements().ElementAt(i).ReplaceWith(deobfuscatedElem);
-                        continue;
+                        break;
                     }
                 }
+                WalkWithAlgorithmForDeobfuscation(element.Elements().ElementAt(i));
                 i++;
             }
             return element;
