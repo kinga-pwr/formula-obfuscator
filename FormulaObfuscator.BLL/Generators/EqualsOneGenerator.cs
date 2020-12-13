@@ -130,7 +130,9 @@ namespace FormulaObfuscator.BLL.Generators
         private XElement Trigonometric()
         {
             Randoms.RecursionDepth--;
-            return MathMLStructures.Trigonometric(Trigonometry.cos, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(0, 2)));
+            
+            if (Randoms.RecursionDepth > 0) return MathMLStructures.Trigonometric(Trigonometry.cos, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(0, 2)));
+            else return MathMLStructures.Trigonometric(Trigonometry.cos, new EqualsZeroGenerator().Generate(TypeOfMethod.Polynomial));
         }
 
         /// <summary>

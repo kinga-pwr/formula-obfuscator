@@ -192,7 +192,8 @@ namespace FormulaObfuscator.BLL.Generators
         private XElement Trigonometry()
         {
             Randoms.RecursionDepth--;
-            return MathMLStructures.Trigonometric((Trigonometry)Randoms.Int(0, 1), Generate((TypeOfMethod)Randoms.Int(0, 2)));
+            if (Randoms.RecursionDepth > 0) return MathMLStructures.Trigonometric((Trigonometry)Randoms.Int(0, 2), Generate((TypeOfMethod)Randoms.Int(0, 2)));
+            else return MathMLStructures.Trigonometric((Trigonometry)Randoms.Int(0, 2), Generate(TypeOfMethod.Polynomial));
         }
         /// <summary>
         /// <code>
