@@ -1,5 +1,6 @@
 ﻿using FormulaObfuscator.BLL.Helpers;
 using FormulaObfuscator.BLL.Models;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Generators
@@ -25,7 +26,7 @@ namespace FormulaObfuscator.BLL.Generators
 
         public XElement Generate(TypeOfMethod type)
         {
-            if (Randoms.RecursionDepth <= 0) return Polynomial();
+            if (Randoms.RecursionDepth <= 0 || !AvailableFormulas.Contains(type)) return Polynomial();
 
             return type switch
             {
@@ -81,7 +82,7 @@ namespace FormulaObfuscator.BLL.Generators
             XElement degree = new XElement(MathMLTags.Row);
             degree.Add(Generate(RandomFormula));
             XElement element = new XElement(MathMLTags.Row);
-            element.Add(Polynomial());
+            element.Add(Generate(RandomFormula));
 
             root.Add(element);
             root.Add(degree);
@@ -108,9 +109,10 @@ namespace FormulaObfuscator.BLL.Generators
 
             XElement fraction = new XElement(MathMLTags.Fraction);
             XElement nominator = new XElement(MathMLTags.Row);
-            nominator.Add(Root());
             XElement denominator = new XElement(MathMLTags.Row);
-            denominator.Add(Polynomial());
+
+            nominator.Add(Generate(RandomFormula));
+            denominator.Add(Generate(RandomFormula));
 
             fraction.Add(nominator);
             fraction.Add(denominator);
@@ -131,8 +133,7 @@ namespace FormulaObfuscator.BLL.Generators
         {
             Randoms.RecursionDepth--;
             
-            if (Randoms.RecursionDepth > 0) return MathMLStructures.Trigonometric(Trigonometry.cos, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(0, 2)));
-            else return MathMLStructures.Trigonometric(Trigonometry.cos, new EqualsZeroGenerator().Generate(TypeOfMethod.Polynomial));
+            return MathMLStructures.Trigonometric(Trigonometry.cos, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(2)));
         }
 
         /// <summary>
@@ -159,10 +160,11 @@ namespace FormulaObfuscator.BLL.Generators
                 (Trigonometry.sin, "+", Trigonometry.cos, 2),
                 (Trigonometry.tg, MathMLSymbols.Multiply, Trigonometry.ctg, 1)
             };
-            var option = options[Randoms.Int(0, 2)];
+
+            var option = options[Randoms.Int(2)];
             XElement element = new XElement(MathMLTags.Row);
-            var part1 = MathMLStructures.Trigonometric(option.Item1, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(0, 2)), option.Item4);
-            var part2 = MathMLStructures.Trigonometric(option.Item3, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(0, 2)), option.Item4);
+            var part1 = MathMLStructures.Trigonometric(option.Item1, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(2)), option.Item4);
+            var part2 = MathMLStructures.Trigonometric(option.Item3, new EqualsZeroGenerator().Generate((TypeOfMethod)Randoms.Int(2)), option.Item4);
             element.Add(part1);
             element.Add(new XElement(MathMLTags.Operator, option.Item2));
             element.Add(part2);

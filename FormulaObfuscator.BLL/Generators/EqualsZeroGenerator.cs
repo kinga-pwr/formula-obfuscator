@@ -23,11 +23,13 @@ namespace FormulaObfuscator.BLL.Generators
 
         public TypeOfMethod[] GetPossibleFormulas() => AvailableFormulas;
 
-        public XElement Generate(TypeOfMethod formula)
-        {
-            if (Randoms.RecursionDepth <= 0) return Polynomial();
+        public static TypeOfMethod RandomFormula => AvailableFormulas[Randoms.Int(AvailableFormulas.Length)];
 
-            return formula switch
+        public XElement Generate(TypeOfMethod type)
+        {
+            if (Randoms.RecursionDepth <= 0 || !AvailableFormulas.Contains(type)) return Polynomial();
+
+            return type switch
             {
                 TypeOfMethod.Polynomial => Polynomial(),
                 TypeOfMethod.Fraction => Fraction(),
@@ -170,7 +172,7 @@ namespace FormulaObfuscator.BLL.Generators
 
             XElement fraction = new XElement(MathMLTags.Fraction);
             XElement nominator = new XElement(MathMLTags.Row);
-            nominator.Add(Polynomial());
+            nominator.Add(Generate(RandomFormula));
             XElement denominator = new XElement(MathMLTags.Row);
             denominator.Add(new EqualsOneGenerator().Generate(EqualsOneGenerator.RandomFormula));
 
@@ -192,8 +194,7 @@ namespace FormulaObfuscator.BLL.Generators
         private XElement Trigonometry()
         {
             Randoms.RecursionDepth--;
-            if (Randoms.RecursionDepth > 0) return MathMLStructures.Trigonometric((Trigonometry)Randoms.Int(0, 2), Generate((TypeOfMethod)Randoms.Int(0, 2)));
-            else return MathMLStructures.Trigonometric((Trigonometry)Randoms.Int(0, 2), Generate(TypeOfMethod.Polynomial));
+            return MathMLStructures.Trigonometric((Trigonometry)Randoms.Int(2), Generate((TypeOfMethod)Randoms.Int(2)));
         }
         /// <summary>
         /// <code>
@@ -211,7 +212,7 @@ namespace FormulaObfuscator.BLL.Generators
             Randoms.RecursionDepth--;
             var upperLimit = new XElement(MathMLTags.Identifier, MathMLSymbols.Infinite);
             var lowerLimit = new XElement(MathMLTags.Number, 0);
-            return MathMLStructures.Integral(Generate((TypeOfMethod)Randoms.Int(0, 3)), upperLimit, lowerLimit);
+            return MathMLStructures.Integral(Generate((TypeOfMethod)Randoms.Int(3)), upperLimit, lowerLimit);
         }
     }
 }
