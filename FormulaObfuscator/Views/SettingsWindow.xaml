@@ -55,6 +55,7 @@
                                  UpdateSourceTrigger="LostFocus">
                             <Binding.ValidationRules>
                                 <validationrules:ObligatoryFieldValidationRule  ValidatesOnTargetUpdated="True" />
+                                <validationrules:MinTenLengthOfFieldValidationRule ValidatesOnTargetUpdated="True" />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -207,6 +208,7 @@
                               Content="Polynomial"
                               Margin="25,0,0,0"
                               Checked="ValidateAll"
+                              IsEnabled="False"
                               Unchecked="ValidateAll" />
                     <CheckBox x:Name="CBEqualsOneFraction"
                               Content="Fraction"
@@ -245,6 +247,7 @@
                               Content="Polynomial"
                               Margin="25,3,0,0"
                               Checked="ValidateAll"
+                              IsEnabled="False"
                               Unchecked="ValidateAll" />
                     <CheckBox x:Name="CBEqualsZeroFraction"
                               Content="Fraction"
