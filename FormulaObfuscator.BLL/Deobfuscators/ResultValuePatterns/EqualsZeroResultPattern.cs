@@ -19,6 +19,14 @@ namespace FormulaObfuscator.BLL.Deobfuscators.ResultValuePatterns
             {
                 return ValidateTrigonometricPattern(element);
             }
+            if (CheckFractionPattern(element))
+            {
+                return ValidateFractionPattern(element);
+            }
+            if (CheckIntegralPattern(element))
+            {
+                return ValidateIntegralPattern(element);
+            }
             return false;
         }
 
@@ -74,6 +82,7 @@ namespace FormulaObfuscator.BLL.Deobfuscators.ResultValuePatterns
         private bool CheckTrigonometricPattern(XElement element)
         {
             return element.Name == MathMLTags.Row
+                && element.Elements().Count() == 4
                 && element.Elements().First().Name == MathMLTags.Identifier 
                 && ValidTrigonometricSymbols.Any(s => s.ToString() == element.Elements().First().Value)
                 && element.Elements().ElementAt(1).Value == "(" && element.Elements().Last().Value == ")";
@@ -81,14 +90,47 @@ namespace FormulaObfuscator.BLL.Deobfuscators.ResultValuePatterns
 
         private bool ValidateTrigonometricPattern(XElement element)
         {
-            var variable = element.Elements().ElementAt(2);
-            if (CheckPolynomialPattern(variable))
-            {
-                return ValidatePolynomialPattern(variable);
-            }
-            // todo fraction
-            return false;
+            var expression = element.Elements().ElementAt(2);
+            return ValidateResultValue(expression);
         }
         #endregion Trigonometry
+
+        #region Fraction
+        private bool CheckFractionPattern(XElement element)
+        {
+            return element.Name == MathMLTags.Fraction
+                && element.Elements().First().Name == MathMLTags.Row
+                && element.Elements().ElementAt(1).Name == MathMLTags.Row;
+        }
+
+        private bool ValidateFractionPattern(XElement element)
+        {
+            var nominator = element.Elements().First().Elements().First();
+            var denominator = element.Elements().ElementAt(1).Elements().First();
+            return ValidateResultValue(nominator) && new EqualsOneResultPattern().ValidateResultValue(denominator);
+        }
+        #endregion Fraction
+
+        #region Integral
+        private bool CheckIntegralPattern(XElement element)
+        {
+            return element.Name == MathMLTags.Row
+                && element.Elements().Count() == 5
+                && element.Elements().First().Name == MathMLTags.Integral
+                && element.Elements().First().Elements().Count() == 3
+                && element.Elements().First().Elements().First().Value == MathMLSymbols.Integral
+                && element.Elements().First().Elements().ElementAt(1).Value == "0"
+                && element.Elements().First().Elements().ElementAt(2).Value == MathMLSymbols.Infinite
+                && element.Elements().ElementAt(1).Value == "("
+                && element.Elements().ElementAt(3).Value == ")"
+                && element.Elements().ElementAt(4).Value == "dx";
+        }
+
+        private bool ValidateIntegralPattern(XElement element)
+        {
+            var expression = element.Elements().ElementAt(2);
+            return ValidateResultValue(expression);
+        }
+        #endregion Integral
     }
 }

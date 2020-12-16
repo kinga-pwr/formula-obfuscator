@@ -1,11 +1,10 @@
-﻿using FormulaObfuscator.BLL.Generators;
+﻿using FormulaObfuscator.BLL.Deobfuscators;
+using FormulaObfuscator.BLL.Generators;
 using FormulaObfuscator.BLL.Models;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
-using FormulaObfuscator.BLL.Deobfuscators;
-using FormulaObfuscator.BLL.Deobfuscators.StructurePatterns;
 
 namespace FormulaObfuscator.BLL.Helpers
 {

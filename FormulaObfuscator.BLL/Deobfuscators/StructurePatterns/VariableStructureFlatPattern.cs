@@ -28,6 +28,7 @@ namespace FormulaObfuscator.BLL.Deobfuscators.StructurePatterns
             // 3rd is operator 
             // 4th is another set of brackets or just polynomial
             return element.Name == MathMLTags.Row
+                && (element.Elements().Count() == 7 || element.Elements().Count() == 5)
                 && element.Elements().First().Value == "(" && element.Elements().Last().Value == ")"
                 && element.Elements().ElementAt(2).Name == MathMLTags.Operator && PossibleOperators.Contains(element.Elements().ElementAt(2).Value);
         }
