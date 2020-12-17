@@ -11,8 +11,8 @@ namespace FormulaObfuscator.BLL.Helpers
 {
     public static class Walker
     {
-        static List<string> TAGS_WITH_VALUES = new List<string>{ MathMLTags.Identifier, MathMLTags.Operator, MathMLTags.Number };
-        static List<TypeOfOperation> OPERATIONS_WITH_EXTRA_BRACKETS = new List<TypeOfOperation>{ TypeOfOperation.MultiplyByOne, TypeOfOperation.MinusZero };
+        static readonly List<string> TAGS_WITH_VALUES = new List<string>{ MathMLTags.Identifier, MathMLTags.Operator, MathMLTags.Number };
+        static readonly List<TypeOfOperation> OPERATIONS_WITH_EXTRA_BRACKETS = new List<TypeOfOperation>{ TypeOfOperation.MultiplyByOne, TypeOfOperation.MinusZero };
 
         public static XElement WalkWithAlgorithmForVariables(XElement node, XElement copyTree)
         {   
@@ -199,8 +199,8 @@ namespace FormulaObfuscator.BLL.Helpers
                     }
                 }
 
-                var leftFraction = makeFraction(leftSide, operation);
-                var rightFraction = makeFraction(rightSide, operation);
+                var leftFraction = MakeFraction(leftSide, operation);
+                var rightFraction = MakeFraction(rightSide, operation);
                 root.RemoveAll();
                 root.Add(leftFraction);
                 root.Add(equalifier);
@@ -209,13 +209,13 @@ namespace FormulaObfuscator.BLL.Helpers
                 return root;
             }
 
-            var elements = makeFraction(root.Elements(), operation);
+            var elements = MakeFraction(root.Elements(), operation);
             root.RemoveAll();
             root.Add(elements);
             return root;
         }
 
-        private static XElement makeFraction(IEnumerable<XElement> elements, TypeOfOperation operation)
+        private static XElement MakeFraction(IEnumerable<XElement> elements, TypeOfOperation operation)
         {
             var fraction = new XElement(MathMLTags.Fraction);
             var nominator = new XElement(MathMLTags.Row);

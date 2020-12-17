@@ -7,7 +7,7 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
         public string Generate()
         {
             string c = Randoms.Char().ToString();
-            string n = c;
+            string n;
             do { n = Randoms.Char().ToString(); } while (n == c);
 
             return $@"

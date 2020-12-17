@@ -9,27 +9,27 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
             return $@"
                     <mrow>
                         <msqrt>
-                            {Randoms.SimpleExpression().ToString()}
-                            <mo>{Randoms.Operator().ToString()}</mo>
+                            {Randoms.SimpleExpression()}
+                            <mo>{Randoms.Operator()}</mo>
                             <msqrt>
-                                {Randoms.SimpleExpression().ToString()}
-                                <mo>{Randoms.Operator().ToString()}</mo>
+                                {Randoms.SimpleExpression()}
+                                <mo>{Randoms.Operator()}</mo>
                                 <msqrt>
-                                    {Randoms.SimpleExpression().ToString()}
-                                    <mo>{Randoms.Operator().ToString()}</mo>
+                                    {Randoms.SimpleExpression()}
+                                    <mo>{Randoms.Operator()}</mo>
                                     <msqrt>
-                                        {Randoms.SimpleExpression().ToString()}
-                                        <mo>{Randoms.Operator().ToString()}</mo>
+                                        {Randoms.SimpleExpression()}
+                                        <mo>{Randoms.Operator()}</mo>
                                         <msqrt>
-                                            {Randoms.SimpleExpression().ToString()}
-                                            <mo>{Randoms.Operator().ToString()}</mo>
+                                            {Randoms.SimpleExpression()}
+                                            <mo>{Randoms.Operator()}</mo>
                                             <msqrt>
-                                                {Randoms.SimpleExpression().ToString()}
-                                                <mo>{Randoms.Operator().ToString()}</mo>
+                                                {Randoms.SimpleExpression()}
+                                                <mo>{Randoms.Operator()}</mo>
                                                 <msqrt>
-                                                    {Randoms.SimpleExpression().ToString()}
-                                                    <mo>{Randoms.Operator().ToString()}</mo>
-                                                    {Randoms.SimpleExpression().ToString()}
+                                                    {Randoms.SimpleExpression()}
+                                                    <mo>{Randoms.Operator()}</mo>
+                                                    {Randoms.SimpleExpression()}
                                                 </msqrt>
                                             </msqrt>
                                         </msqrt>

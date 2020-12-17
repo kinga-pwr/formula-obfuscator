@@ -6,7 +6,7 @@ namespace FormulaObfuscator.BLL.Generators
 {
     public static class ComplexExpressionGenerator
     {
-        private static int _maxLength => 7;
+        private static int MaxLength => 7;
 
         /// <summary>
         /// <code>
@@ -27,7 +27,7 @@ namespace FormulaObfuscator.BLL.Generators
             XElement nominator = new XElement(MathMLTags.Row);
             XElement denominator = new XElement(MathMLTags.Row);
 
-            var length = Randoms.Int(2, _maxLength);
+            var length = Randoms.Int(2, MaxLength);
             for (int i = 0; i < length; i++)
             {
                 nominator.Add(Randoms.SimpleExpression());
@@ -37,7 +37,7 @@ namespace FormulaObfuscator.BLL.Generators
                 }
             }
 
-            length = Randoms.Int(2, _maxLength);
+            length = Randoms.Int(2, MaxLength);
             for (int i = 0; i < length; i++)
             {
                 denominator.Add(Randoms.SimpleExpression());
@@ -68,7 +68,7 @@ namespace FormulaObfuscator.BLL.Generators
             XElement degree = new XElement(MathMLTags.Identifier);
             XElement element = new XElement(MathMLTags.Number);
 
-            var length = Randoms.Int(_maxLength);
+            var length = Randoms.Int(MaxLength);
             for (int i = 0; i < length; i++)
             {
                 degree.Add(Randoms.SimpleExpression());
@@ -78,7 +78,7 @@ namespace FormulaObfuscator.BLL.Generators
                 }
             }
 
-            length = Randoms.Int(_maxLength);
+            length = Randoms.Int(MaxLength);
             for (int i = 0; i < length; i++)
             {
                 element.Add(Randoms.SimpleExpression());

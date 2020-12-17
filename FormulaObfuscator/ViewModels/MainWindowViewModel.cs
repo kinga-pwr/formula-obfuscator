@@ -31,7 +31,7 @@ namespace FormulaObfuscator.ViewModels
         public DelegateCommand InputFirefoxCommand { get; set; }
         public DelegateCommand OutputFirefoxCommand { get; set; }
 
-        private Settings Settings;
+        private readonly Settings Settings;
 
         public bool HasFirefox { get; }
         public string FirefoxTooltip => HasFirefox 
@@ -83,11 +83,9 @@ namespace FormulaObfuscator.ViewModels
 
             try
             {
-                using (StreamReader r = new StreamReader("currSettings"))
-                {
-                    string json = r.ReadToEnd();
-                    settings = JsonSerializer.Deserialize<Settings>(json);
-                }
+                using StreamReader r = new StreamReader("currSettings");
+                string json = r.ReadToEnd();
+                settings = JsonSerializer.Deserialize<Settings>(json);
             } catch
             {
                 return settings;
