@@ -7,6 +7,8 @@ namespace FormulaObfuscator.BLL.Deobfuscators
     {
         public static readonly List<IStructurePattern> AvailableStructurePatterns = new List<IStructurePattern>()
         {
+            new FormulaStructureFlatPattern(),
+            new FormulaStructureFractionPattern(),
             new VariableStructureFlatPattern(),
             new VariableStructureFractionPattern()
         };
