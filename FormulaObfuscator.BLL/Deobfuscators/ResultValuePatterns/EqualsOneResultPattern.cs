@@ -42,53 +42,85 @@ namespace FormulaObfuscator.BLL.Deobfuscators.ResultValuePatterns
         #region Polynomial
         private bool CheckPolynomialPattern(XElement element)
         {
-            var initialCheck = element.Name == MathMLTags.Row
+            return element.Name == MathMLTags.Row
                 && element.Elements().All(e => e.Name == MathMLTags.Number || e.Name == MathMLTags.Operator
                 || (e.Name == MathMLTags.Power && e.Elements().First().Name == MathMLTags.Identifier && e.Elements().Last().Name == MathMLTags.Number));
-
-            if (initialCheck)
-            {
-                var operatorsQty = element.Elements().Where(e => e.Name == MathMLTags.Operator).Count();
-                var powerQty = element.Elements().Where(e => e.Name == MathMLTags.Power).Count();
-                var numbersQty = element.Elements().Where(e => e.Name == MathMLTags.Number).Count();
-                return numbersQty == operatorsQty + 1 && powerQty == operatorsQty - 1;
-            }
-            return false;
         }
 
-        private bool ValidatePolynomialPattern(XElement element)
+        public bool ValidatePolynomialPattern(XElement element)
         {
-            try
+            var valuesDictionary = new Dictionary<string, int>();
+            int i = 0;
+            while (i < element.Elements().Count())
             {
-                var firstNumber = int.Parse(element.Elements().First().Value);
-                var lastNumber = int.Parse(element.Elements().Last().Value);
-                if (firstNumber - lastNumber == 1)
+                try
                 {
-                    var valuesDictionary = new Dictionary<string, int>();
-                    int i = 2;
-                    while (i < element.Elements().Count() - 2)
+                    if (i == 0 && element.Elements().ElementAt(i).Name == MathMLTags.Operator)
+                    {
+                        i++;
+                    }
+
+                    // case 2x or 2
+                    if (element.Elements().ElementAt(i).Name == MathMLTags.Number)
                     {
                         var number = int.Parse(element.Elements().ElementAt(i).Value);
-                        if (element.Elements().ElementAt(i - 1).Value == "-") number *= -1;
-                        var key = element.Elements().ElementAt(i + 1).Value;
-                        if (!valuesDictionary.TryAdd(key, number))
+                        if (i > 0 && element.Elements().ElementAt(i - 1).Value == "-") number *= -1;
+                        string key = "null"; // case 2
+                        if (i < element.Elements().Count() - 1 && element.Elements().ElementAt(i + 1).Name != MathMLTags.Operator)
                         {
-                            if (valuesDictionary[key] + number == 0)
-                            {
-                                valuesDictionary.Remove(key);
-                            }
-                            else
-                            {
-                                valuesDictionary[key] = valuesDictionary[key] + number;
-                            }
+                            key = element.Elements().ElementAt(i + 1).Value; // case 2x
+                            i += 3;
                         }
+                        else
+                        {
+                            i += 2;
+                        }
+                        TryAddElement(number, key);
+                    }
+                    // case x
+                    else if (i == element.Elements().Count() - 1 || element.Elements().ElementAt(i + 1).Name == MathMLTags.Operator)
+                    {
+                        var number = 1;
+                        if (i > 0 && element.Elements().ElementAt(i - 1).Value == "-") number *= -1;
+                        var key = element.Elements().ElementAt(i).Value;
+                        TryAddElement(number, key);
+                        i += 2;
+                    }
+                    // case x2
+                    else if (element.Elements().ElementAt(i + 1).Name == MathMLTags.Number)
+                    {
+                        var number = int.Parse(element.Elements().ElementAt(i + 1).Value);
+                        if (i > 0 && element.Elements().ElementAt(i - 1).Value == "-") number *= -1;
+                        var key = element.Elements().ElementAt(i).Value;
+                        TryAddElement(number, key);
                         i += 3;
                     }
-                    return !valuesDictionary.Any() || valuesDictionary.All(vd => vd.Value == 0);
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
                 }
             }
-            catch { }
-            return false;
+            return valuesDictionary.All(vd => vd.Key == "null" && vd.Value == 1);
+
+            void TryAddElement(int number, string key)
+            {
+                if (number != 0 && !valuesDictionary.TryAdd(key, number))
+                {
+                    if (valuesDictionary[key] + number == 0)
+                    {
+                        valuesDictionary.Remove(key);
+                    }
+                    else
+                    {
+                        valuesDictionary[key] = valuesDictionary[key] + number;
+                    }
+                }
+            }
         }
         #endregion Polynomial
 
