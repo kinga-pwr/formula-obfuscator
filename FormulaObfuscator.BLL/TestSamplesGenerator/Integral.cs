@@ -16,7 +16,7 @@ namespace FormulaObfuscator.BLL.TestSamplesGenerator
                     <mrow>
                         <msub>
                             <mo>{MathMLSymbols.Integral}</mo>
-                            <mi>D</mi>
+                            <mi>{D}</mi>
                         </msub>
                         <mi>d</mi>
                         <mi>{x}</mi>

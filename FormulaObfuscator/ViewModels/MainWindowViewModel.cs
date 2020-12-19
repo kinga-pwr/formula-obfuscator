@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using FormulaObfuscator.Views;
+using System.Text.Json;
 
 namespace FormulaObfuscator.ViewModels
 {
@@ -30,7 +31,7 @@ namespace FormulaObfuscator.ViewModels
         public DelegateCommand InputFirefoxCommand { get; set; }
         public DelegateCommand OutputFirefoxCommand { get; set; }
 
-        private Settings Settings = new Settings();
+        private readonly Settings Settings;
 
         public bool HasFirefox { get; }
         public string FirefoxTooltip => HasFirefox 
@@ -65,6 +66,8 @@ namespace FormulaObfuscator.ViewModels
             InputFirefoxCommand = new DelegateCommand(() => OpenInFirefox(Input));
             OutputFirefoxCommand = new DelegateCommand(() => OpenInFirefox(Output));
 
+            Settings = GetSettings();
+
             _dialogCoordinator = dialogCoordinator;
 
             HasFirefox = CheckIfFirefoxIsInstalled();
@@ -72,6 +75,23 @@ namespace FormulaObfuscator.ViewModels
             OnPropertyChanged(nameof(FirefoxTooltip));
 
             LoadInitialFile();
+        }
+
+        private Settings GetSettings()
+        {
+            var settings = new Settings();
+
+            try
+            {
+                using StreamReader r = new StreamReader("currSettings");
+                string json = r.ReadToEnd();
+                settings = JsonSerializer.Deserialize<Settings>(json);
+            } catch
+            {
+                return settings;
+            }
+
+            return settings;
         }
 
         private bool CheckIfFirefoxIsInstalled()

@@ -121,7 +121,17 @@ namespace FormulaObfuscator.Views
         {
             GetConfigurationFromUI(Settings);
 
+            SaveCurrentSetting();
+
             this.Close();
+        }
+
+        private void SaveCurrentSetting()
+        {
+            var serializerOptions = new JsonSerializerOptions();
+            serializerOptions.WriteIndented = true;
+            var serializedSettings = JsonSerializer.Serialize<Settings>(Settings, serializerOptions);
+            File.WriteAllText("currSettings", serializedSettings.ToString());
         }
 
         private void GetConfigurationFromUI(Settings toStore)
@@ -220,16 +230,12 @@ namespace FormulaObfuscator.Views
             var areComplexValid = !AreAllCheckboxesUnchecked(ComplexMethods, ComplexLabel);
             var areSimpleValid = !AreAllCheckboxesUnchecked(SimpleMethods, SimpleLabel);
             var areSamplesValid = !AreAllCheckboxesUnchecked(SamplesMethods, SamplesLabel);
-            var areEqualsOneValid = !AreAllCheckboxesUnchecked(EqualOneMethods.Values.ToList(), EqualsOneLabel);
-            var areEqualsZeroValid = !AreAllCheckboxesUnchecked(EqualZeroMethods.Values.ToList(), EqualsZeroLabel);
 
             var areAllValid = BindingOperations.GetBindingExpression(TextBoxLetters, TextBox.TextProperty).ValidateWithoutUpdate()
                 && BindingOperations.GetBindingExpression(TextBoxGreekLetters, TextBox.TextProperty).ValidateWithoutUpdate()
                 && areComplexValid
                 && areSimpleValid
-                && areSamplesValid
-                && areEqualsOneValid
-                && areEqualsZeroValid;
+                && areSamplesValid;
 
             SaveButton.IsEnabled = areAllValid;
             ExportButton.IsEnabled = areAllValid;
