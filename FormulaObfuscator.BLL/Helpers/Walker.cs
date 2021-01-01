@@ -10,16 +10,17 @@ namespace FormulaObfuscator.BLL.Helpers
 {
     public static class Walker
     {
-        static readonly List<string> TAGS_WITH_VALUES = new List<string>{ MathMLTags.Identifier, MathMLTags.Operator, MathMLTags.Number };
-        static readonly List<TypeOfOperation> OPERATIONS_WITH_EXTRA_BRACKETS = new List<TypeOfOperation>{ TypeOfOperation.MultiplyByOne, TypeOfOperation.MinusZero };
+        static readonly List<string> TAGS_WITH_VALUES = new List<string> { MathMLTags.Identifier, MathMLTags.Operator, MathMLTags.Number };
+        static readonly List<TypeOfOperation> OPERATIONS_WITH_EXTRA_BRACKETS = new List<TypeOfOperation> { TypeOfOperation.MultiplyByOne, TypeOfOperation.MinusZero };
 
         public static XElement WalkWithAlgorithmForVariables(XElement node, XElement copyTree)
-        {   
+        {
             // copy current node to copyTree
             if (TAGS_WITH_VALUES.Any(i => node.Name.ToString().Contains(i)))
             {
                 copyTree.Add(new XElement(node.Name, node.Value));
-            } else
+            }
+            else
             {
                 copyTree.Add(new XElement(node.Name));
             }
@@ -105,13 +106,14 @@ namespace FormulaObfuscator.BLL.Helpers
                     node = equalifier.ElementsAfterSelf().First();
                     last = equalifier.ElementsAfterSelf().Last();
                 }
-                
+
                 node.AddBeforeSelf(new XElement(MathMLTags.Operator, "("));
                 last.AddAfterSelf(Obfuscate(operation));
                 last.AddAfterSelf(new XElement(MathMLTags.Operator, ")"));
                 return root;
 
-            } else
+            }
+            else
             {
                 return ObfuscateRootWithDivide(root, operation);
             }
@@ -189,10 +191,11 @@ namespace FormulaObfuscator.BLL.Helpers
                         continue;
                     }
 
-                    if(isRightSide)
+                    if (isRightSide)
                     {
                         rightSide.Add(child);
-                    } else
+                    }
+                    else
                     {
                         leftSide.Add(child);
                     }
@@ -221,7 +224,7 @@ namespace FormulaObfuscator.BLL.Helpers
             var formula = new XElement(MathMLTags.Row);
 
             formula.Add(new XElement(MathMLTags.Operator, "("));
-            nominator.Add(elements);            
+            nominator.Add(elements);
             fraction.Add(nominator);
             fraction.Add(Obfuscate(operation));
             formula.Add(fraction);
@@ -232,7 +235,7 @@ namespace FormulaObfuscator.BLL.Helpers
 
         private static bool IfContainsEqualities(string value)
         {
-            var equalities = new List<string>{ MathMLSymbols.Equal };
+            var equalities = new List<string> { MathMLSymbols.Equal };
             return equalities.Any(equality => value.Contains(equality));
         }
 
@@ -292,7 +295,7 @@ namespace FormulaObfuscator.BLL.Helpers
         {
             Array operations = Enum.GetValues(typeof(TypeOfOperation));
 
-            return (TypeOfOperation) operations.GetValue(Randoms.Int(operations.Length));
+            return (TypeOfOperation)operations.GetValue(Randoms.Int(operations.Length));
         }
 
         private static TypeOfOperation GetTypeOfOperationWithoutDivide()
@@ -340,7 +343,7 @@ namespace FormulaObfuscator.BLL.Helpers
                 {
                     FindTrees(child, value, outputTrees);
                 }
-            }          
+            }
         }
 
         public static XElement WalkWithAlgorithmForDeobfuscation(XElement element)
@@ -348,7 +351,7 @@ namespace FormulaObfuscator.BLL.Helpers
             int i = 0;
             while (i < element.Elements().Count())
             {
-                foreach (var deobfuscationPattern in DeobfuscationManager.AvailableStructurePatterns)
+                foreach (var deobfuscationPattern in DeobfuscationManager.AvailableVariableStructurePatterns)
                 {
                     var isObfuscatingElem = deobfuscationPattern.DetectObfuscation(element.Elements().ElementAt(i));
                     if (isObfuscatingElem)
@@ -356,6 +359,17 @@ namespace FormulaObfuscator.BLL.Helpers
                         var deobfuscatedElem = deobfuscationPattern.RemoveObfuscation(element.Elements().ElementAt(i));
                         element.Elements().ElementAt(i).ReplaceWith(deobfuscatedElem);
                         break;
+                    }
+                }
+
+                foreach (var deobfuscationPattern in DeobfuscationManager.AvailableFormulaStructurePatterns)
+                {
+                    var isObfuscatingElem = deobfuscationPattern.DetectObfuscation(element.Elements().ElementAt(i));
+                    if (isObfuscatingElem)
+                    {
+                        var deobfuscatedElem = deobfuscationPattern.RemoveObfuscation(element.Elements().ElementAt(i));
+                        element = deobfuscatedElem;
+                        return element;
                     }
                 }
                 WalkWithAlgorithmForDeobfuscation(element.Elements().ElementAt(i));
@@ -378,6 +392,6 @@ namespace FormulaObfuscator.BLL.Helpers
                 }
             }
             return node;
-        } 
+        }
     }
 }

@@ -24,7 +24,8 @@ namespace FormulaObfuscator.BLL.Deobfuscators.StructurePatterns
             // mrow
             // surrounded by brackets
             // next is mfrac
-            return element.Elements().ElementAt(0).Name == MathMLTags.Operator
+            return element.Elements().Count()>2
+                && element.Elements().ElementAt(0).Name == MathMLTags.Operator
                 && element.Elements().ElementAt(0).Value == "("
                 && element.Elements().ElementAt(1).Name == MathMLTags.Fraction;
 
