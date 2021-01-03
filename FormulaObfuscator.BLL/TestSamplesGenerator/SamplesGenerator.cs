@@ -20,13 +20,13 @@ namespace FormulaObfuscator.BLL.TestGenerator
                 switch (generatorMethod)
                 {
                     case SamplesGeneratorMethod.DetSumPi:
-                        testSamples.Add(new DetSumPi());
+                        //testSamples.Add(new DetSumPi());
                         break;
                     case SamplesGeneratorMethod.Fi:
-                        testSamples.Add(new Fi());
+                        //testSamples.Add(new Fi());
                         break;
                     case SamplesGeneratorMethod.FuncBracket:
-                        testSamples.Add(new FuncBracket());
+                        //testSamples.Add(new FuncBracket());
                         break;
                     case SamplesGeneratorMethod.Integral:
                         testSamples.Add(new Integral());
@@ -47,7 +47,7 @@ namespace FormulaObfuscator.BLL.TestGenerator
         public string DrawSample(Settings settings)
         {
             ApplySettings(settings);
-            int index = Randoms.Int(0, testSamples.Count - 1);
+            int index = Randoms.Int(0, testSamples.Count);
 
             string mathML = @"<html><math display=""block"" xmlns=""http://www.w3.org/1998/Math/MathML"">";
             mathML += testSamples[index].Generate();

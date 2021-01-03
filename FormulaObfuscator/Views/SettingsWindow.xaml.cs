@@ -68,9 +68,9 @@ namespace FormulaObfuscator.Views
             EqualZeroMethods.Add(TypeOfMethod.Trigonometry, CBEqualsZeroTrigonometry);
             EqualZeroMethods.Add(TypeOfMethod.Integral, CBEqualsZeroIntegral);
 
-            SamplesMethods.Add(CBSamplesDetSumPi);
-            SamplesMethods.Add(CBSamplesFi);
-            SamplesMethods.Add(CBSamplesFuncBracket);
+            //SamplesMethods.Add(CBSamplesDetSumPi);
+            //SamplesMethods.Add(CBSamplesFi);
+            //SamplesMethods.Add(CBSamplesFuncBracket);
             SamplesMethods.Add(CBSamplesIntegral);
             SamplesMethods.Add(CBSamplesLimit);
             SamplesMethods.Add(CBSamplesSqrtRecursive);

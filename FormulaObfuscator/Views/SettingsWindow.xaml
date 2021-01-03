@@ -288,12 +288,12 @@
                            Margin="0,5,0,5"
                            VerticalAlignment="Center"
                            Height="34" />
-                    <CheckBox x:Name="CBSamplesDetSumPi"
+                    <!--<CheckBox x:Name="CBSamplesDetSumPi"
                               Content="DetSumPi"
                               Margin="25,0,0,0"
                               Checked="ValidateAll"
-                              Unchecked="ValidateAll" />
-                    <CheckBox x:Name="CBSamplesFi"
+                              Unchecked="ValidateAll" />-->
+                    <!--<CheckBox x:Name="CBSamplesFi"
                               Content="Fi"
                               Margin="25,3,0,0"
                               Checked="ValidateAll"
@@ -302,7 +302,7 @@
                               Content="FuncBracket"
                               Margin="25,3,0,0"
                               Checked="ValidateAll"
-                              Unchecked="ValidateAll" />
+                              Unchecked="ValidateAll" />-->
                     <CheckBox x:Name="CBSamplesIntegral"
                               Content="Integral"
                               Margin="25,3,0,0"

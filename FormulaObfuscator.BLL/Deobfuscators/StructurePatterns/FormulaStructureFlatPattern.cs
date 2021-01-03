@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
+﻿using FormulaObfuscator.BLL.Deobfuscators.ResultValuePatterns;
 using FormulaObfuscator.BLL.Models;
+using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Deobfuscators.StructurePatterns
 {
     class FormulaStructureFlatPattern : IStructurePattern
     {
+
+        private static readonly Dictionary<string, IResultValuePattern> OperatorValueDictionary = new Dictionary<string, IResultValuePattern>()
+        {
+            { MathMLSymbols.Multiply, new EqualsOneResultPattern() },
+            { "+", new EqualsZeroResultPattern() },
+            { "-", new EqualsZeroResultPattern() }
+        };
+
         public bool DetectObfuscation(XElement element)
         {
             return DetectFormulaObfucationStructure(element);
@@ -18,11 +25,11 @@ namespace FormulaObfuscator.BLL.Deobfuscators.StructurePatterns
         {
             //return XElement.Parse(element.NextNode.ToString());
 
-            var list = element.Parent.Elements().ToList();
-            var startBracket = list.Where(e => e.Value == "(").FirstOrDefault();
-            var endBracket = list.Where(e => e.Value == ")").FirstOrDefault();
-            var startIndex = list.IndexOf(startBracket);
-            var endIndex = list.IndexOf(endBracket);
+            List<XElement> list = element.Parent.Elements().ToList();
+            XElement startBracket = list.Where(e => e.Value == "(").FirstOrDefault();
+            XElement endBracket = list.Where(e => e.Value == ")").FirstOrDefault();
+            int startIndex = list.IndexOf(startBracket);
+            int endIndex = list.IndexOf(endBracket);
             XElement result = new XElement(MathMLTags.Row);
             for (int i = 0; i < list.Count; i++)
             {
@@ -40,9 +47,46 @@ namespace FormulaObfuscator.BLL.Deobfuscators.StructurePatterns
             // brakcethas attribute xmlns
             return element.Name == MathMLTags.Operator
                 && element.Value == "("
-                && element.Attribute("xmlns") != null;
+                && element.Attribute("xmlns") != null
+                && DetectVariablePattern(AfterClosingBracketNode(element));
 
         }
 
+        private bool DetectVariablePattern(XElement element)
+        {
+            XElement nextElement = (element.NextNode as XElement);
+            var elementOperator = nextElement.Elements().ElementAt(0).Value;
+            bool detected = false;
+            int i = 0;
+            while (i < nextElement.Elements().Count())
+            {
+                foreach (var deobfuscationPattern in DeobfuscationManager.AvailableVariableStructurePatterns)
+                {
+                    detected = detected || OperatorValueDictionary[elementOperator].ValidateResultValue(nextElement.Elements().ElementAt(2));
+                }
+                i++;
+            }
+            return detected;
+        }
+
+        private XElement AfterClosingBracketNode(XElement element)
+        {
+            if (element.Value == ")")
+                return element;
+            else
+                if (element.NextNode != null)
+                return (ClosingBracketNode(element.NextNode) as XElement);
+            else return null;
+        }
+
+        private XNode ClosingBracketNode(XNode element)
+        {
+            if ((element as XElement).Value == ")")
+                return element;
+            else
+                if (element.NextNode != null)
+                return ClosingBracketNode(element.NextNode);
+            else return null;
+        }
     }
 }
