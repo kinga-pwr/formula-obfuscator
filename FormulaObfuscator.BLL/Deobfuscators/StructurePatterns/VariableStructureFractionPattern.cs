@@ -38,6 +38,6 @@ namespace FormulaObfuscator.BLL.Deobfuscators.StructurePatterns
             else return new EqualsOneResultPattern().ValidateResultValue(element.Elements().ElementAt(1).Elements().ElementAt(1));
         }
 
-        public XElement RemoveObfuscation(XElement element) => element.Elements().ElementAt(1).Elements().ElementAt(0); // todo: revert changes after full formula is fixed. Add .Elements().ElementAt(0) 
+        public XElement RemoveObfuscation(XElement element) => element.Elements().ElementAt(1).Elements().ElementAt(0).Elements().ElementAt(0);
     }
 }

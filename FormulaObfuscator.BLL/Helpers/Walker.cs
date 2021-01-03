@@ -346,11 +346,35 @@ namespace FormulaObfuscator.BLL.Helpers
             }
         }
 
-        public static XElement WalkWithAlgorithmForDeobfuscation(XElement element)
+        public static XElement WalkWithAlgorithmForDeobfuscation(XElement element, bool isRoot = true)
         {
             int i = 0;
             while (i < element.Elements().Count())
             {
+                if (isRoot)
+                {
+                    foreach (var deobfuscationPattern in DeobfuscationManager.AvailableFormulaStructurePatterns)
+                    {
+                        var first = element.Elements().First();
+                        var last = element.Elements().Last();
+
+                        if (IfContainsEqualities(element.Value))
+                        {
+                            XElement equalifier = null;
+                            FindTreeWithEqualities(element, ref equalifier);
+                            first = equalifier.ElementsAfterSelf().First();
+                            last = equalifier.ElementsAfterSelf().Last();
+                        }
+                        var isObfuscatingElem = deobfuscationPattern.DetectObfuscation(first);
+                        if (isObfuscatingElem)
+                        {
+                            var deobfuscatedElem = deobfuscationPattern.RemoveObfuscation(first);
+                            element = deobfuscatedElem;
+                            return element;
+                        }
+                    }
+                }
+
                 foreach (var deobfuscationPattern in DeobfuscationManager.AvailableVariableStructurePatterns)
                 {
                     var isObfuscatingElem = deobfuscationPattern.DetectObfuscation(element.Elements().ElementAt(i));
@@ -362,17 +386,7 @@ namespace FormulaObfuscator.BLL.Helpers
                     }
                 }
 
-                foreach (var deobfuscationPattern in DeobfuscationManager.AvailableFormulaStructurePatterns)
-                {
-                    var isObfuscatingElem = deobfuscationPattern.DetectObfuscation(element.Elements().ElementAt(i));
-                    if (isObfuscatingElem)
-                    {
-                        var deobfuscatedElem = deobfuscationPattern.RemoveObfuscation(element.Elements().ElementAt(i));
-                        element = deobfuscatedElem;
-                        return element;
-                    }
-                }
-                WalkWithAlgorithmForDeobfuscation(element.Elements().ElementAt(i));
+                WalkWithAlgorithmForDeobfuscation(element.Elements().ElementAt(i), false);
                 i++;
             }
             return element;
