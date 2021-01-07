@@ -353,24 +353,52 @@ namespace FormulaObfuscator.BLL.Helpers
             {
                 if (isRoot)
                 {
-                    foreach (var deobfuscationPattern in DeobfuscationManager.AvailableFormulaStructurePatterns)
-                    {
-                        var first = element.Elements().First();
-                        var last = element.Elements().Last();
+                    // flat
+                    var deobfuscationFlatPattern = DeobfuscationManager.AvailableFormulaStructurePatterns.ElementAt(0);
+                    var first = element.Elements().First();
 
-                        if (IfContainsEqualities(element.Value))
-                        {
-                            XElement equalifier = null;
-                            FindTreeWithEqualities(element, ref equalifier);
-                            first = equalifier.ElementsAfterSelf().First();
-                            last = equalifier.ElementsAfterSelf().Last();
-                        }
-                        var isObfuscatingElem = deobfuscationPattern.DetectObfuscation(first);
+                    if (IfContainsEqualities(element.Value))
+                    {
+                        XElement equalifier = null;
+                        FindTreeWithEqualities(element, ref equalifier);
+                        first = equalifier.ElementsAfterSelf().First();
+                    }
+                    var isObfuscatingElem = deobfuscationFlatPattern.DetectObfuscation(first);
+                    if (isObfuscatingElem)
+                    {
+                        var deobfuscatedElem = deobfuscationFlatPattern.RemoveObfuscation(first);
+                        element = deobfuscatedElem;
+                        return element;
+                    }
+
+                    // fraction
+                    var deobfuscationFractionPattern = DeobfuscationManager.AvailableFormulaStructurePatterns.ElementAt(1);
+
+                    if (IfContainsEqualities(element.Value))
+                    {
+                        XElement equalifier = null;
+                        FindTreeWithEqualities(element, ref equalifier);
+                        var left = equalifier.ElementsBeforeSelf().First();
+                        var right = equalifier.ElementsAfterSelf().First();
+                        isObfuscatingElem = deobfuscationFractionPattern.DetectObfuscation(left) && deobfuscationFractionPattern.DetectObfuscation(right);
                         if (isObfuscatingElem)
                         {
-                            var deobfuscatedElem = deobfuscationPattern.RemoveObfuscation(first);
-                            element = deobfuscatedElem;
+                            left = deobfuscationFractionPattern.RemoveObfuscation(left);
+                            right = deobfuscationFractionPattern.RemoveObfuscation(right);
+                            element.RemoveAll();
+                            element.Add(left);
+                            element.Add(equalifier);
+                            element.Add(right);
                             return element;
+                        }
+                    }
+                    else
+                    {
+                        first = element.Elements().First();
+                        isObfuscatingElem = deobfuscationFractionPattern.DetectObfuscation(first);
+                        if (isObfuscatingElem)
+                        {
+                            return deobfuscationFractionPattern.RemoveObfuscation(first);
                         }
                     }
                 }

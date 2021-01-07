@@ -56,17 +56,7 @@ namespace FormulaObfuscator.BLL.Deobfuscators.StructurePatterns
         {
             XElement nextElement = (element.NextNode as XElement);
             var elementOperator = nextElement.Elements().ElementAt(0).Value;
-            bool detected = false;
-            int i = 0;
-            while (i < nextElement.Elements().Count())
-            {
-                foreach (var deobfuscationPattern in DeobfuscationManager.AvailableVariableStructurePatterns)
-                {
-                    detected = detected || OperatorValueDictionary[elementOperator].ValidateResultValue(nextElement.Elements().ElementAt(2));
-                }
-                i++;
-            }
-            return detected;
+            return OperatorValueDictionary[elementOperator].ValidateResultValue(nextElement.Elements().ElementAt(2));
         }
 
         private XElement AfterClosingBracketNode(XElement element)
