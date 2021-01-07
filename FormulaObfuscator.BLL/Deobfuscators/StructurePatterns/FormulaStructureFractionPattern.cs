@@ -5,27 +5,30 @@ using System.Xml.Linq;
 
 namespace FormulaObfuscator.BLL.Deobfuscators.StructurePatterns
 {
-    public class VariableStructureFractionPattern : IStructurePattern
+    class FormulaStructureFractionPattern : IStructurePattern
     {
         public bool DetectObfuscation(XElement element)
         {
-            return DetectVariableObfucationFractionStructure(element) && ValidateFractionValue(element);
+            return DetectFormulaObfucationStructure(element) && ValidateFractionValue(element);
         }
 
-        private bool DetectVariableObfucationFractionStructure(XElement element)
+        public XElement RemoveObfuscation(XElement element)
+        {
+            return XElement.Parse(element.Elements().ElementAt(1).FirstNode.ToString());
+        }
+
+        private bool DetectFormulaObfucationStructure(XElement element)
         {
             // mrow
             // surrounded by brackets
-            // 3rd is frac
-            // 4th is mrow with original value
-            // 5th is mrow with polynomial or polynomial in brackets
-            return element.Name == MathMLTags.Row
-                && element.Elements().Count() == 3
-                && element.Elements().First().Value == "(" && element.Elements().Last().Value == ")"
+            // next is mfrac
+            return element.Elements().Count() == 3
+                && element.Elements().ElementAt(0).Name == MathMLTags.Operator
+                && element.Elements().ElementAt(0).Value == "("
                 && element.Elements().ElementAt(1).Name == MathMLTags.Fraction
-                && element.Elements().ElementAt(1).Elements().Count() == 2
-                && element.Elements().ElementAt(1).Elements().ElementAt(0).Name == MathMLTags.Row
-                && element.Elements().ElementAt(1).Elements().ElementAt(1).Name == MathMLTags.Row;
+                && element.Elements().ElementAt(2).Name == MathMLTags.Operator
+                && element.Elements().ElementAt(2).Value == ")";
+
         }
 
         private bool ValidateFractionValue(XElement element)
@@ -37,7 +40,5 @@ namespace FormulaObfuscator.BLL.Deobfuscators.StructurePatterns
             }
             else return new EqualsOneResultPattern().ValidateResultValue(element.Elements().ElementAt(1).Elements().ElementAt(1));
         }
-
-        public XElement RemoveObfuscation(XElement element) => element.Elements().ElementAt(1).Elements().ElementAt(0).Elements().ElementAt(0);
     }
 }
