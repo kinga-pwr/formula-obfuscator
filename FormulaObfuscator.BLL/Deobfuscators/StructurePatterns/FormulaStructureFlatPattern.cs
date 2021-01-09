@@ -23,8 +23,6 @@ namespace FormulaObfuscator.BLL.Deobfuscators.StructurePatterns
 
         public XElement RemoveObfuscation(XElement element)
         {
-            //return XElement.Parse(element.NextNode.ToString());
-
             List<XElement> list = element.Parent.Elements().ToList();
             XElement startBracket = list.Where(e => e.Value == "(").FirstOrDefault();
             XElement endBracket = list.Where(e => e.Value == ")").FirstOrDefault();

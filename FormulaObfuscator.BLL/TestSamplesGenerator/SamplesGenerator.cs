@@ -19,15 +19,6 @@ namespace FormulaObfuscator.BLL.TestGenerator
             {
                 switch (generatorMethod)
                 {
-                    case SamplesGeneratorMethod.DetSumPi:
-                        //testSamples.Add(new DetSumPi());
-                        break;
-                    case SamplesGeneratorMethod.Fi:
-                        //testSamples.Add(new Fi());
-                        break;
-                    case SamplesGeneratorMethod.FuncBracket:
-                        //testSamples.Add(new FuncBracket());
-                        break;
                     case SamplesGeneratorMethod.Integral:
                         testSamples.Add(new Integral());
                         break;

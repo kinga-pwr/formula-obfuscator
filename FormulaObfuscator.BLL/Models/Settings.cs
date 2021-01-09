@@ -18,7 +18,7 @@ namespace FormulaObfuscator.BLL.Models
         public List<ComplexGeneratorMethod> ComplexMethods { get; set; } = new List<ComplexGeneratorMethod> { ComplexGeneratorMethod.Fraction, ComplexGeneratorMethod.Root };
         public List<TypeOfMethod> MethodsForZeroGenerator { get; set; } = new List<TypeOfMethod>(EqualsZeroGenerator.PossibleFormulas);
         public List<TypeOfMethod> MethodsForOneGenerator { get; set; } = new List<TypeOfMethod>(EqualsOneGenerator.PossibleFormulas);
-        public List<SamplesGeneratorMethod> MethodsForSamplesGenerator { get; set; } = new List<SamplesGeneratorMethod> { SamplesGeneratorMethod.DetSumPi, SamplesGeneratorMethod.Fi, SamplesGeneratorMethod.FuncBracket, SamplesGeneratorMethod.Integral, SamplesGeneratorMethod.Limit, SamplesGeneratorMethod.SqrtRecursive, SamplesGeneratorMethod.Sum };
+        public List<SamplesGeneratorMethod> MethodsForSamplesGenerator { get; set; } = new List<SamplesGeneratorMethod> { SamplesGeneratorMethod.Integral, SamplesGeneratorMethod.Limit, SamplesGeneratorMethod.SqrtRecursive, SamplesGeneratorMethod.Sum };
 
         public static Settings CurrentSettings { get; set; } = new Settings();
     }
